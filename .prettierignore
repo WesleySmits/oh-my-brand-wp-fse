@@ -1,0 +1,15 @@
+/coverage/
+/jest/
+/jest-coverage/
+/node_modules/
+/public/
+/public/build/
+/public/assets/
+*.yaml
+*.yml
+*.json
+*.md
+*.lock
+*.min.js
+*.min.css
+*.php

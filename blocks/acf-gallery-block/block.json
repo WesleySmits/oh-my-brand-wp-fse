@@ -1,0 +1,30 @@
+{
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "apiVersion": 2,
+    "name": "acf/acf-gallery-block",
+    "title": "ACF Gallery Block",
+    "description": "A block that displays images from an ACF gallery field.",
+    "category": "media",
+    "icon": "format-gallery",
+    "keywords": ["gallery", "acf", "images"],
+    "supports": {
+        "align": true,
+        "customClassName": true,
+        "spacing": {
+            "margin": true,
+            "padding": true,
+            "blockGap": true
+        },
+        "color": {
+            "background": true,
+            "text": true
+        }
+    },
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "acf-gallery-block.php"
+    },
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css",
+    "script": "file:../../assets/js/gallery.js"
+}

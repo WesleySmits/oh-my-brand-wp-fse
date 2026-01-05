@@ -1,0 +1,10 @@
+@layer utilities {
+    .grayscale-images img {
+        transition: filter 0.4s ease-in-out;
+    }
+
+    .greyscale,
+    .grayscale-images img:not(:hover) {
+        filter: grayscale();
+    }
+}

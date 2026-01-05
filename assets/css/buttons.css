@@ -1,0 +1,22 @@
+@layer components {
+    .wp-element-button:hover {
+        text-decoration: none;
+    }
+
+    .wp-block-button .wp-block-button__link {
+        transition: all 0.3s ease-in-out;
+    }
+
+    .wp-block-button .wp-block-button__link:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .wp-block-button.is-style-button-brand .wp-block-button__link:hover {
+        background: color-mix(in oklab, var(--wp--preset--color--primary) 90%, white);
+    }
+
+    .wp-block-button.is-style-secondary-button .wp-block-button__link:hover {
+        background: color-mix(in oklab, var(--wp--preset--color--tertiary) 97%, black);
+    }
+}

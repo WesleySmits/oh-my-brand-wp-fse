@@ -1,0 +1,21 @@
+@layer utilities {
+    .full-height {
+        height: 100%;
+
+        figure& {
+            img {
+                height: 100%;
+            }
+        }
+    }
+
+    .equal-flex-columns {
+        display: flex;
+        align-items: stretch;
+
+        > * {
+            flex: 1;
+            align-self: initial;
+        }
+    }
+}

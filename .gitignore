@@ -1,0 +1,24 @@
+# Logs and temp files
+*.log
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+
+# IDE/Editor
+.vscode/
+.idea/
+
+# Environment
+.env
+
+# Database
+*.sql
+*.sql.gz
+
+# Build output (compiled assets)
+assets/js/*.js

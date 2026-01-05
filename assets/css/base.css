@@ -1,0 +1,19 @@
+:root {
+    --header-height: 90px;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-height) + var(--wp-admin--admin-bar--height, 0px));
+}
+
+a {
+    transition: color 0.25s ease;
+}
+
+img,
+video,
+iframe {
+    max-width: 100%;
+    height: auto;
+}
