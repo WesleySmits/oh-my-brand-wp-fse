@@ -1,0 +1,167 @@
+{
+    // ============================================
+    // Editor Settings
+    // ============================================
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.stylelint": "explicit"
+    },
+    "editor.rulers": [100],
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+
+    // ============================================
+    // File Settings
+    // ============================================
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.associations": {
+        "*.php": "php",
+        "*.json": "jsonc"
+    },
+    "files.exclude": {
+        "**/node_modules": true,
+        "**/vendor": true,
+        "**/.phpunit.cache": true,
+        "**/coverage": true
+    },
+
+    // ============================================
+    // Language-Specific Settings
+    // ============================================
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[php]": {
+        "editor.formatOnSave": false
+    },
+    "[markdown]": {
+        "editor.wordWrap": "on",
+        "editor.trimAutoWhitespace": false
+    },
+
+    // ============================================
+    // TypeScript Settings
+    // ============================================
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.preferences.importModuleSpecifier": "relative",
+
+    // ============================================
+    // ESLint Settings
+    // ============================================
+    "eslint.enable": true,
+    "eslint.validate": ["typescript", "javascript"],
+    "eslint.useFlatConfig": true,
+
+    // ============================================
+    // Stylelint Settings
+    // ============================================
+    "stylelint.enable": true,
+    "stylelint.validate": ["css"],
+    "css.validate": false,
+
+    // ============================================
+    // PHP Settings
+    // ============================================
+    "intelephense.environment.phpVersion": "8.4.0",
+    "intelephense.files.associations": ["*.php"],
+    "intelephense.stubs": [
+        "apache",
+        "bcmath",
+        "bz2",
+        "Core",
+        "curl",
+        "date",
+        "dom",
+        "fileinfo",
+        "filter",
+        "gd",
+        "hash",
+        "iconv",
+        "intl",
+        "json",
+        "libxml",
+        "mbstring",
+        "mysqli",
+        "openssl",
+        "pcntl",
+        "pcre",
+        "PDO",
+        "pdo_mysql",
+        "Phar",
+        "posix",
+        "readline",
+        "Reflection",
+        "session",
+        "SimpleXML",
+        "SPL",
+        "standard",
+        "tokenizer",
+        "xml",
+        "xmlreader",
+        "xmlwriter",
+        "zip",
+        "zlib",
+        "wordpress"
+    ],
+    "php.validate.executablePath": "/usr/local/bin/php",
+
+    // ============================================
+    // PHPCS Settings
+    // ============================================
+    "phpcs.enable": true,
+    "phpcs.executablePath": "./vendor/bin/phpcs",
+    "phpcs.standard": "./phpcs.xml",
+
+    // ============================================
+    // Prettier Settings
+    // ============================================
+    "prettier.requireConfig": true,
+    "prettier.configPath": ".prettierrc",
+
+    // ============================================
+    // Search Settings
+    // ============================================
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/vendor": true,
+        "**/coverage": true,
+        "**/.phpunit.cache": true,
+        "**/assets/js": true
+    },
+
+    // ============================================
+    // Testing Settings
+    // ============================================
+    "vitest.enable": true,
+    "vitest.commandLine": "npx vitest",
+
+    // ============================================
+    // Git Settings
+    // ============================================
+    "git.ignoreLimitWarning": true,
+
+    // ============================================
+    // Emmet Settings
+    // ============================================
+    "emmet.includeLanguages": {
+        "php": "html"
+    }
+}

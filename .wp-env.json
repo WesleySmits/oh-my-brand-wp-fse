@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/wp-env.json",
+    "core": "WordPress/WordPress#6.7",
+    "phpVersion": "8.4",
+    "plugins": [],
+    "themes": [
+        "https://downloads.wordpress.org/theme/ollie.latest-stable.zip",
+        "."
+    ],
+    "config": {
+        "WP_DEBUG": true,
+        "SCRIPT_DEBUG": true,
+        "WP_DEBUG_LOG": true,
+        "WP_DEBUG_DISPLAY": false
+    },
+    "mappings": {
+        "wp-content/themes/oh-my-brand": "."
+    },
+    "env": {
+        "tests": {
+            "phpVersion": "8.4",
+            "config": {
+                "WP_DEBUG": true,
+                "SCRIPT_DEBUG": true
+            }
+        }
+    }
+}

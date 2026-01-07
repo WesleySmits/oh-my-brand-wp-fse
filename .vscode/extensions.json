@@ -1,0 +1,59 @@
+{
+    "recommendations": [
+        // ============================================
+        // Essential - Code Quality
+        // ============================================
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "stylelint.vscode-stylelint",
+
+        // ============================================
+        // PHP Development
+        // ============================================
+        "bmewburn.vscode-intelephense-client",
+        "shevaua.phpcs",
+        "xdebug.php-debug",
+
+        // ============================================
+        // TypeScript/JavaScript
+        // ============================================
+        "ms-vscode.vscode-typescript-next",
+
+        // ============================================
+        // Testing
+        // ============================================
+        "vitest.explorer",
+        "ms-playwright.playwright",
+
+        // ============================================
+        // WordPress Development
+        // ============================================
+        "wordpresstoolbox.wordpress-toolbox",
+        "johnbillion.vscode-wordpress-hooks",
+
+        // ============================================
+        // Git & Version Control
+        // ============================================
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+
+        // ============================================
+        // Editor Enhancements
+        // ============================================
+        "editorconfig.editorconfig",
+        "streetsidesoftware.code-spell-checker",
+        "usernamehw.errorlens",
+        "gruntfuggly.todo-tree",
+
+        // ============================================
+        // AI & Productivity
+        // ============================================
+        "github.copilot",
+        "github.copilot-chat"
+    ],
+    "unwantedRecommendations": [
+        // Avoid conflicts with our setup
+        "hookyqr.beautify",
+        "formulahendry.auto-close-tag"
+    ]
+}

@@ -8,13 +8,17 @@ Thumbs.db
 
 # Dependencies
 node_modules/
+vendor/
 
-# IDE/Editor
-.vscode/
+# IDE/Editor (keep .vscode for shared settings)
 .idea/
+*.swp
+*.swo
 
 # Environment
 .env
+.env.local
+.env.*.local
 
 # Database
 *.sql
@@ -22,3 +26,17 @@ node_modules/
 
 # Build output (compiled assets)
 assets/js/*.js
+assets/js/*.js.map
+
+# Test coverage
+coverage/
+.phpunit.cache/
+playwright-report/
+test-results/
+
+# Package lock files (optional - uncomment if preferred)
+# package-lock.json
+# composer.lock
+
+# Local development
+.wp-env.override.json

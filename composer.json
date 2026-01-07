@@ -1,0 +1,50 @@
+{
+    "name": "oh-my-brand/theme",
+    "description": "Oh My Brand! WordPress FSE Theme",
+    "type": "wordpress-theme",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Wesley Smits",
+            "homepage": "https://github.com/WesleySmits"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5",
+        "wp-phpunit/wp-phpunit": "^6.7",
+        "yoast/phpunit-polyfills": "^2.0",
+        "squizlabs/php_codesniffer": "^3.11",
+        "wp-coding-standards/wpcs": "^3.1",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-html coverage/php",
+        "phpcs": "phpcs",
+        "phpcbf": "phpcbf",
+        "lint:php": "@phpcs"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true,
+        "platform": {
+            "php": "8.4.0"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "OMB\\": "includes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OMB\\Tests\\": "tests/php/"
+        }
+    }
+}
