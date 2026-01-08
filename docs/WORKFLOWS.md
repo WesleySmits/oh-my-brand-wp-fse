@@ -22,15 +22,15 @@ git clone git@github.com:WesleySmits/oh-my-brand-wp-fse.git
 cd oh-my-brand-wp-fse
 
 # 2. Install dependencies
-npm install
+pnpm install
 composer install
 
 # 3. Set up Git hooks
-npm run prepare
+pnpm run prepare
 
 # 4. Verify setup
-npm run lint
-npm test
+pnpm run lint
+pnpm test
 composer test
 ```
 
@@ -43,17 +43,17 @@ git pull origin main
 git checkout -b feature/your-feature-name
 
 # 2. Run watch mode for TypeScript
-npm run watch
+pnpm run watch
 
 # 3. Make changes and test locally
 # Local site: https://demo-site.local
 
 # 4. Run linting before commit
-npm run lint
-npm run lint:fix  # Auto-fix issues
+pnpm run lint
+pnpm run lint:fix  # Auto-fix issues
 
 # 5. Run tests
-npm test
+pnpm test
 composer test
 
 # 6. Commit changes (triggers hooks)
@@ -68,14 +68,14 @@ git push -u origin feature/your-feature-name
 
 | Command | Purpose |
 |---------|---------|
-| `npm run build` | Production build |
-| `npm run watch` | Development watch mode |
-| `npm run lint` | Run all linters |
-| `npm run lint:fix` | Fix linting issues |
-| `npm test` | Run JS/TS tests |
-| `npm run test:watch` | Watch mode for tests |
-| `npm run test:coverage` | Tests with coverage |
-| `npm run test:e2e` | Run E2E tests |
+| `pnpm run build` | Production build |
+| `pnpm run watch` | Development watch mode |
+| `pnpm run lint` | Run all linters |
+| `pnpm run lint:fix` | Fix linting issues |
+| `pnpm test` | Run JS/TS tests |
+| `pnpm run test:watch` | Watch mode for tests |
+| `pnpm run test:coverage` | Tests with coverage |
+| `pnpm run test:e2e` | Run E2E tests |
 | `composer test` | Run PHP tests |
 | `composer lint` | Run PHPCS |
 | `composer lint:fix` | Run PHPCBF |
@@ -242,24 +242,30 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-      - run: npm ci
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
       - run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
 
   lint-js:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run lint:js
-      - run: npm run lint:css
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint:js
+      - run: pnpm run lint:css
 
   lint-php:
     runs-on: ubuntu-latest
@@ -275,12 +281,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run test:coverage
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run test:coverage
       - uses: codecov/codecov-action@v4
 
   test-unit-php:
@@ -297,17 +306,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-      - run: npm ci
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
       - run: npx playwright install chromium webkit
       - name: Start wp-env
         run: |
-          npm install -g @wordpress/env
+          pnpm add -g @wordpress/env
           wp-env start
-      - run: npm run test:e2e
+      - run: pnpm run test:e2e
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
@@ -319,12 +331,15 @@ jobs:
     needs: [lint-js, lint-php, test-unit-js, test-unit-php]
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
       - uses: actions/upload-artifact@v4
         with:
           name: build
@@ -439,13 +454,13 @@ git push origin main --tags
 
 ### Common Issues
 
-#### npm install fails
+#### pnpm install fails
 
 ```bash
 # Clear cache and reinstall
-rm -rf node_modules package-lock.json
-npm cache clean --force
-npm install
+rm -rf node_modules pnpm-lock.yaml
+pnpm store prune
+pnpm install
 ```
 
 #### composer install fails
@@ -465,7 +480,7 @@ composer install
 ```bash
 # Reset test environment
 rm -rf node_modules/.vitest
-npm test -- --clearCache
+pnpm test -- --clearCache
 
 # For PHP
 rm -rf vendor
@@ -477,7 +492,7 @@ composer install
 ```bash
 # Reinstall hooks
 rm -rf .husky/_
-npm run prepare
+pnpm run prepare
 ```
 
 #### ESLint not finding config
@@ -540,13 +555,13 @@ console.trace();
 
 ```bash
 # Run single test file
-npm test -- blocks/utils/debounce.test.ts
+pnpm test -- blocks/utils/debounce.test.ts
 
 # Run with verbose output
-npm test -- --reporter=verbose
+pnpm test -- --reporter=verbose
 
 # Run matching pattern
-npm test -- --testNamePattern="should navigate"
+pnpm test -- --testNamePattern="should navigate"
 
 # PHP single test
 ./vendor/bin/phpunit --filter test_render_returns_html

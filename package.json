@@ -4,13 +4,13 @@
     "description": "Oh My Brand! WordPress FSE Theme",
     "type": "module",
     "scripts": {
-        "build": "vite build",
-        "dev": "vite build --watch",
+        "build": "wp-scripts build && node scripts/copy-block-assets.cjs",
+        "start": "wp-scripts start",
         "lint": "npm run lint:js && npm run lint:css",
-        "lint:js": "eslint 'blocks/**/*.ts'",
-        "lint:css": "stylelint 'assets/css/**/*.css' 'blocks/**/*.css'",
+        "lint:js": "wp-scripts lint-js 'src/**/*.js'",
+        "lint:css": "stylelint 'assets/css/**/*.css' 'src/**/*.css'",
         "lint:fix": "npm run lint:js -- --fix && npm run lint:css -- --fix",
-        "format": "prettier --write .",
+        "format": "wp-scripts format",
         "format:check": "prettier --check .",
         "test": "vitest run",
         "test:watch": "vitest",
@@ -19,11 +19,12 @@
         "test:e2e:ui": "playwright test --ui",
         "test:e2e:headed": "playwright test --headed",
         "typecheck": "tsc --noEmit",
-        "prepare": "husky"
+        "prepare": "husky",
+        "packages-update": "wp-scripts packages-update"
     },
     "lint-staged": {
-        "*.ts": [
-            "eslint --fix",
+        "*.js": [
+            "wp-scripts lint-js --fix",
             "prettier --write"
         ],
         "*.css": [
@@ -48,24 +49,37 @@
         "@commitlint/config-conventional": "^19.6.0",
         "@playwright/test": "^1.49.1",
         "@types/node": "^22.13.11",
-        "@types/wordpress__block-editor": "^11.5.16",
-        "@typescript-eslint/eslint-plugin": "^8.19.0",
-        "@typescript-eslint/parser": "^8.19.0",
+        "@types/react": "^19.2.7",
+        "@types/react-dom": "^19.2.3",
+        "@types/wordpress__block-editor": "^15.0.0",
+        "@types/wordpress__blocks": "^12.5.18",
+        "@types/wordpress__components": "^23.8.0",
+        "@types/wordpress__i18n": "^3.11.0",
+        "@typescript-eslint/eslint-plugin": "^8.52.0",
+        "@typescript-eslint/parser": "^8.52.0",
         "@vitest/coverage-v8": "^2.1.8",
-        "eslint": "^9.17.0",
-        "eslint-config-prettier": "^9.1.0",
+        "@wordpress/scripts": "^30.0.0",
+        "copy-webpack-plugin": "^13.0.1",
+        "eslint-config-prettier": "^10.1.8",
         "happy-dom": "^15.11.7",
         "husky": "^9.1.7",
         "lint-staged": "^15.3.0",
-        "prettier": "^3.4.2",
         "stylelint": "^16.12.0",
         "stylelint-config-standard": "^36.0.1",
-        "typescript": "^5.8.2",
-        "vite": "^6.2.2",
         "vitest": "^2.1.8"
     },
     "dependencies": {
-        "@wordpress/dom-ready": "^4.20.0"
+        "@dnd-kit/core": "^6.3.1",
+        "@dnd-kit/sortable": "^10.0.0",
+        "@dnd-kit/utilities": "^3.2.2",
+        "@wordpress/block-editor": "^14.0.0",
+        "@wordpress/blocks": "^14.0.0",
+        "@wordpress/components": "^29.0.0",
+        "@wordpress/data": "^10.0.0",
+        "@wordpress/element": "^6.0.0",
+        "@wordpress/i18n": "^5.0.0",
+        "@wordpress/icons": "^11.4.0",
+        "@wordpress/interactivity": "^6.0.0"
     },
     "engines": {
         "node": ">=20.0.0"

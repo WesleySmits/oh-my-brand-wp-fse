@@ -452,6 +452,197 @@ function format_gallery_output(array $images): array {
 
 ---
 
+## Native WordPress Block Development
+
+### File Structure for Native Blocks
+
+Native WordPress blocks (using `@wordpress/scripts`) use a `src/` directory structure:
+
+```
+src/blocks/{block-name}/
+├── block.json       # Block metadata and registration
+├── edit.tsx         # Editor component (TypeScript/React)
+├── render.php       # Server-side rendering template
+├── helpers.php      # Block-specific helper functions
+├── style.css        # Frontend styles (auto-enqueued)
+├── editor.css       # Editor-only styles
+├── view.ts          # Frontend TypeScript (optional, Web Component)
+└── index.ts         # Block registration entry point
+```
+
+### Block Logic Separation
+
+**Principle**: Separate concerns between rendering (render.php), logic (helpers.php), and interactivity (view.ts/edit.tsx).
+
+#### render.php - Template Only
+
+Keep render.php focused on HTML structure only:
+
+```php
+<?php
+/**
+ * Block render template.
+ */
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/helpers.php';
+
+// Extract attributes
+$images = $attributes['images'] ?? [];
+
+// Generate data using helpers
+$schema_markup = omb_gallery_generate_schema($images);
+$gallery_style = omb_gallery_build_style($attributes);
+
+// Render HTML only
+?>
+<div <?php echo get_block_wrapper_attributes(); ?>>
+    <!-- HTML structure only, no complex logic -->
+</div>
+<?php echo $schema_markup; ?>
+```
+
+#### helpers.php - Business Logic
+
+Extract all complex logic to helpers:
+
+```php
+<?php
+/**
+ * Block helper functions.
+ */
+
+declare(strict_types=1);
+
+if (!function_exists('omb_gallery_generate_schema')) {
+    /**
+     * Generate JSON-LD schema for SEO.
+     *
+     * @param array $images Image data.
+     * @return string JSON-LD script tag.
+     */
+    function omb_gallery_generate_schema(array $images): string {
+        // Complex logic here
+    }
+}
+```
+
+#### view.ts - Frontend Interactivity
+
+Handle all client-side behavior using Web Components:
+
+```typescript
+/**
+ * Block frontend script using Web Component.
+ */
+
+import { debounce } from '../utils/debounce';
+
+class BlockComponent {
+    constructor(element) {
+        this.element = element;
+        this.init();
+    }
+
+    init() {
+        this.bindEvents();
+    }
+
+    bindEvents() {
+        // Event handlers
+    }
+}
+
+// Initialize on DOM ready
+document.querySelectorAll('[data-block-wrapper]').forEach((el) => {
+    new BlockComponent(el);
+});
+```
+
+### TypeScript Edit Components
+
+Use TypeScript for type-safe editor components:
+
+```typescript
+/**
+ * Block editor component.
+ */
+
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, RangeControl } from '@wordpress/components';
+import type { BlockEditProps } from '@wordpress/blocks';
+
+interface BlockAttributes {
+    items: Array<{ id: string; content: string }>;
+    columns: number;
+}
+
+export default function Edit({
+    attributes,
+    setAttributes
+}: BlockEditProps<BlockAttributes>): JSX.Element {
+    const { items, columns } = attributes;
+    const blockProps = useBlockProps();
+
+    return (
+        <>
+            <InspectorControls>
+                <PanelBody title={__('Settings', 'theme-oh-my-brand')}>
+                    <RangeControl
+                        label={__('Columns', 'theme-oh-my-brand')}
+                        value={columns}
+                        onChange={(value) => setAttributes({ columns: value })}
+                        min={1}
+                        max={6}
+                    />
+                </PanelBody>
+            </InspectorControls>
+
+            <div {...blockProps}>
+                {/* Block preview */}
+            </div>
+        </>
+    );
+}
+```
+
+### Shared Utilities
+
+Place reusable code in `src/blocks/utils/`:
+
+```
+src/blocks/utils/
+├── index.ts           # Re-exports all utilities
+├── debounce.ts        # Debounce function
+├── debounce.test.ts   # Tests for debounce
+├── Lightbox.ts        # Reusable lightbox component
+├── Lightbox.test.ts   # Tests for lightbox
+└── lightbox.css       # Lightbox styles
+```
+
+Example utility with TypeScript:
+
+```typescript
+/**
+ * Debounce utility.
+ */
+export function debounce<T extends (...args: Parameters<T>) => void>(
+    func: T,
+    delay: number = 100
+): (...args: Parameters<T>) => void {
+    let timeout: ReturnType<typeof setTimeout>;
+
+    return function (this: unknown, ...args: Parameters<T>): void {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+```
+
+---
+
 ## REST API Endpoints
 
 ### Registration Pattern

@@ -1,0 +1,61 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "theme-oh-my-brand/gallery",
+    "version": "1.0.0",
+    "title": "Gallery Carousel",
+    "category": "media",
+    "icon": "images-alt2",
+    "description": "Display images in a horizontal carousel gallery with smooth scrolling.",
+    "keywords": ["gallery", "carousel", "images", "slider"],
+    "textdomain": "theme-oh-my-brand",
+    "attributes": {
+        "images": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "fullUrl": {
+                        "type": "string"
+                    },
+                    "alt": {
+                        "type": "string"
+                    },
+                    "caption": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "visibleImages": {
+            "type": "number",
+            "default": 3
+        }
+    },
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "className": true,
+        "color": {
+            "background": true,
+            "text": false
+        },
+        "spacing": {
+            "margin": true,
+            "padding": true,
+            "blockGap": true
+        }
+    },
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css",
+    "render": "file:./render.php",
+    "viewScript": "file:./view.ts"
+}

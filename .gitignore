@@ -25,6 +25,7 @@ vendor/
 *.sql.gz
 
 # Build output (compiled assets)
+build/
 assets/js/*.js
 assets/js/*.js.map
 

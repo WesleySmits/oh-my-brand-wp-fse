@@ -1,0 +1,101 @@
+/**
+ * FAQ Block - Frontend styles.
+ *
+ * @package theme-oh-my-brand
+ */
+
+:root {
+	interpolate-size: allow-keywords;
+}
+
+.wp-block-theme-oh-my-brand-faq .faq-container {
+	margin: 1.25rem auto;
+	padding: 1.5rem;
+	background-color: var(--wp--preset--color--custom-brand);
+	border-radius: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.wp-block-theme-oh-my-brand-faq .faq-container .faq-title {
+	font-size: 1.5rem;
+	margin: 0;
+}
+
+.wp-block-theme-oh-my-brand-faq .faq-items {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.wp-block-theme-oh-my-brand-faq .faq-item {
+}
+
+.wp-block-theme-oh-my-brand-faq details {
+	border: 1px solid var(--wp--preset--color--custom-border);
+	border-radius: 0.5rem;
+	padding: 0.75rem;
+	background-color: var(--wp--preset--color--base);
+	overflow: hidden;
+	transition: background-color 0.4s ease;
+}
+
+.wp-block-theme-oh-my-brand-faq details * {
+	margin: 0;
+}
+
+.wp-block-theme-oh-my-brand-faq details[open] {
+	background-color: var(--wp--preset--color--tertiary);
+}
+
+.wp-block-theme-oh-my-brand-faq details::details-content {
+	block-size: 0%;
+	transition:
+		block-size 0.4s ease,
+		content-visibility 0.4s ease;
+	transition-behavior: allow-discrete;
+}
+
+.wp-block-theme-oh-my-brand-faq details[open]::details-content {
+	block-size: auto;
+}
+
+.wp-block-theme-oh-my-brand-faq summary {
+	font-weight: bold;
+	cursor: pointer;
+	padding: 5px;
+	margin-inline-start: 1rem;
+	list-style-position: outside;
+}
+
+.wp-block-theme-oh-my-brand-faq summary::marker {
+	font-size: 0.75rem;
+	margin-right: 0.5rem;
+}
+
+.wp-block-theme-oh-my-brand-faq details p {
+	padding: 0.5rem;
+	font-size: 1rem;
+}
+
+/* Focus states */
+.wp-block-theme-oh-my-brand-faq summary:focus-visible {
+	outline: 2px solid var(--wp--preset--color--primary, #06c);
+	outline-offset: 2px;
+	border-radius: 0.25rem;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+	.wp-block-theme-oh-my-brand-faq details {
+		transition: none;
+	}
+
+	.wp-block-theme-oh-my-brand-faq details::details-content {
+		transition: none;
+	}
+}

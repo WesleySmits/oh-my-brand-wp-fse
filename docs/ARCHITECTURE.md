@@ -21,76 +21,68 @@ oh-my-brand/
 ├── 📄 style.css              # Theme metadata (required by WP)
 ├── 📄 theme.json             # Global styles, settings, block configuration
 │
+├── 📁 src/                   # Source files (built with @wordpress/scripts)
+│   └── 📁 blocks/           # Native WordPress blocks
+│       ├── 📁 faq/          # FAQ accordion block
+│       │   ├── block.json
+│       │   ├── edit.tsx
+│       │   ├── render.php
+│       │   ├── helpers.php
+│       │   ├── style.css
+│       │   └── editor.css
+│       ├── 📁 gallery/      # Gallery carousel block
+│       │   ├── block.json
+│       │   ├── edit.tsx
+│       │   ├── render.php
+│       │   ├── helpers.php
+│       │   ├── style.css
+│       │   └── view.js
+│       ├── 📁 youtube/      # YouTube embed block
+│       │   ├── block.json
+│       │   ├── edit.tsx
+│       │   ├── render.php
+│       │   ├── helpers.php
+│       │   ├── style.css
+│       │   └── view.js
+│       └── 📁 utils/        # Shared utilities
+│           ├── index.ts
+│           ├── debounce.ts
+│           ├── debounce.test.ts
+│           ├── Lightbox.ts
+│           ├── Lightbox.test.ts
+│           └── lightbox.css
+│
+├── 📁 build/                 # Compiled output (generated)
+│   └── 📁 blocks/           # Built block assets
+│
 ├── 📁 assets/                # Static assets
 │   ├── 📁 css/              # Global stylesheets
-│   │   ├── base.css         # Reset and base styles
-│   │   ├── typography.css   # Typography rules
-│   │   ├── layout.css       # Layout utilities
-│   │   ├── buttons.css      # Button styles
-│   │   ├── components.css   # Shared components
-│   │   ├── media.css        # Media styles
-│   │   ├── utils.css        # Utility classes
-│   │   └── theme.css        # Theme-specific styles
 │   ├── 📁 js/               # Compiled JavaScript
-│   │   └── gallery.js       # Compiled gallery bundle
 │   ├── 📁 icons/            # SVG icon files
 │   └── 📁 images/           # Theme images
-│
-├── 📁 blocks/                # ACF custom blocks
-│   ├── 📁 acf-faq/          # FAQ accordion block
-│   ├── 📁 acf-gallery-block/# Image gallery block
-│   ├── 📁 acf-youtube-block/# YouTube embed block
-│   └── 📁 utils/            # Shared TypeScript utilities
-│       ├── debounce.ts
-│       └── debounce.test.ts
 │
 ├── 📁 includes/              # PHP includes
 │   ├── assets.php           # Asset registration
 │   ├── block-helpers.php    # Block utility functions
-│   ├── custom-image-controls.php
 │   └── 📁 post-types/       # Custom post type definitions
-│       └── social-links.php
 │
 ├── 📁 patterns/              # Block patterns
 │
 ├── 📁 acf-json/              # ACF field group JSON (auto-sync)
-│   ├── group_*.json         # Field group definitions
-│   └── ui_options_page_*.json
 │
 ├── 📁 tests/                 # Test files
 │   ├── 📁 php/              # PHPUnit tests
-│   │   ├── bootstrap.php
-│   │   └── 📁 Blocks/
 │   ├── 📁 e2e/              # Playwright E2E tests
 │   └── setup.ts             # Vitest setup
 │
 ├── 📁 docs/                  # Documentation
-│   ├── CODING_STANDARDS.md
-│   ├── ARCHITECTURE.md      # This file
-│   ├── TESTING.md
-│   └── WORKFLOWS.md
-│
-├── 📁 .github/               # GitHub configuration
-│   ├── 📁 workflows/        # GitHub Actions
-│   │   └── ci.yml
-│   └── copilot-instructions.md
 │
 └── 📄 Configuration files
-    ├── AGENT.md             # AI assistant guidelines
-    ├── README.md            # Project documentation
-    ├── package.json         # Node dependencies
-    ├── composer.json        # PHP dependencies
-    ├── tsconfig.json        # TypeScript configuration
-    ├── vite.config.ts       # Vite build configuration
-    ├── vitest.config.ts     # Vitest test configuration
-    ├── playwright.config.ts # Playwright E2E configuration
-    ├── eslint.config.js     # ESLint configuration
-    ├── stylelint.config.js  # Stylelint configuration
-    ├── commitlint.config.js # Commit message linting
-    ├── phpcs.xml            # PHP CodeSniffer rules
-    ├── phpunit.xml          # PHPUnit configuration
-    ├── .editorconfig        # Editor settings
-    └── .wp-env.json         # wp-env configuration
+    ├── package.json
+    ├── webpack.config.js
+    ├── tsconfig.json
+    ├── vitest.config.ts
+    └── playwright.config.ts
 ```
 
 ---

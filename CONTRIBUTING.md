@@ -42,15 +42,15 @@ git clone git@github.com:YOUR_USERNAME/oh-my-brand-wp-fse.git
 cd oh-my-brand-wp-fse
 
 # Install dependencies
-npm install
+pnpm install
 composer install
 
 # Set up Git hooks
-npm run prepare
+pnpm run prepare
 
 # Verify setup
-npm run lint
-npm test
+pnpm run lint
+pnpm test
 ```
 
 ## Making Changes
@@ -64,8 +64,8 @@ npm test
 
 3. Run linting and tests:
    ```bash
-   npm run lint
-   npm test
+   pnpm run lint
+   pnpm test
    composer test
    ```
 

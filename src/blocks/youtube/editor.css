@@ -1,0 +1,25 @@
+/**
+ * YouTube Block - Editor styles.
+ *
+ * @package theme-oh-my-brand
+ */
+
+.wp-block-theme-oh-my-brand-youtube__wrapper {
+	width: 100%;
+}
+
+.wp-block-theme-oh-my-brand-youtube__wrapper iframe {
+	max-width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 9;
+	border-radius: 0.5rem;
+}
+
+.wp-block-theme-oh-my-brand-youtube .components-placeholder {
+	min-height: 200px;
+}
+
+.wp-block-theme-oh-my-brand-youtube .components-placeholder .components-text-control__input {
+	width: 100%;
+	max-width: 400px;
+}

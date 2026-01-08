@@ -1,0 +1,52 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "theme-oh-my-brand/youtube",
+    "version": "1.0.0",
+    "title": "YouTube Embed",
+    "category": "embed",
+    "icon": "video-alt3",
+    "description": "Embed a YouTube video with accessible, responsive iframe.",
+    "keywords": ["youtube", "video", "embed"],
+    "textdomain": "theme-oh-my-brand",
+    "attributes": {
+        "url": {
+            "type": "string",
+            "default": ""
+        },
+        "videoTitle": {
+            "type": "string",
+            "default": ""
+        },
+        "width": {
+            "type": "number",
+            "default": 1280
+        },
+        "height": {
+            "type": "number",
+            "default": 720
+        },
+        "lazyLoad": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "className": true,
+        "color": {
+            "background": true,
+            "text": false
+        },
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css",
+    "render": "file:./render.php",
+    "viewScript": "file:./view.ts"
+}

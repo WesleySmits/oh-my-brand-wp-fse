@@ -1,0 +1,110 @@
+/**
+ * YouTube Block - Frontend styles.
+ *
+ * @package theme-oh-my-brand
+ */
+
+.wp-block-theme-oh-my-brand-youtube {
+	width: 100%;
+	position: relative;
+	aspect-ratio: 16 / 9;
+	background-color: #000;
+	border-radius: 0.5rem;
+	overflow: hidden;
+}
+
+/* Facade pattern styles */
+.wp-block-theme-oh-my-brand-youtube .youtube-facade {
+	position: absolute;
+	inset: 0;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.wp-block-theme-oh-my-brand-youtube .youtube-facade__thumbnail {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.wp-block-theme-oh-my-brand-youtube .youtube-facade__play {
+	position: relative;
+	z-index: 1;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	transition:
+		transform 0.2s ease,
+		filter 0.2s ease;
+}
+
+.wp-block-theme-oh-my-brand-youtube .youtube-facade:hover .youtube-facade__play,
+.wp-block-theme-oh-my-brand-youtube .youtube-facade:focus-visible .youtube-facade__play {
+	transform: scale(1.1);
+	filter: brightness(1.1);
+}
+
+.wp-block-theme-oh-my-brand-youtube .youtube-facade:focus-visible {
+	outline: 2px solid var(--wp--preset--color--primary, #06c);
+	outline-offset: 2px;
+}
+
+.wp-block-theme-oh-my-brand-youtube .youtube-facade__play-bg {
+	transition: fill 0.2s ease;
+}
+
+.wp-block-theme-oh-my-brand-youtube .youtube-facade:hover .youtube-facade__play-bg {
+	fill: #f00;
+}
+
+/* Activated state - when iframe is loaded */
+.wp-block-theme-oh-my-brand-youtube.is-activated {
+	aspect-ratio: 16 / 9;
+}
+
+.wp-block-theme-oh-my-brand-youtube.is-activated omb-youtube-facade {
+	display: block;
+	position: absolute;
+	inset: 0;
+}
+
+.wp-block-theme-oh-my-brand-youtube omb-youtube-facade iframe,
+.wp-block-theme-oh-my-brand-youtube iframe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+/* Error state */
+.wp-block-theme-oh-my-brand-youtube__error {
+	padding: 1rem;
+	background-color: #fef2f2;
+	color: #991b1b;
+	border: 1px solid #fecaca;
+	border-radius: 0.5rem;
+	text-align: center;
+}
+
+/* Focus state for wrapper */
+.wp-block-theme-oh-my-brand-youtube:focus-within {
+	outline: 2px solid var(--wp--preset--color--primary, #06c);
+	outline-offset: 2px;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+	.wp-block-theme-oh-my-brand-youtube .youtube-facade__play {
+		transition: none;
+	}
+
+	.wp-block-theme-oh-my-brand-youtube .youtube-facade__play-bg {
+		transition: none;
+	}
+}

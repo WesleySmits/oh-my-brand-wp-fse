@@ -20,16 +20,16 @@ git clone https://github.com/WesleySmits/oh-my-brand-wp-fse.git
 cd oh-my-brand-wp-fse
 
 # Install Node dependencies
-npm install
+pnpm install
 
 # Install PHP dependencies
 composer install
 
 # Build assets
-npm run build
+pnpm run build
 
 # Start development (watch mode)
-npm run dev
+pnpm run dev
 ```
 
 ## Development
@@ -40,24 +40,24 @@ npm run dev
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start Vite in watch mode |
-| `npm run build` | Build production assets |
-| `npm run lint` | Run ESLint and Stylelint |
-| `npm run lint:js` | Run ESLint only |
-| `npm run lint:css` | Run Stylelint only |
-| `npm run lint:fix` | Auto-fix linting issues |
-| `npm run format` | Format code with Prettier |
-| `npm run typecheck` | Run TypeScript type checking |
+| `pnpm run dev` | Start Vite in watch mode |
+| `pnpm run build` | Build production assets |
+| `pnpm run lint` | Run ESLint and Stylelint |
+| `pnpm run lint:js` | Run ESLint only |
+| `pnpm run lint:css` | Run Stylelint only |
+| `pnpm run lint:fix` | Auto-fix linting issues |
+| `pnpm run format` | Format code with Prettier |
+| `pnpm run typecheck` | Run TypeScript type checking |
 
 #### Testing
 
 | Command | Description |
 |---------|-------------|
-| `npm test` | Run Vitest unit tests |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run test:coverage` | Generate coverage report |
-| `npm run test:e2e` | Run Playwright E2E tests |
-| `npm run test:e2e:ui` | Run E2E tests with UI |
+| `pnpm test` | Run Vitest unit tests |
+| `pnpm run test:watch` | Run tests in watch mode |
+| `pnpm run test:coverage` | Generate coverage report |
+| `pnpm run test:e2e` | Run Playwright E2E tests |
+| `pnpm run test:e2e:ui` | Run E2E tests with UI |
 
 #### PHP
 
@@ -190,8 +190,8 @@ blocks/utils/debounce.test.ts
 
 Run tests:
 ```bash
-npm test
-npm run test:coverage
+pnpm test
+pnpm run test:coverage
 ```
 
 ### PHP Tests (PHPUnit)
@@ -215,10 +215,10 @@ Tests are in `tests/e2e/`:
 npx playwright install
 
 # Run tests against local site
-npm run test:e2e
+pnpm run test:e2e
 
 # Run with UI
-npm run test:e2e:ui
+pnpm run test:e2e:ui
 ```
 
 Configure base URL in `.env`:

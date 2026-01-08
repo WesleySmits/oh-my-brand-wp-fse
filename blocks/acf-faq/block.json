@@ -1,7 +1,7 @@
 {
     "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
     "name": "acf/faq",
-    "title": "FAQ Blok",
+    "title": "ACF FAQ Blok",
     "description": "Een Gutenberg-blok voor FAQ's met JSON-LD structured data.",
     "category": "formatting",
     "icon": "editor-help",

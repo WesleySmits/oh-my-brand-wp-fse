@@ -62,7 +62,15 @@ function omb_setup_theme(): void {
 		]
 	);
 
-	add_editor_style( 'assets/css/theme.css' );
+	// Load individual CSS files instead of theme.css with @imports.
+	// This avoids broken relative paths in the block editor.
+	add_editor_style( 'assets/css/base.css' );
+	add_editor_style( 'assets/css/layout.css' );
+	add_editor_style( 'assets/css/typography.css' );
+	add_editor_style( 'assets/css/buttons.css' );
+	add_editor_style( 'assets/css/components.css' );
+	add_editor_style( 'assets/css/media.css' );
+	add_editor_style( 'assets/css/utils.css' );
 }
 
 // ==========================================================================
@@ -72,7 +80,7 @@ function omb_setup_theme(): void {
 add_action( 'init', 'omb_register_blocks' );
 
 /**
- * Register ACF blocks from the theme.
+ * Register native blocks from the theme.
  *
  * @since 1.0.0
  *
@@ -80,12 +88,47 @@ add_action( 'init', 'omb_register_blocks' );
  */
 function omb_register_blocks(): void {
 	$blocks = [
+		'faq',
+		'gallery',
+		'youtube',
+	];
+
+	foreach ( $blocks as $block ) {
+		$block_path = OMB_PATH . '/build/blocks/' . $block;
+		if ( file_exists( $block_path . '/block.json' ) ) {
+			register_block_type( $block_path );
+		}
+	}
+}
+
+// ==========================================================================
+// ACF Block Registration (Legacy - for backwards compatibility)
+// ==========================================================================
+
+add_action( 'init', 'omb_register_acf_blocks' );
+
+/**
+ * Register ACF blocks for backwards compatibility.
+ *
+ * These are legacy blocks that may still be used in existing content.
+ * New content should use the native blocks instead.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function omb_register_acf_blocks(): void {
+	if ( ! function_exists( 'acf_register_block_type' ) ) {
+		return;
+	}
+
+	$acf_blocks = [
 		'acf-faq',
 		'acf-gallery-block',
 		'acf-youtube-block',
 	];
 
-	foreach ( $blocks as $block ) {
+	foreach ( $acf_blocks as $block ) {
 		$block_path = OMB_PATH . '/blocks/' . $block;
 		if ( file_exists( $block_path . '/block.json' ) ) {
 			register_block_type( $block_path );

@@ -4,6 +4,8 @@ This document defines the TypeScript coding standards for the Oh My Brand! theme
 
 We use modern TypeScript with strict type checking.
 
+> **Important**: All client-side code must be written in TypeScript. No `.js` files are permitted in the `src/` directory. This ensures type safety, better tooling support, and consistent code quality across the project.
+
 ## Table of Contents
 
 - [File Structure](#file-structure)

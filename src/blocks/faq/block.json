@@ -1,0 +1,52 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "theme-oh-my-brand/faq",
+    "version": "1.0.0",
+    "title": "FAQ",
+    "category": "text",
+    "icon": "editor-help",
+    "description": "Display frequently asked questions in an accordion layout with SEO-friendly structured data.",
+    "keywords": ["faq", "questions", "accordion", "help"],
+    "textdomain": "theme-oh-my-brand",
+    "attributes": {
+        "items": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "question": {
+                        "type": "string"
+                    },
+                    "answer": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "className": true,
+        "color": {
+            "background": true,
+            "text": true
+        },
+        "spacing": {
+            "margin": true,
+            "padding": true
+        },
+        "typography": {
+            "fontSize": true
+        }
+    },
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css",
+    "render": "file:./render.php"
+}

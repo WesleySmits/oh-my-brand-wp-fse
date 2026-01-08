@@ -26,16 +26,16 @@ This document covers testing strategies and best practices for the Oh My Brand! 
 
 ```bash
 # JavaScript/TypeScript tests
-npm test                    # Run once
-npm run test:watch          # Watch mode
-npm run test:coverage       # With coverage
+pnpm test                    # Run once
+pnpm run test:watch          # Watch mode
+pnpm run test:coverage       # With coverage
 
 # PHP tests
 composer test               # Run PHPUnit
 
 # E2E tests
-npm run test:e2e            # Run Playwright
-npm run test:e2e:ui         # Interactive UI mode
+pnpm run test:e2e            # Run Playwright
+pnpm run test:e2e:ui         # Interactive UI mode
 ```
 
 ---

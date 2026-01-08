@@ -28,13 +28,13 @@ This document serves as the central reference for AI assistants (GitHub Copilot,
 
 | Task | Command |
 |------|---------|
-| Build for production | `npm run build` |
-| Watch mode | `npm run watch` |
-| Lint all code | `npm run lint` |
-| Fix linting issues | `npm run lint:fix` |
-| Run JS tests | `npm test` |
+| Build for production | `pnpm run build` |
+| Watch mode | `pnpm run watch` |
+| Lint all code | `pnpm run lint` |
+| Fix linting issues | `pnpm run lint:fix` |
+| Run JS tests | `pnpm test` |
 | Run PHP tests | `composer test` |
-| Run E2E tests | `npm run test:e2e` |
+| Run E2E tests | `pnpm run test:e2e` |
 
 ## Documentation Structure
 
