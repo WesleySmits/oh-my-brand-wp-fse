@@ -13,6 +13,8 @@ module.exports = {
 		'blocks/faq/index': path.resolve(__dirname, 'src/blocks/faq/index.js'),
 		'blocks/gallery/index': path.resolve(__dirname, 'src/blocks/gallery/index.js'),
 		'blocks/gallery/view': path.resolve(__dirname, 'src/blocks/gallery/view.ts'),
+		'blocks/logo-grid/index': path.resolve(__dirname, 'src/blocks/logo-grid/index.ts'),
+		'blocks/logo-grid/view': path.resolve(__dirname, 'src/blocks/logo-grid/view.ts'),
 		'blocks/youtube/index': path.resolve(__dirname, 'src/blocks/youtube/index.js'),
 		'blocks/youtube/view': path.resolve(__dirname, 'src/blocks/youtube/view.ts')
 	},

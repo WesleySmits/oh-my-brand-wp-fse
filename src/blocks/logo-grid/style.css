@@ -1,0 +1,176 @@
+/**
+ * Logo Grid Block Styles
+ *
+ * @package theme-oh-my-brand
+ */
+
+.wp-block-theme-oh-my-brand-logo-grid {
+	--logo-grid-columns: 4;
+	--logo-grid-columns-mobile: 2;
+	--logo-grid-gap: 2rem;
+	--logo-grid-logo-height: 80px;
+	--logo-grid-grayscale: 1;
+	--logo-grid-transition: 300ms ease;
+
+	display: block;
+	width: 100%;
+}
+
+/* Heading */
+.wp-block-theme-oh-my-brand-logo-grid__heading {
+	margin-block-end: 2rem;
+	text-align: center;
+}
+
+/* Logo List */
+.wp-block-theme-oh-my-brand-logo-grid__list {
+	display: grid;
+	grid-template-columns: repeat(var(--logo-grid-columns-mobile), 1fr);
+	gap: var(--logo-grid-gap);
+	align-items: center;
+	justify-items: center;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* Logo Item */
+.wp-block-theme-oh-my-brand-logo-grid__item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	max-height: var(--logo-grid-logo-height);
+}
+
+/* Logo Image */
+.wp-block-theme-oh-my-brand-logo-grid__image {
+	width: auto;
+	max-width: 100%;
+	height: auto;
+	max-height: var(--logo-grid-logo-height);
+	object-fit: contain;
+	filter: grayscale(var(--logo-grid-grayscale));
+	transition: filter var(--logo-grid-transition);
+}
+
+/* Logo Link */
+.wp-block-theme-oh-my-brand-logo-grid__link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	border-radius: 4px;
+	transition: outline var(--logo-grid-transition);
+}
+
+.wp-block-theme-oh-my-brand-logo-grid__link:focus-visible {
+	outline: 2px solid currentcolor;
+	outline-offset: 4px;
+}
+
+/* Color on Hover */
+.wp-block-theme-oh-my-brand-logo-grid--color-on-hover
+	.wp-block-theme-oh-my-brand-logo-grid__item:hover
+	.wp-block-theme-oh-my-brand-logo-grid__image,
+.wp-block-theme-oh-my-brand-logo-grid--color-on-hover
+	.wp-block-theme-oh-my-brand-logo-grid__link:hover
+	.wp-block-theme-oh-my-brand-logo-grid__image,
+.wp-block-theme-oh-my-brand-logo-grid--color-on-hover
+	.wp-block-theme-oh-my-brand-logo-grid__link:focus-visible
+	.wp-block-theme-oh-my-brand-logo-grid__image {
+	filter: grayscale(0);
+}
+
+/* Empty State */
+.wp-block-theme-oh-my-brand-logo-grid__empty {
+	padding: 2rem;
+	text-align: center;
+	color: var(--wp--preset--color--contrast, #666);
+	background-color: var(--wp--preset--color--base, #f5f5f5);
+	border-radius: 4px;
+}
+
+/* Responsive: Desktop */
+@media (width >= 768px) {
+	.wp-block-theme-oh-my-brand-logo-grid__list {
+		grid-template-columns: repeat(var(--logo-grid-columns), 1fr);
+	}
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+	.wp-block-theme-oh-my-brand-logo-grid__image,
+	.wp-block-theme-oh-my-brand-logo-grid__link {
+		transition: none;
+	}
+}
+
+/* ==========================================================================
+   Marquee Animation Styles
+   ========================================================================== */
+
+/* Marquee keyframes */
+@keyframes logo-marquee-scroll {
+	0% {
+		transform: translateX(0);
+	}
+
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+/* Marquee container */
+omb-logo-marquee {
+	display: block;
+	overflow: hidden;
+	width: 100%;
+}
+
+/* Marquee list - active state (applied by JS) */
+.wp-block-theme-oh-my-brand-logo-grid__list--marquee-active {
+	--marquee-duration: 20s;
+	--marquee-direction: normal;
+	--marquee-play-state: running;
+
+	display: flex;
+	flex-wrap: nowrap;
+	gap: var(--logo-grid-gap);
+	width: max-content;
+	animation: logo-marquee-scroll var(--marquee-duration) linear infinite;
+	animation-direction: var(--marquee-direction);
+	animation-play-state: var(--marquee-play-state);
+}
+
+/* Override grid for marquee mode */
+.wp-block-theme-oh-my-brand-logo-grid--marquee .wp-block-theme-oh-my-brand-logo-grid__list {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: var(--logo-grid-gap);
+}
+
+/* Marquee items need fixed width */
+.wp-block-theme-oh-my-brand-logo-grid__list--marquee-active .wp-block-theme-oh-my-brand-logo-grid__item {
+	flex-shrink: 0;
+	width: auto;
+	min-width: calc(var(--logo-grid-logo-height) * 1.5);
+}
+
+/* Pause on hover */
+.wp-block-theme-oh-my-brand-logo-grid__list--marquee-active.wp-block-theme-oh-my-brand-logo-grid__list--pause-on-hover:hover {
+	animation-play-state: paused;
+}
+
+/* Reduced motion for marquee */
+.wp-block-theme-oh-my-brand-logo-grid__list--marquee-active.wp-block-theme-oh-my-brand-logo-grid__list--reduced-motion {
+	animation: none;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+/* Hide duplicated items when reduced motion is active */
+.wp-block-theme-oh-my-brand-logo-grid__list--marquee-active.wp-block-theme-oh-my-brand-logo-grid__list--reduced-motion
+	.wp-block-theme-oh-my-brand-logo-grid__item[aria-hidden='true'] {
+	display: none;
+}

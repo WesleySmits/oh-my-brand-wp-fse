@@ -24,6 +24,7 @@ $omb_includes = [
 	'includes/custom-image-controls.php',
 	'includes/block-helpers.php',
 	'includes/post-types/social-links.php',
+	'includes/rest-api/logo-grid-endpoints.php',
 ];
 
 foreach ( $omb_includes as $omb_file ) {

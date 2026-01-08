@@ -1,0 +1,130 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "theme-oh-my-brand/logo-grid",
+	"version": "1.0.0",
+	"title": "Logo Grid",
+	"category": "theme-oh-my-brand",
+	"icon": "grid-view",
+	"description": "Display client or partner logos in a responsive grid with optional grayscale effect.",
+	"textdomain": "theme-oh-my-brand",
+	"keywords": ["logo", "grid", "clients", "partners", "brands", "sponsors"],
+	"attributes": {
+		"heading": {
+			"type": "string",
+			"default": ""
+		},
+		"headingLevel": {
+			"type": "string",
+			"default": "h2"
+		},
+		"source": {
+			"type": "string",
+			"default": "manual"
+		},
+		"postType": {
+			"type": "string",
+			"default": ""
+		},
+		"imageSource": {
+			"type": "string",
+			"default": "featured_image"
+		},
+		"linkSource": {
+			"type": "string",
+			"default": "permalink"
+		},
+		"altSource": {
+			"type": "string",
+			"default": "title"
+		},
+		"maxLogos": {
+			"type": "number",
+			"default": 12
+		},
+		"orderBy": {
+			"type": "string",
+			"default": "menu_order"
+		},
+		"order": {
+			"type": "string",
+			"default": "ASC"
+		},
+		"images": {
+			"type": "array",
+			"default": [],
+			"items": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "number"
+					},
+					"url": {
+						"type": "string"
+					},
+					"alt": {
+						"type": "string"
+					},
+					"link": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"columns": {
+			"type": "number",
+			"default": 4
+		},
+		"columnsMobile": {
+			"type": "number",
+			"default": 2
+		},
+		"grayscale": {
+			"type": "boolean",
+			"default": true
+		},
+		"colorOnHover": {
+			"type": "boolean",
+			"default": true
+		},
+		"logoMaxHeight": {
+			"type": "number",
+			"default": 80
+		},
+		"enableMarquee": {
+			"type": "boolean",
+			"default": false
+		},
+		"marqueeSpeed": {
+			"type": "string",
+			"default": "medium",
+			"enum": ["slow", "medium", "fast"]
+		},
+		"marqueeDirection": {
+			"type": "string",
+			"default": "left",
+			"enum": ["left", "right"]
+		},
+		"pauseOnHover": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"align": ["wide", "full"],
+		"anchor": true,
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}

@@ -1,0 +1,126 @@
+/**
+ * Logo Grid Block Editor Styles
+ *
+ * @package theme-oh-my-brand
+ */
+
+/* Editor wrapper adjustments */
+.wp-block-theme-oh-my-brand-logo-grid {
+	--logo-grid-columns: 4;
+	--logo-grid-columns-mobile: 2;
+	--logo-grid-gap: 2rem;
+	--logo-grid-logo-height: 80px;
+	--logo-grid-grayscale: 1;
+}
+
+/* Editor Placeholder */
+.wp-block-theme-oh-my-brand-logo-grid .components-placeholder {
+	min-height: 200px;
+}
+
+/* Editor Heading */
+.wp-block-theme-oh-my-brand-logo-grid__heading {
+	margin-block-end: 1.5rem;
+	text-align: center;
+}
+
+.wp-block-theme-oh-my-brand-logo-grid__heading[data-rich-text-placeholder]::before {
+	opacity: 60%;
+}
+
+/* Editor Logo List */
+.wp-block-theme-oh-my-brand-logo-grid__list {
+	display: grid;
+	grid-template-columns: repeat(var(--logo-grid-columns), 1fr);
+	gap: var(--logo-grid-gap);
+	align-items: center;
+	justify-items: center;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* Editor Logo Item */
+.wp-block-theme-oh-my-brand-logo-grid__item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	max-height: var(--logo-grid-logo-height);
+}
+
+/* Editor Logo Image */
+.wp-block-theme-oh-my-brand-logo-grid__image {
+	width: auto;
+	max-width: 100%;
+	height: auto;
+	max-height: var(--logo-grid-logo-height);
+	object-fit: contain;
+	filter: grayscale(var(--logo-grid-grayscale));
+}
+
+/* Remove Button */
+.wp-block-theme-oh-my-brand-logo-grid__remove {
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	z-index: 1;
+	padding: 0;
+	background: #cc1818;
+	border: none;
+	border-radius: 50%;
+	opacity: 0%;
+	transition: opacity 150ms ease;
+}
+
+.wp-block-theme-oh-my-brand-logo-grid__remove svg {
+	fill: #fff;
+}
+
+.wp-block-theme-oh-my-brand-logo-grid__item:hover .wp-block-theme-oh-my-brand-logo-grid__remove,
+.wp-block-theme-oh-my-brand-logo-grid__item:focus-within .wp-block-theme-oh-my-brand-logo-grid__remove {
+	opacity: 100%;
+}
+
+/* Editor Toolbar */
+.wp-block-theme-oh-my-brand-logo-grid__toolbar {
+	display: flex;
+	justify-content: center;
+	margin-block-start: 1.5rem;
+	padding-block-start: 1rem;
+	border-top: 1px solid #ddd;
+}
+
+/* Loading State */
+.wp-block-theme-oh-my-brand-logo-grid__loading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 150px;
+	padding: 2rem;
+	background: #f0f0f0;
+	border-radius: 4px;
+}
+
+.wp-block-theme-oh-my-brand-logo-grid__loading p {
+	margin-block-start: 0.5rem;
+	color: #757575;
+	font-size: 14px;
+}
+
+/* Dynamic Source Notice */
+.wp-block-theme-oh-my-brand-logo-grid__dynamic-notice {
+	margin-block-start: 1rem;
+	padding: 0.75rem 1rem;
+	background: #e7f5fe;
+	border-left: 4px solid #007cba;
+	border-radius: 0 4px 4px 0;
+	color: #1e1e1e;
+	font-size: 13px;
+}
+
+.wp-block-theme-oh-my-brand-logo-grid__dynamic-notice strong {
+	color: #007cba;
+}
