@@ -1,7 +1,7 @@
 /**
  * Gallery Block - Edit Component
  *
- * @package theme-oh-my-brand
+ * @package
  */
 
 import { __ } from '@wordpress/i18n';
@@ -47,6 +47,9 @@ interface MediaItem {
 
 /**
  * Edit component for the Gallery block.
+ * @param root0
+ * @param root0.attributes
+ * @param root0.setAttributes
  */
 export default function Edit({ attributes, setAttributes }: BlockEditProps<GalleryAttributes>): JSX.Element {
 	const { images, visibleImages } = attributes;
@@ -56,6 +59,7 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<Galle
 
 	/**
 	 * Handle image selection from media library.
+	 * @param selectedImages
 	 */
 	const onSelectImages = (selectedImages: MediaItem[]): void => {
 		const newImages: GalleryImage[] = selectedImages.map((image) => ({
@@ -70,6 +74,7 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<Galle
 
 	/**
 	 * Remove an image from the gallery.
+	 * @param indexToRemove
 	 */
 	const removeImage = (indexToRemove: number): void => {
 		const newImages = images.filter((_: GalleryImage, index: number) => index !== indexToRemove);

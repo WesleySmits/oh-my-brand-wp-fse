@@ -43,12 +43,15 @@ class MockIntersectionObserver {
 	readonly rootMargin: string = '';
 	readonly thresholds: ReadonlyArray<number> = [];
 
+	// eslint-disable-next-line no-useless-constructor, @typescript-eslint/no-unused-vars
 	constructor(_callback: IntersectionObserverCallback, _options?: IntersectionObserverInit) {}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	observe(_target: Element): void {
 		// Mock implementation
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	unobserve(_target: Element): void {
 		// Mock implementation
 	}
@@ -66,12 +69,15 @@ vi.stubGlobal('IntersectionObserver', MockIntersectionObserver);
 
 // Mock ResizeObserver
 class MockResizeObserver {
+	// eslint-disable-next-line no-useless-constructor, @typescript-eslint/no-unused-vars
 	constructor(_callback: ResizeObserverCallback) {}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	observe(_target: Element): void {
 		// Mock implementation
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	unobserve(_target: Element): void {
 		// Mock implementation
 	}

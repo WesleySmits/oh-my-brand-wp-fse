@@ -1,7 +1,7 @@
 /**
  * FAQ Block - Edit Component
  *
- * @package theme-oh-my-brand
+ * @package
  */
 
 import { __ } from '@wordpress/i18n';
@@ -65,6 +65,12 @@ function generateId(): string {
 
 /**
  * Sortable FAQ Item Component.
+ * @param root0
+ * @param root0.id
+ * @param root0.item
+ * @param root0.index
+ * @param root0.onChange
+ * @param root0.onRemove
  */
 function SortableFAQItem({ id, item, index, onChange, onRemove }: SortableFAQItemProps): JSX.Element {
 	const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
@@ -125,6 +131,9 @@ function SortableFAQItem({ id, item, index, onChange, onRemove }: SortableFAQIte
 
 /**
  * Edit component for the FAQ block with drag-to-reorder support.
+ * @param root0
+ * @param root0.attributes
+ * @param root0.setAttributes
  */
 export default function Edit({ attributes, setAttributes }: BlockEditProps<FAQAttributes>): JSX.Element {
 	const { items } = attributes;
@@ -157,6 +166,7 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<FAQAt
 
 	/**
 	 * Handle drag end - reorder items array.
+	 * @param event
 	 */
 	const handleDragEnd = (event: DragEndEvent): void => {
 		const { active, over } = event;
@@ -182,6 +192,8 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<FAQAt
 
 	/**
 	 * Update an FAQ item.
+	 * @param index
+	 * @param newItem
 	 */
 	const updateItem = (index: number, newItem: FAQItem): void => {
 		const newItems = [...itemsWithIds];
@@ -191,6 +203,7 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<FAQAt
 
 	/**
 	 * Remove an FAQ item.
+	 * @param index
 	 */
 	const removeItem = (index: number): void => {
 		const newItems = itemsWithIds.filter((_, i) => i !== index);

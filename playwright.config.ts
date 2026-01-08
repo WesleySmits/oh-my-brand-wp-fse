@@ -8,13 +8,13 @@ import { defineConfig, devices } from '@playwright/test';
  *
  * @see https://playwright.dev/docs/test-configuration
  */
-export default defineConfig({
+export default defineConfig( {
 	testDir: './tests/e2e',
 	fullyParallel: true,
-	forbidOnly: !!process.env.CI,
+	forbidOnly: !! process.env.CI,
 	retries: process.env.CI ? 2 : 0,
 	workers: process.env.CI ? 1 : undefined,
-	reporter: [['html', { open: 'never' }], ['list']],
+	reporter: [ [ 'html', { open: 'never' } ], [ 'list' ] ],
 
 	use: {
 		// Local by Flywheel URL for local dev, wp-env URL for CI
@@ -27,20 +27,20 @@ export default defineConfig({
 	projects: [
 		{
 			name: 'chromium',
-			use: { ...devices['Desktop Chrome'] }
+			use: { ...devices[ 'Desktop Chrome' ] }
 		},
 		{
 			name: 'webkit',
-			use: { ...devices['Desktop Safari'] }
+			use: { ...devices[ 'Desktop Safari' ] }
 		},
 		// Mobile viewports
 		{
 			name: 'mobile-chrome',
-			use: { ...devices['Pixel 5'] }
+			use: { ...devices[ 'Pixel 5' ] }
 		},
 		{
 			name: 'mobile-safari',
-			use: { ...devices['iPhone 12'] }
+			use: { ...devices[ 'iPhone 12' ] }
 		}
 	]
 
@@ -52,4 +52,4 @@ export default defineConfig({
 	//     reuseExistingServer: !process.env.CI,
 	//     timeout: 120 * 1000
 	// }
-});
+} );

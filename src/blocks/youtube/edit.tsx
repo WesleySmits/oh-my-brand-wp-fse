@@ -1,7 +1,7 @@
 /**
  * YouTube Block - Edit Component
  *
- * @package theme-oh-my-brand
+ * @package
  */
 
 import { __ } from '@wordpress/i18n';
@@ -34,6 +34,7 @@ interface OEmbedResponse {
 
 /**
  * Extract YouTube video ID from URL or iframe.
+ * @param input
  */
 function getVideoId(input: string): string | null {
 	if (!input) {
@@ -59,6 +60,7 @@ function getVideoId(input: string): string | null {
 
 /**
  * Get YouTube thumbnail URL.
+ * @param videoId
  */
 function getThumbnailUrl(videoId: string): string {
 	return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
@@ -66,6 +68,9 @@ function getThumbnailUrl(videoId: string): string {
 
 /**
  * Edit component for the YouTube block.
+ * @param root0
+ * @param root0.attributes
+ * @param root0.setAttributes
  */
 export default function Edit({ attributes, setAttributes }: BlockEditProps<YouTubeAttributes>): JSX.Element {
 	const { url, videoTitle, lazyLoad } = attributes;
@@ -106,6 +111,7 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<YouTu
 			})
 			.catch((error: Error) => {
 				// Silent failure - video title is optional enhancement
+				// eslint-disable-next-line no-console
 				console.warn('Could not fetch video title:', error.message);
 				setFetchError(__('Could not fetch video title', 'theme-oh-my-brand'));
 			})
@@ -137,7 +143,7 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<YouTu
 										: __(
 												'Used for accessibility and SEO. Auto-fetched from YouTube.',
 												'theme-oh-my-brand'
-											)
+										  )
 								}
 								value={videoTitle}
 								onChange={(value: string) => setAttributes({ videoTitle: value })}

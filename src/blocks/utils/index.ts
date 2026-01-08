@@ -3,7 +3,7 @@
  *
  * Re-exports all utility functions and classes for easy importing.
  *
- * @package theme-oh-my-brand
+ * @package
  */
 
 export { debounce } from './debounce';

@@ -4,7 +4,7 @@
  *
  * @param func  The function to debounce.
  * @param delay The number of milliseconds to delay.
- * @returns     The debounced function.
+ * @return     The debounced function.
  */
 export function debounce<T extends (...args: Parameters<T>) => void>(
 	func: T,

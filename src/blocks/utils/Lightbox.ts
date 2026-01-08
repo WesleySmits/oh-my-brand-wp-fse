@@ -8,7 +8,7 @@
  * - Smooth animations with prefers-reduced-motion support
  * - Lazy image loading
  *
- * @package theme-oh-my-brand
+ * @package
  */
 
 export interface LightboxImage {
@@ -67,11 +67,16 @@ export class Lightbox {
 
 	/**
 	 * Open the lightbox at a specific index.
+	 * @param index
+	 * @param triggerElement
 	 */
 	public open(index: number = 0, triggerElement?: HTMLElement): void {
-		if (this.images.length === 0) return;
+		if (this.images.length === 0) {
+			return;
+		}
 
 		this.currentIndex = this.clampIndex(index);
+		// eslint-disable-next-line @wordpress/no-global-active-element
 		this.triggerElement = triggerElement || (document.activeElement as HTMLElement);
 
 		this.createDialog();
@@ -88,7 +93,9 @@ export class Lightbox {
 	 * Close the lightbox.
 	 */
 	public close(): void {
-		if (!this.dialog) return;
+		if (!this.dialog) {
+			return;
+		}
 
 		// Animate out if motion is allowed
 		if (!this.prefersReducedMotion()) {
@@ -123,6 +130,7 @@ export class Lightbox {
 
 	/**
 	 * Navigate to a specific image index.
+	 * @param index
 	 */
 	public goTo(index: number): void {
 		const newIndex = this.clampIndex(index);
@@ -257,7 +265,9 @@ export class Lightbox {
 	}
 
 	private attachEventListeners(): void {
-		if (!this.dialog) return;
+		if (!this.dialog) {
+			return;
+		}
 
 		// Close button
 		const closeButton = this.dialog.querySelector('.lightbox__close');
@@ -314,7 +324,9 @@ export class Lightbox {
 
 	private updateContent(): void {
 		const image = this.images[this.currentIndex];
-		if (!image || !this.imageElement) return;
+		if (!image || !this.imageElement) {
+			return;
+		}
 
 		// Update image
 		this.imageElement.src = image.src;
@@ -379,8 +391,9 @@ export class Lightbox {
 /**
  * Factory function to create a lightbox from DOM elements.
  *
- * @param selector CSS selector for images or anchor elements wrapping images
- * @param options Lightbox options
+ * @param selector  CSS selector for images or anchor elements wrapping images
+ * @param container
+ * @param options   Lightbox options
  */
 export function createLightboxFromElements(
 	selector: string,

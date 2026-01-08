@@ -7,6 +7,7 @@ vi.mock('@wordpress/data', () => ({
 	select: vi.fn(() => ({
 		getBlocks: vi.fn(() => [])
 	})),
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	subscribe: vi.fn((_callback: () => void) => {
 		return () => {}; // Return unsubscribe function
 	})

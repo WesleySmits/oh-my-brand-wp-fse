@@ -1,6 +1,6 @@
 /** @type {import('stylelint').Config} */
 export default {
-	extends: ['stylelint-config-standard'],
+	extends: [ 'stylelint-config-standard' ],
 	rules: {
 		// WordPress uses various class naming patterns
 		'selector-class-pattern': null,
@@ -16,7 +16,7 @@ export default {
 		'at-rule-no-unknown': [
 			true,
 			{
-				ignoreAtRules: ['layer', 'tailwind', 'apply', 'variants', 'responsive', 'screen']
+				ignoreAtRules: [ 'layer', 'tailwind', 'apply', 'variants', 'responsive', 'screen' ]
 			}
 		],
 
@@ -24,7 +24,7 @@ export default {
 		'selector-pseudo-class-no-unknown': [
 			true,
 			{
-				ignorePseudoClasses: ['target-current']
+				ignorePseudoClasses: [ 'target-current' ]
 			}
 		],
 
@@ -48,5 +48,5 @@ export default {
 		'property-no-vendor-prefix': null,
 		'value-no-vendor-prefix': null
 	},
-	ignoreFiles: ['node_modules/**', 'vendor/**', 'assets/js/**', 'coverage/**', '**/*.min.css']
+	ignoreFiles: [ 'node_modules/**', 'vendor/**', 'assets/js/**', 'coverage/**', '**/*.min.css' ]
 };

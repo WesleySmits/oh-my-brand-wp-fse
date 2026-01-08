@@ -65,13 +65,13 @@ test.describe('Gallery Block - Interactive', () => {
 
 	test('gallery scrolls on navigation click', async ({ page }) => {
 		const gallery = page.locator('[data-gallery]').first();
-		const nextButton = page.locator('[data-gallery-next]').first();
 
 		if ((await gallery.count()) === 0) {
 			test.skip();
 			return;
 		}
 
+		const nextButton = page.locator('[data-gallery-next]').first();
 		await nextButton.click();
 
 		// Wait for smooth scroll animation
@@ -85,13 +85,13 @@ test.describe('Gallery Block - Interactive', () => {
 
 	test('navigation buttons have accessible labels', async ({ page }) => {
 		const prevButton = page.locator('[data-gallery-previous]').first();
-		const nextButton = page.locator('[data-gallery-next]').first();
 
 		if ((await prevButton.count()) === 0) {
 			test.skip();
 			return;
 		}
 
+		const nextButton = page.locator('[data-gallery-next]').first();
 		await expect(prevButton).toHaveAttribute('aria-label', /.+/);
 		await expect(nextButton).toHaveAttribute('aria-label', /.+/);
 	});

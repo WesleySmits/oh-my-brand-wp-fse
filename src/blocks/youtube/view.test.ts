@@ -1,7 +1,7 @@
 /**
  * Unit tests for OmbYouTubeFacade web component.
  *
- * @package theme-oh-my-brand
+ * @package
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
@@ -12,6 +12,8 @@ describe('OmbYouTubeFacade', () => {
 
 	/**
 	 * Helper to create a facade element with attributes.
+	 * @param embedUrl
+	 * @param videoTitle
 	 */
 	function createFacadeElement(
 		embedUrl: string = 'https://www.youtube.com/embed/dQw4w9WgXcQ',
@@ -38,6 +40,8 @@ describe('OmbYouTubeFacade', () => {
 
 	/**
 	 * Helper to create facade with parent wrapper.
+	 * @param embedUrl
+	 * @param videoTitle
 	 */
 	function createFacadeWithWrapper(
 		embedUrl: string = 'https://www.youtube.com/embed/dQw4w9WgXcQ',

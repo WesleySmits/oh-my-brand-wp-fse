@@ -1,7 +1,7 @@
 /**
  * Gallery Block - Frontend view script using Web Component.
  *
- * @package theme-oh-my-brand
+ * @package
  */
 
 import { createLightboxFromElements, type Lightbox } from '../utils/Lightbox';
@@ -87,6 +87,9 @@ class OmbGalleryCarousel extends HTMLElement {
 
 	/**
 	 * Called when an observed attribute changes.
+	 * @param name
+	 * @param oldValue
+	 * @param newValue
 	 */
 	attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 		if (oldValue === newValue) {
@@ -213,6 +216,7 @@ class OmbGalleryCarousel extends HTMLElement {
 
 	/**
 	 * Handle keyboard navigation.
+	 * @param event
 	 */
 	#handleKeydown = (event: KeyboardEvent): void => {
 		switch (event.key) {

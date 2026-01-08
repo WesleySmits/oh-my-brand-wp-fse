@@ -1,7 +1,7 @@
 /**
  * Lightbox unit tests.
  *
- * @package theme-oh-my-brand
+ * @package
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
@@ -268,6 +268,7 @@ describe('createLightboxFromElements', () => {
 			</div>
 		`;
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const lightbox = createLightboxFromElements('.gallery-image');
 		const image = document.querySelector('.gallery-image') as HTMLElement;
 

@@ -4,7 +4,7 @@
  * Implements facade pattern: replaces thumbnail with iframe on user interaction.
  * This improves initial page load by deferring iframe loading (~500KB saved per video).
  *
- * @package theme-oh-my-brand
+ * @package
  */
 
 /**
@@ -42,6 +42,7 @@ class OmbYouTubeFacade extends HTMLElement {
 		this.#videoTitle = this.getAttribute('video-title') || 'YouTube video';
 
 		if (!this.#embedUrl) {
+			// eslint-disable-next-line no-console
 			console.warn('omb-youtube-facade: Missing embed-url attribute');
 			return;
 		}
@@ -51,6 +52,9 @@ class OmbYouTubeFacade extends HTMLElement {
 
 	/**
 	 * Called when an observed attribute changes.
+	 * @param name
+	 * @param oldValue
+	 * @param newValue
 	 */
 	attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 		if (oldValue === newValue) {
@@ -80,6 +84,7 @@ class OmbYouTubeFacade extends HTMLElement {
 
 	/**
 	 * Handle keyboard events.
+	 * @param event
 	 */
 	#handleKeydown = (event: KeyboardEvent): void => {
 		if (event.key === 'Enter' || event.key === ' ') {

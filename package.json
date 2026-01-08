@@ -23,7 +23,7 @@
         "packages-update": "wp-scripts packages-update"
     },
     "lint-staged": {
-        "*.js": [
+        "!(assets)/**/*.{js,jsx,ts,tsx}": [
             "wp-scripts lint-js --fix",
             "prettier --write"
         ],
