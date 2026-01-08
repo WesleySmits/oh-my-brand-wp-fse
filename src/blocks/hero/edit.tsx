@@ -5,21 +5,13 @@
  */
 
 import { __ } from '@wordpress/i18n';
-import {
-	useBlockProps,
-	MediaUpload,
-	MediaUploadCheck,
-	InspectorControls,
-	RichText,
-	URLInput
-} from '@wordpress/block-editor';
+import { useBlockProps, MediaUpload, MediaUploadCheck, InspectorControls, RichText } from '@wordpress/block-editor';
 import {
 	Button,
 	PanelBody,
 	SelectControl,
 	RangeControl,
 	TextControl,
-	ToggleControl,
 	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
 	__experimentalUnitControl as UnitControl,
 	ColorPicker,
@@ -27,15 +19,7 @@ import {
 } from '@wordpress/components';
 import { cover as heroIcon } from '@wordpress/icons';
 import type { BlockEditProps } from '@wordpress/blocks';
-
-/**
- * Button object interface.
- */
-interface HeroButton {
-	text: string;
-	url: string;
-	openInNewTab: boolean;
-}
+import { ButtonSettingsPanel, type BlockButton } from '../utils';
 
 /**
  * Background image interface.
@@ -64,8 +48,8 @@ interface HeroAttributes {
 	contentAlignment: string;
 	verticalAlignment: string;
 	minHeight: string;
-	primaryButton: HeroButton;
-	secondaryButton: HeroButton;
+	primaryButton: BlockButton;
+	secondaryButton: BlockButton;
 }
 
 /**
@@ -138,26 +122,6 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<HeroA
 	 */
 	const removeBackgroundImage = (): void => {
 		setAttributes({ backgroundImage: {} });
-	};
-
-	/**
-	 * Update button attribute.
-	 * @param buttonKey
-	 * @param field
-	 * @param value
-	 */
-	const updateButton = (
-		buttonKey: 'primaryButton' | 'secondaryButton',
-		field: keyof HeroButton,
-		value: string | boolean
-	): void => {
-		const currentButton = attributes[buttonKey] || { text: '', url: '', openInNewTab: false };
-		setAttributes({
-			[buttonKey]: {
-				...currentButton,
-				[field]: value
-			}
-		});
 	};
 
 	return (
@@ -296,42 +260,18 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<HeroA
 				</PanelBody>
 
 				{/* Primary Button Settings */}
-				<PanelBody title={__('Primary Button', 'theme-oh-my-brand')} initialOpen={false}>
-					<TextControl
-						label={__('Button Text', 'theme-oh-my-brand')}
-						value={primaryButton?.text || ''}
-						onChange={(value: string) => updateButton('primaryButton', 'text', value)}
-					/>
-					<URLInput
-						label={__('Button URL', 'theme-oh-my-brand')}
-						value={primaryButton?.url || ''}
-						onChange={(value: string) => updateButton('primaryButton', 'url', value)}
-					/>
-					<ToggleControl
-						label={__('Open in new tab', 'theme-oh-my-brand')}
-						checked={primaryButton?.openInNewTab || false}
-						onChange={(value: boolean) => updateButton('primaryButton', 'openInNewTab', value)}
-					/>
-				</PanelBody>
+				<ButtonSettingsPanel
+					title={__('Primary Button', 'theme-oh-my-brand')}
+					button={primaryButton || { text: '', url: '', openInNewTab: false }}
+					onChange={(button: BlockButton) => setAttributes({ primaryButton: button })}
+				/>
 
 				{/* Secondary Button Settings */}
-				<PanelBody title={__('Secondary Button', 'theme-oh-my-brand')} initialOpen={false}>
-					<TextControl
-						label={__('Button Text', 'theme-oh-my-brand')}
-						value={secondaryButton?.text || ''}
-						onChange={(value: string) => updateButton('secondaryButton', 'text', value)}
-					/>
-					<URLInput
-						label={__('Button URL', 'theme-oh-my-brand')}
-						value={secondaryButton?.url || ''}
-						onChange={(value: string) => updateButton('secondaryButton', 'url', value)}
-					/>
-					<ToggleControl
-						label={__('Open in new tab', 'theme-oh-my-brand')}
-						checked={secondaryButton?.openInNewTab || false}
-						onChange={(value: boolean) => updateButton('secondaryButton', 'openInNewTab', value)}
-					/>
-				</PanelBody>
+				<ButtonSettingsPanel
+					title={__('Secondary Button', 'theme-oh-my-brand')}
+					button={secondaryButton || { text: '', url: '', openInNewTab: false }}
+					onChange={(button: BlockButton) => setAttributes({ secondaryButton: button })}
+				/>
 			</InspectorControls>
 
 			<div {...blockProps}>
@@ -368,7 +308,7 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<HeroA
 
 					<header className="wp-block-theme-oh-my-brand-hero__header">
 						<RichText
-							tagName={headingLevel as keyof JSX.IntrinsicElements}
+							tagName={headingLevel as 'h1' | 'h2'}
 							className="wp-block-theme-oh-my-brand-hero__heading"
 							placeholder={__('Add heading…', 'theme-oh-my-brand')}
 							value={heading}

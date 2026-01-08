@@ -1,0 +1,159 @@
+/**
+ * Banner Block - Frontend Styles
+ *
+ * Light-DOM fallback styles and button styling for the banner block.
+ *
+ * @package theme-oh-my-brand
+ */
+
+/* ==========================================================================
+   Banner Block Variables
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-banner {
+	--banner-gap: 2rem;
+	--banner-padding-block: 4rem;
+	--banner-padding-inline: 2rem;
+	--banner-content-max-width: 600px;
+	--banner-button-padding-block: 0.875rem;
+	--banner-button-padding-inline: 1.75rem;
+	--banner-button-border-radius: 0.375rem;
+	--banner-button-font-weight: 600;
+	--banner-button-transition: all 0.2s ease;
+}
+
+/* ==========================================================================
+   Banner Article (Light-DOM Content)
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-banner__article {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.wp-block-theme-oh-my-brand-banner__heading {
+	margin: 0;
+	font-size: clamp(1.5rem, 3vw, 2.5rem);
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.wp-block-theme-oh-my-brand-banner__text {
+	font-size: 1rem;
+	line-height: 1.6;
+}
+
+.wp-block-theme-oh-my-brand-banner__text p {
+	margin: 0 0 1rem;
+}
+
+.wp-block-theme-oh-my-brand-banner__text p:last-child {
+	margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Banner Button
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-banner__button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding-block: var(--banner-button-padding-block);
+	padding-inline: var(--banner-button-padding-inline);
+	font-weight: var(--banner-button-font-weight);
+	text-decoration: none;
+	border-radius: var(--banner-button-border-radius);
+	transition: var(--banner-button-transition);
+	cursor: pointer;
+	border: 2px solid transparent;
+}
+
+.wp-block-theme-oh-my-brand-banner__button:focus-visible {
+	outline: 2px solid currentcolor;
+	outline-offset: 2px;
+}
+
+/* Primary Button */
+.wp-block-theme-oh-my-brand-banner__button--primary {
+	background-color: var(--wp--preset--color--primary, #06c);
+	color: var(--wp--preset--color--base, #fff);
+	border-color: var(--wp--preset--color--primary, #06c);
+}
+
+.wp-block-theme-oh-my-brand-banner__button--primary:hover {
+	background-color: var(--wp--preset--color--primary-dark, #0052a3);
+	border-color: var(--wp--preset--color--primary-dark, #0052a3);
+}
+
+/* Secondary Button */
+.wp-block-theme-oh-my-brand-banner__button--secondary {
+	background-color: transparent;
+	color: var(--wp--preset--color--primary, #06c);
+	border-color: var(--wp--preset--color--primary, #06c);
+}
+
+.wp-block-theme-oh-my-brand-banner__button--secondary:hover {
+	background-color: var(--wp--preset--color--primary, #06c);
+	color: var(--wp--preset--color--base, #fff);
+}
+
+/* ==========================================================================
+   Light-DOM Fallback (No Web Components)
+   ========================================================================== */
+
+@supports not (selector(:host)) {
+	.wp-block-theme-oh-my-brand-banner {
+		display: grid;
+		grid-template-columns: 50% 1fr;
+		gap: var(--banner-gap);
+		padding-block: var(--banner-padding-block);
+		padding-inline: var(--banner-padding-inline);
+		align-items: center;
+	}
+
+	.wp-block-theme-oh-my-brand-banner--image-right {
+		grid-template-columns: 1fr 50%;
+	}
+
+	.wp-block-theme-oh-my-brand-banner--image-right .wp-block-theme-oh-my-brand-banner__image-wrapper {
+		order: 2;
+	}
+
+	.wp-block-theme-oh-my-brand-banner--image-right .wp-block-theme-oh-my-brand-banner__article {
+		order: 1;
+	}
+
+	.wp-block-theme-oh-my-brand-banner__image-wrapper img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: 0.5rem;
+		object-fit: cover;
+	}
+
+	.wp-block-theme-oh-my-brand-banner__article {
+		max-width: var(--banner-content-max-width);
+	}
+
+	@media (width <= 768px) {
+		.wp-block-theme-oh-my-brand-banner {
+			grid-template-columns: 1fr;
+		}
+
+		.wp-block-theme-oh-my-brand-banner--image-right {
+			grid-template-columns: 1fr;
+		}
+
+		.wp-block-theme-oh-my-brand-banner__image-wrapper,
+		.wp-block-theme-oh-my-brand-banner__article {
+			order: unset;
+		}
+
+		.wp-block-theme-oh-my-brand-banner__article {
+			max-width: none;
+		}
+	}
+}

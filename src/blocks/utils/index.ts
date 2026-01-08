@@ -9,3 +9,5 @@
 export { debounce } from './debounce';
 export { Lightbox, createLightboxFromElements } from './Lightbox';
 export type { LightboxImage, LightboxOptions } from './Lightbox';
+export { ButtonSettingsPanel } from './ButtonSettingsPanel';
+export type { BlockButton } from './ButtonSettingsPanel';

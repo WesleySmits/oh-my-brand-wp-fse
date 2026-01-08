@@ -40,6 +40,42 @@ function omb_register_blocks(): void {
 }
 
 /**
+ * Render a CTA button for blocks.
+ *
+ * Shared utility for rendering consistent CTA buttons across Hero, Banner,
+ * and other blocks that need button functionality.
+ *
+ * @since 1.0.0
+ *
+ * @param array<string, mixed> $button      Button data with 'text', 'url', 'openInNewTab'.
+ * @param string               $block_name  Block class name prefix (e.g., 'hero', 'banner').
+ * @param string               $variant     Button variant: 'primary' or 'secondary'.
+ * @return string HTML output.
+ */
+function omb_render_block_button( array $button, string $block_name, string $variant = 'primary' ): string {
+	if ( empty( $button['text'] ) || empty( $button['url'] ) ) {
+		return '';
+	}
+
+	$class = sprintf(
+		'wp-block-theme-oh-my-brand-%s__button wp-block-theme-oh-my-brand-%s__button--%s',
+		esc_attr( $block_name ),
+		esc_attr( $block_name ),
+		esc_attr( $variant )
+	);
+
+	$target = ! empty( $button['openInNewTab'] ) ? ' target="_blank" rel="noopener noreferrer"' : '';
+
+	return sprintf(
+		'<a href="%s" class="%s"%s>%s</a>',
+		esc_url( $button['url'] ),
+		$class,
+		$target,
+		esc_html( $button['text'] )
+	);
+}
+
+/**
  * Convert WordPress preset spacing values to actual CSS values.
  *
  * Converts values like 'var:preset|spacing|medium' to their actual CSS values

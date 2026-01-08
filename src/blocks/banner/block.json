@@ -1,0 +1,79 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "theme-oh-my-brand/banner",
+	"version": "1.0.0",
+	"title": "Banner",
+	"category": "theme-oh-my-brand",
+	"description": "A side-by-side layout with image and text content.",
+	"textdomain": "theme-oh-my-brand",
+	"keywords": ["banner", "image", "text", "media", "feature", "split"],
+	"attributes": {
+		"heading": {
+			"type": "string",
+			"default": ""
+		},
+		"headingLevel": {
+			"type": "string",
+			"default": "h2"
+		},
+		"content": {
+			"type": "string",
+			"default": ""
+		},
+		"image": {
+			"type": "object",
+			"default": {}
+		},
+		"imagePosition": {
+			"type": "string",
+			"default": "left"
+		},
+		"imageSize": {
+			"type": "string",
+			"default": "50"
+		},
+		"imageFit": {
+			"type": "string",
+			"default": "cover"
+		},
+		"verticalAlignment": {
+			"type": "string",
+			"default": "center"
+		},
+		"button": {
+			"type": "object",
+			"default": {
+				"text": "",
+				"url": "",
+				"openInNewTab": false
+			}
+		},
+		"mobileStack": {
+			"type": "string",
+			"default": "image-first"
+		}
+	},
+	"supports": {
+		"align": ["full", "wide"],
+		"anchor": true,
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}
