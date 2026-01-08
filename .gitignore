@@ -26,6 +26,7 @@ vendor/
 
 # Build output (compiled assets)
 build/
+docs/blocks/
 assets/js/*.js
 assets/js/*.js.map
 

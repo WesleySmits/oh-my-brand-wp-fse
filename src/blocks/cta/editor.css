@@ -1,0 +1,137 @@
+/**
+ * CTA Block - Editor Styles
+ *
+ * Styles specific to the block editor environment.
+ *
+ * @package theme-oh-my-brand
+ */
+
+/* ==========================================================================
+   CTA Block Editor Layout
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-cta {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 3rem 2rem;
+	min-height: 200px;
+}
+
+/* ==========================================================================
+   CTA Content
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-cta__content {
+	display: flex;
+	flex-direction: column;
+	max-width: 720px;
+	width: 100%;
+}
+
+/* Alignment variants */
+.wp-block-theme-oh-my-brand-cta--align-left .wp-block-theme-oh-my-brand-cta__content {
+	align-items: flex-start;
+	text-align: left;
+}
+
+.wp-block-theme-oh-my-brand-cta--align-center .wp-block-theme-oh-my-brand-cta__content {
+	align-items: center;
+	text-align: center;
+}
+
+.wp-block-theme-oh-my-brand-cta--align-right .wp-block-theme-oh-my-brand-cta__content {
+	align-items: flex-end;
+	text-align: right;
+}
+
+/* ==========================================================================
+   CTA Heading
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-cta__heading {
+	margin: 0 0 1rem;
+	font-size: clamp(1.75rem, 4vw, 2.5rem);
+	font-weight: 700;
+	line-height: 1.2;
+	width: 100%;
+}
+
+.wp-block-theme-oh-my-brand-cta__heading[data-rich-text-placeholder]::before {
+	opacity: 60%;
+}
+
+/* ==========================================================================
+   CTA Text
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-cta__text {
+	margin: 0 0 1.5rem;
+	font-size: 1.125rem;
+	line-height: 1.6;
+	width: 100%;
+}
+
+.wp-block-theme-oh-my-brand-cta__text[data-rich-text-placeholder]::before {
+	opacity: 60%;
+}
+
+/* ==========================================================================
+   CTA Buttons
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-cta__buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+/* Center buttons for center alignment */
+.wp-block-theme-oh-my-brand-cta--align-center .wp-block-theme-oh-my-brand-cta__buttons {
+	justify-content: center;
+}
+
+/* Right-align buttons for right alignment */
+.wp-block-theme-oh-my-brand-cta--align-right .wp-block-theme-oh-my-brand-cta__buttons {
+	justify-content: flex-end;
+}
+
+.wp-block-theme-oh-my-brand-cta__button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.875rem 1.75rem;
+	font-weight: 600;
+	font-size: 1rem;
+	border-radius: 0.375rem;
+	cursor: default;
+	border: 2px solid transparent;
+}
+
+/* Primary Button */
+.wp-block-theme-oh-my-brand-cta__button--primary {
+	background-color: var(--wp--preset--color--primary, #5344f4);
+	color: var(--wp--preset--color--base, #fff);
+	border-color: var(--wp--preset--color--primary, #5344f4);
+}
+
+/* Secondary Button */
+.wp-block-theme-oh-my-brand-cta__button--secondary {
+	background-color: transparent;
+	color: var(--wp--preset--color--primary, #5344f4);
+	border-color: var(--wp--preset--color--primary, #5344f4);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (width <= 782px) {
+	.wp-block-theme-oh-my-brand-cta {
+		padding: 2rem 1rem;
+	}
+
+	.wp-block-theme-oh-my-brand-cta__content {
+		max-width: none;
+	}
+}

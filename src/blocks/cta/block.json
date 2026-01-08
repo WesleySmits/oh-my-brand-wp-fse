@@ -1,0 +1,66 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "theme-oh-my-brand/cta",
+	"version": "1.0.0",
+	"title": "Call to Action",
+	"category": "theme-oh-my-brand",
+	"description": "A conversion-focused section with heading, text, and action buttons.",
+	"textdomain": "theme-oh-my-brand",
+	"keywords": ["cta", "call to action", "button", "conversion", "signup"],
+	"attributes": {
+		"heading": {
+			"type": "string",
+			"default": ""
+		},
+		"headingLevel": {
+			"type": "string",
+			"default": "h2"
+		},
+		"content": {
+			"type": "string",
+			"default": ""
+		},
+		"contentAlignment": {
+			"type": "string",
+			"default": "center"
+		},
+		"primaryButton": {
+			"type": "object",
+			"default": {
+				"text": "",
+				"url": "",
+				"openInNewTab": false
+			}
+		},
+		"secondaryButton": {
+			"type": "object",
+			"default": {
+				"text": "",
+				"url": "",
+				"openInNewTab": false
+			}
+		}
+	},
+	"supports": {
+		"align": ["full", "wide"],
+		"anchor": true,
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"render": "file:./render.php"
+}
