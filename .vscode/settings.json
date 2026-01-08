@@ -159,6 +159,15 @@
     "git.ignoreLimitWarning": true,
 
     // ============================================
+    // GitHub Copilot Settings
+    // ============================================
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        {
+            "file": ".vscode/copilot-commit-instructions.md"
+        }
+    ],
+
+    // ============================================
     // Emmet Settings
     // ============================================
     "emmet.includeLanguages": {

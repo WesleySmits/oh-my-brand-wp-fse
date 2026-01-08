@@ -1,51 +1,127 @@
 <?php
+/**
+ * Oh My Brand! theme functions and definitions.
+ *
+ * @package theme-oh-my-brand
+ */
 
-$includes = [
-    'includes/assets.php',
-    'includes/custom-image-controls.php',
-    'includes/block-helpers.php',
-    'includes/post-types/social-links.php',
+declare(strict_types=1);
+
+// ==========================================================================
+// Constants
+// ==========================================================================
+
+define( 'OMB_VERSION', '1.0.0' );
+define( 'OMB_PATH', get_stylesheet_directory() );
+define( 'OMB_URI', get_stylesheet_directory_uri() );
+
+// ==========================================================================
+// Includes
+// ==========================================================================
+
+$omb_includes = [
+	'includes/assets.php',
+	'includes/custom-image-controls.php',
+	'includes/block-helpers.php',
+	'includes/post-types/social-links.php',
 ];
 
-foreach ($includes as $file) {
-    $filepath = get_stylesheet_directory() . '/' . $file;
-    if (file_exists($filepath)) {
-        require_once $filepath;
-    } else {
-        var_dump('File not found: ' . $filepath);
-        error_log("File not found: " . $filepath);
-    }
+foreach ( $omb_includes as $omb_file ) {
+	$omb_filepath = OMB_PATH . '/' . $omb_file;
+	if ( file_exists( $omb_filepath ) ) {
+		require_once $omb_filepath;
+	}
 }
+
+// ==========================================================================
+// Theme Setup
+// ==========================================================================
+
+add_action( 'after_setup_theme', 'omb_setup_theme' );
+
+/**
+ * Sets up theme defaults and registers support for WordPress features.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function omb_setup_theme(): void {
+	add_theme_support( 'wp-block-styles' );
+	add_theme_support( 'editor-styles' );
+	add_theme_support( 'responsive-embeds' );
+	add_theme_support(
+		'html5',
+		[
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'caption',
+			'style',
+			'script',
+		]
+	);
+
+	add_editor_style( 'assets/css/theme.css' );
+}
+
+// ==========================================================================
+// Block Registration
+// ==========================================================================
+
+add_action( 'init', 'omb_register_blocks' );
 
 /**
  * Register ACF blocks from the theme.
+ *
+ * @since 1.0.0
+ *
+ * @return void
  */
-add_action('init', function () {
-    $blocks = [
-        'acf-faq',
-        'acf-gallery-block',
-        'acf-youtube-block',
-    ];
+function omb_register_blocks(): void {
+	$blocks = [
+		'acf-faq',
+		'acf-gallery-block',
+		'acf-youtube-block',
+	];
 
-    foreach ($blocks as $block) {
-        $block_path = get_stylesheet_directory() . '/blocks/' . $block;
-        if (file_exists($block_path . '/block.json')) {
-            register_block_type($block_path);
-        }
-    }
-});
+	foreach ( $blocks as $block ) {
+		$block_path = OMB_PATH . '/blocks/' . $block;
+		if ( file_exists( $block_path . '/block.json' ) ) {
+			register_block_type( $block_path );
+		}
+	}
+}
+
+// ==========================================================================
+// ACF JSON Configuration
+// ==========================================================================
+
+add_filter( 'acf/settings/save_json', 'omb_acf_json_save_path' );
 
 /**
- * ACF JSON save path - save to theme's acf-json folder.
+ * Set ACF JSON save path to theme's acf-json folder.
+ *
+ * @since 1.0.0
+ *
+ * @param string $path Default ACF JSON save path.
+ * @return string Modified save path.
  */
-add_filter('acf/settings/save_json', function ($path) {
-    return get_stylesheet_directory() . '/acf-json';
-});
+function omb_acf_json_save_path( string $path ): string {
+	return OMB_PATH . '/acf-json';
+}
+
+add_filter( 'acf/settings/load_json', 'omb_acf_json_load_paths' );
 
 /**
- * ACF JSON load paths - include theme's acf-json folder.
+ * Add theme's acf-json folder to ACF JSON load paths.
+ *
+ * @since 1.0.0
+ *
+ * @param array<int, string> $paths Default ACF JSON load paths.
+ * @return array<int, string> Modified load paths.
  */
-add_filter('acf/settings/load_json', function ($paths) {
-    $paths[] = get_stylesheet_directory() . '/acf-json';
-    return $paths;
-});
+function omb_acf_json_load_paths( array $paths ): array {
+	$paths[] = OMB_PATH . '/acf-json';
+	return $paths;
+}

@@ -1,31 +1,39 @@
 <?php
-if (!function_exists('resolve_wp_preset')) {
-    /**
-     * Convert WordPress preset spacing values (var:preset|spacing|xxx-large) to actual pixel values
-     *
-     * @param string $preset_value The preset value from block settings.
-     * @return string The resolved CSS value.
-     */
-    function resolve_wp_preset($preset_value) {
+/**
+ * Block helper functions.
+ *
+ * @package theme-oh-my-brand
+ */
 
-        if (strpos($preset_value, 'var:preset|spacing|') !== false) {
-            $spacing_presets = array(
-                'small' => '8px',
-                'medium' => '16px',
-                'large' => '24px',
-                'x-large' => '32px',
-                'xx-large' => '48px',
-                'xxx-large' => '64px',
-                'xxxx-large' => '80px'
-            );
+declare(strict_types=1);
 
-            // Extract key after "spacing|"
-            $preset_key = str_replace('var:preset|spacing|', '', $preset_value);
+/**
+ * Convert WordPress preset spacing values to actual CSS values.
+ *
+ * Converts values like 'var:preset|spacing|medium' to their actual CSS values
+ * from theme.json or falls back to sensible defaults.
+ *
+ * @since 1.0.0
+ *
+ * @param string $preset_value The preset value from block settings.
+ * @return string The resolved CSS value.
+ */
+function omb_resolve_wp_preset( string $preset_value ): string {
+	if ( ! str_contains( $preset_value, 'var:preset|spacing|' ) ) {
+		return $preset_value;
+	}
 
-            // Return real spacing value or fallback to 10px
-            return isset($spacing_presets[$preset_key]) ? $spacing_presets[$preset_key] : '10px';
-        }
+	$spacing_presets = [
+		'small'      => 'clamp(0.5rem, 2.5vw, 1rem)',
+		'medium'     => 'clamp(1.5rem, 4vw, 2rem)',
+		'large'      => 'clamp(2rem, 5vw, 3rem)',
+		'x-large'    => 'clamp(3rem, 7vw, 5rem)',
+		'xx-large'   => 'clamp(4rem, 9vw, 7rem)',
+		'xxx-large'  => 'clamp(5rem, 12vw, 9rem)',
+		'xxxx-large' => 'clamp(6rem, 14vw, 13rem)',
+	];
 
-        return $preset_value; // If it's a normal value, return it as-is
-    }
+	$preset_key = str_replace( 'var:preset|spacing|', '', $preset_value );
+
+	return $spacing_presets[ $preset_key ] ?? '1rem';
 }

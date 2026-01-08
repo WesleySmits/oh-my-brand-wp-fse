@@ -18,7 +18,7 @@ const mockSubscribe = subscribe as Mock;
 describe('GalleryCarousel', () => {
 	let wrapper: HTMLElement;
 
-	const createGalleryDOM = (options: { visibleImages?: number; itemCount?: number } = {}) => {
+	const createGalleryDOM = (options: { visibleImages?: number; itemCount?: number } = {}): HTMLElement => {
 		const { visibleImages = 3, itemCount = 5 } = options;
 
 		const items = Array.from(

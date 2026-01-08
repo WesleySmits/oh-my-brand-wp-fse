@@ -1,0 +1,70 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# PHP files
+*.php text eol=lf
+
+# JavaScript/TypeScript
+*.js text eol=lf
+*.ts text eol=lf
+*.json text eol=lf
+
+# CSS
+*.css text eol=lf
+
+# HTML
+*.html text eol=lf
+
+# Markdown
+*.md text eol=lf
+
+# YAML
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+
+# Git config
+.gitattributes text eol=lf
+.gitignore text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+
+# Archives
+*.zip binary
+
+# Lock files - don't diff
+package-lock.json -diff
+composer.lock -diff
+
+# Exclude from export
+.github/ export-ignore
+.husky/ export-ignore
+tests/ export-ignore
+node_modules/ export-ignore
+vendor/ export-ignore
+*.md export-ignore
+.editorconfig export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+.nvmrc export-ignore
+.wp-env.json export-ignore
+phpcs.xml export-ignore
+phpunit.xml export-ignore
+playwright.config.ts export-ignore
+vitest.config.ts export-ignore
+vite.config.ts export-ignore
+tsconfig.json export-ignore
+eslint.config.js export-ignore
+stylelint.config.js export-ignore
+commitlint.config.js export-ignore

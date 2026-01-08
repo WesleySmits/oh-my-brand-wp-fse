@@ -33,9 +33,7 @@
         "*.{json,md,yml,yaml}": [
             "prettier --write"
         ],
-        "*.php": [
-            "composer phpcs"
-        ]
+        "*.php": "composer phpcs-staged"
     },
     "keywords": [
         "wordpress",
