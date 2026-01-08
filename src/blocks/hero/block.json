@@ -1,0 +1,93 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "theme-oh-my-brand/hero",
+    "version": "1.0.0",
+    "title": "Hero Section",
+    "category": "theme-oh-my-brand",
+    "icon": "cover-image",
+    "description": "A full-width hero section with background, heading, text, and buttons.",
+    "keywords": ["hero", "banner", "header", "jumbotron"],
+    "textdomain": "theme-oh-my-brand",
+    "attributes": {
+        "heading": {
+            "type": "string",
+            "default": ""
+        },
+        "headingLevel": {
+            "type": "string",
+            "default": "h1"
+        },
+        "subheading": {
+            "type": "string",
+            "default": ""
+        },
+        "content": {
+            "type": "string",
+            "default": ""
+        },
+        "backgroundType": {
+            "type": "string",
+            "default": "color"
+        },
+        "backgroundImage": {
+            "type": "object",
+            "default": {}
+        },
+        "backgroundVideo": {
+            "type": "string",
+            "default": ""
+        },
+        "overlayColor": {
+            "type": "string",
+            "default": "rgba(0,0,0,0.5)"
+        },
+        "overlayOpacity": {
+            "type": "number",
+            "default": 50
+        },
+        "contentAlignment": {
+            "type": "string",
+            "default": "center"
+        },
+        "verticalAlignment": {
+            "type": "string",
+            "default": "center"
+        },
+        "minHeight": {
+            "type": "string",
+            "default": "60vh"
+        },
+        "primaryButton": {
+            "type": "object",
+            "default": {}
+        },
+        "secondaryButton": {
+            "type": "object",
+            "default": {}
+        }
+    },
+    "supports": {
+        "align": ["full", "wide"],
+        "anchor": true,
+        "className": true,
+        "color": {
+            "background": true,
+            "text": true,
+            "gradients": true
+        },
+        "spacing": {
+            "margin": true,
+            "padding": true
+        },
+        "typography": {
+            "fontSize": true,
+            "lineHeight": true
+        }
+    },
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css",
+    "render": "file:./render.php",
+    "viewScript": "file:./view.ts"
+}
