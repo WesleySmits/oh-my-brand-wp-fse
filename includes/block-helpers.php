@@ -7,6 +7,38 @@
 
 declare(strict_types=1);
 
+add_action( 'init', 'omb_register_blocks' );
+
+/**
+ * Register native blocks from the theme.
+ *
+ * Automatically discovers and registers all blocks in the build/blocks directory
+ * that contain a block.json file.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function omb_register_blocks(): void {
+	$blocks_dir = OMB_PATH . '/build/blocks';
+
+	if ( ! is_dir( $blocks_dir ) ) {
+		return;
+	}
+
+	$block_folders = glob( $blocks_dir . '/*', GLOB_ONLYDIR );
+
+	if ( empty( $block_folders ) ) {
+		return;
+	}
+
+	foreach ( $block_folders as $block_path ) {
+		if ( file_exists( $block_path . '/block.json' ) ) {
+			register_block_type( $block_path );
+		}
+	}
+}
+
 /**
  * Convert WordPress preset spacing values to actual CSS values.
  *

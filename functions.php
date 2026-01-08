@@ -74,34 +74,6 @@ function omb_setup_theme(): void {
 }
 
 // ==========================================================================
-// Block Registration
-// ==========================================================================
-
-add_action( 'init', 'omb_register_blocks' );
-
-/**
- * Register native blocks from the theme.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function omb_register_blocks(): void {
-	$blocks = [
-		'faq',
-		'gallery',
-		'youtube',
-	];
-
-	foreach ( $blocks as $block ) {
-		$block_path = OMB_PATH . '/build/blocks/' . $block;
-		if ( file_exists( $block_path . '/block.json' ) ) {
-			register_block_type( $block_path );
-		}
-	}
-}
-
-// ==========================================================================
 // ACF Block Registration (Legacy - for backwards compatibility)
 // ==========================================================================
 
