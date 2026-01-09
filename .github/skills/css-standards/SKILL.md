@@ -196,6 +196,103 @@ See [accessibility.css](references/accessibility.css) for complete patterns.
 
 ---
 
+## Stylelint Rules
+
+This project uses Stylelint for CSS linting. Key rules to follow:
+
+### No Empty Blocks
+
+Stylelint disallows empty rule blocks. Never create a rule with only a comment:
+
+```css
+/* ❌ Bad - empty block causes stylelint error */
+@media (prefers-reduced-motion: reduce) {
+    .my-component {
+        /* No styles needed */
+    }
+}
+
+/* ❌ Bad - empty block */
+.my-component__element {
+}
+
+/* ✅ Good - omit the rule entirely if no styles needed */
+/* (Simply don't include the rule) */
+
+/* ✅ Good - if you need the media query, include actual styles */
+@media (prefers-reduced-motion: reduce) {
+    .my-component {
+        transition: none;
+        animation: none;
+    }
+}
+```
+
+### No Duplicate Selectors
+
+Stylelint disallows duplicate selectors within a stylesheet. Consolidate all styles for a selector in one place:
+
+```css
+/* ❌ Bad - duplicate selector causes stylelint error */
+.my-component__number {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.my-component__label {
+    font-size: 1rem;
+}
+
+.my-component__number {
+    order: 0;  /* This duplicates the selector above! */
+}
+
+/* ✅ Good - all styles consolidated in one selector */
+.my-component__number {
+    font-size: 2rem;
+    font-weight: 700;
+    order: 0;
+}
+
+.my-component__label {
+    font-size: 1rem;
+}
+```
+
+### Hex Color Length
+
+Use shorthand hex colors when possible:
+
+```css
+/* ❌ Bad - can be shortened */
+color: #0066cc;
+background: #ffffff;
+
+/* ✅ Good - use shorthand */
+color: #06c;
+background: #fff;
+```
+
+### Key Principles
+
+1. If a rule block would be empty (even with just a comment), **do not include it**
+2. Consolidate all styles for a selector in **one place** - no duplicate selectors
+3. Use **shorthand hex colors** when all pairs are identical (e.g., `#aabbcc` → `#abc`)
+
+---
+
+## Validation
+
+**Always run stylelint after making CSS changes:**
+
+```bash
+pnpm run lint:css
+```
+
+Fix any issues before committing. This ensures consistent code style and catches common errors.
+
+---
+
 ## Related Skills
 
 - [html-standards](../html-standards/SKILL.md) - Semantic HTML structure

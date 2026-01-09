@@ -20,6 +20,8 @@ module.exports = {
 		'blocks/logo-grid/view': path.resolve(__dirname, 'src/blocks/logo-grid/view.ts'),
 		'blocks/social-share/index': path.resolve(__dirname, 'src/blocks/social-share/index.ts'),
 		'blocks/social-share/view': path.resolve(__dirname, 'src/blocks/social-share/view.ts'),
+		'blocks/stats-counter/index': path.resolve(__dirname, 'src/blocks/stats-counter/index.ts'),
+		'blocks/stats-counter/view': path.resolve(__dirname, 'src/blocks/stats-counter/view.ts'),
 		'blocks/youtube/index': path.resolve(__dirname, 'src/blocks/youtube/index.js'),
 		'blocks/youtube/view': path.resolve(__dirname, 'src/blocks/youtube/view.ts')
 	},

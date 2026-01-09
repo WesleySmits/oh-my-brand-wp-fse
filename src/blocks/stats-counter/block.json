@@ -1,0 +1,78 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "theme-oh-my-brand/stats-counter",
+	"version": "1.0.0",
+	"title": "Stats Counter",
+	"category": "theme-oh-my-brand",
+	"description": "Display animated statistics with customizable formatting, icons, and CSS-powered count-up animation.",
+	"textdomain": "oh-my-brand",
+	"keywords": ["stats", "counter", "numbers", "statistics", "metrics", "achievements"],
+	"attributes": {
+		"heading": {
+			"type": "string",
+			"default": ""
+		},
+		"headingLevel": {
+			"type": "string",
+			"default": "h2"
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		},
+		"stats": {
+			"type": "array",
+			"default": [],
+			"items": {
+				"type": "object"
+			}
+		},
+		"columns": {
+			"type": "number",
+			"default": 4
+		},
+		"statStyle": {
+			"type": "string",
+			"default": "default"
+		},
+		"showIcons": {
+			"type": "boolean",
+			"default": true
+		},
+		"animateOnScroll": {
+			"type": "boolean",
+			"default": true
+		},
+		"animationDuration": {
+			"type": "number",
+			"default": 2000
+		},
+		"contentAlignment": {
+			"type": "string",
+			"default": "center"
+		}
+	},
+	"supports": {
+		"align": ["wide", "full"],
+		"anchor": true,
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}

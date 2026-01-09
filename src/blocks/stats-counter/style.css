@@ -1,0 +1,226 @@
+/**
+ * Stats Counter Block - Frontend Styles
+ *
+ * Uses CSS @property (Houdini) for animatable counter values.
+ * Animation is pure CSS - no JavaScript needed for the counting effect.
+ *
+ * @package theme-oh-my-brand
+ */
+
+/* ==========================================================================
+   CSS @property Definition (Houdini)
+   Allows CSS transitions on integer values for counter animation.
+   ========================================================================== */
+
+@property --counter-value {
+	syntax: '<integer>';
+	initial-value: 0;
+	inherits: false;
+}
+
+/* ==========================================================================
+   Block Container
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-stats-counter {
+	/* Container query setup */
+	container-type: inline-size;
+	container-name: stats;
+
+	/* Layout custom properties */
+	--stats-columns: 4;
+	--stats-gap: clamp(1.5rem, 4cqi, 2.5rem);
+
+	/* Smart grid: min-width calculated from columns preference */
+	--stats-min-width: clamp(150px, calc(100% / var(--stats-columns) - var(--stats-gap)), 300px);
+
+	/* Typography - fluid with clamp() using container query units */
+	--stats-heading-size: clamp(1.5rem, 4cqi, 2.25rem);
+	--stats-description-size: clamp(0.9375rem, 2cqi, 1.125rem);
+	--stats-number-size: clamp(2rem, 8cqi, 4rem);
+	--stats-label-size: clamp(0.875rem, 2cqi, 1rem);
+
+	/* Icon */
+	--stats-icon-size: clamp(2rem, 6cqi, 3rem);
+	--stats-icon-color: var(--wp--preset--color--primary, #06c);
+
+	/* Boxed style */
+	--stats-padding: clamp(1rem, 3cqi, 2rem);
+	--stats-border-radius: var(--wp--custom--border-radius--medium, 0.5rem);
+	--stats-shadow: 0 4px 12px rgb(0 0 0 / 8%);
+	--stats-shadow-hover: 0 8px 24px rgb(0 0 0 / 12%);
+
+	/* Animation timing (can be overridden via inline style) */
+	--stats-animation-duration: 2000ms;
+	--stats-animation-easing: ease-out;
+
+	/* Transition for hover effects */
+	--stats-transition: 0.2s ease;
+
+	/* Block layout */
+	display: flex;
+	flex-direction: column;
+	gap: var(--stats-gap);
+}
+
+/* ==========================================================================
+   Section Header
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-stats-counter__header {
+	text-align: inherit;
+}
+
+.wp-block-theme-oh-my-brand-stats-counter--align-center .wp-block-theme-oh-my-brand-stats-counter__header {
+	text-align: center;
+}
+
+.wp-block-theme-oh-my-brand-stats-counter--align-right .wp-block-theme-oh-my-brand-stats-counter__header {
+	text-align: right;
+}
+
+.wp-block-theme-oh-my-brand-stats-counter__heading {
+	font-size: var(--stats-heading-size);
+	font-weight: 700;
+	line-height: 1.2;
+	margin: 0 0 0.5rem;
+}
+
+.wp-block-theme-oh-my-brand-stats-counter__description {
+	font-size: var(--stats-description-size);
+	color: var(--wp--preset--color--contrast-2, #666);
+	margin: 0;
+	max-width: 65ch;
+}
+
+.wp-block-theme-oh-my-brand-stats-counter--align-center .wp-block-theme-oh-my-brand-stats-counter__description {
+	margin-inline: auto;
+}
+
+/* ==========================================================================
+   Stats List Grid
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-stats-counter__list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(var(--stats-min-width), 1fr));
+	gap: var(--stats-gap);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* ==========================================================================
+   Individual Stat Item
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-stats-counter__item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 0.5rem;
+}
+
+.wp-block-theme-oh-my-brand-stats-counter--align-left .wp-block-theme-oh-my-brand-stats-counter__item {
+	align-items: flex-start;
+	text-align: left;
+}
+
+.wp-block-theme-oh-my-brand-stats-counter--align-right .wp-block-theme-oh-my-brand-stats-counter__item {
+	align-items: flex-end;
+	text-align: right;
+}
+
+/* ==========================================================================
+   Icon
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-stats-counter__icon {
+	font-size: var(--stats-icon-size);
+	line-height: 1;
+	color: var(--stats-icon-color);
+}
+
+/* ==========================================================================
+   Counter Number Styles
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-stats-counter__number {
+	/* Prevent layout shift during animation */
+	font-variant-numeric: tabular-nums;
+
+	/* Typography */
+	font-size: var(--stats-number-size);
+	font-weight: 700;
+	line-height: 1.1;
+	margin: 0;
+
+	/* Display order - number appears before label visually */
+	order: 0;
+}
+
+/* ==========================================================================
+   Label
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-stats-counter__label {
+	font-size: var(--stats-label-size);
+	color: var(--wp--preset--color--contrast-2, #666);
+	font-weight: 500;
+	margin: 0;
+	order: 1;
+}
+
+/* ==========================================================================
+   Style Variants
+   ========================================================================== */
+
+/* Boxed Style */
+.wp-block-theme-oh-my-brand-stats-counter--style-boxed .wp-block-theme-oh-my-brand-stats-counter__item {
+	background: var(--wp--preset--color--base, #fff);
+	padding: var(--stats-padding);
+	border-radius: var(--stats-border-radius);
+	box-shadow: var(--stats-shadow);
+	transition:
+		box-shadow var(--stats-transition),
+		transform var(--stats-transition);
+}
+
+.wp-block-theme-oh-my-brand-stats-counter--style-boxed .wp-block-theme-oh-my-brand-stats-counter__item:hover {
+	box-shadow: var(--stats-shadow-hover);
+	transform: translateY(-2px);
+}
+
+/* Bordered Style */
+.wp-block-theme-oh-my-brand-stats-counter--style-bordered .wp-block-theme-oh-my-brand-stats-counter__item {
+	padding: var(--stats-padding);
+	border: 2px solid var(--wp--preset--color--contrast-2, #e0e0e0);
+	border-radius: var(--stats-border-radius);
+	transition: border-color var(--stats-transition);
+}
+
+.wp-block-theme-oh-my-brand-stats-counter--style-bordered .wp-block-theme-oh-my-brand-stats-counter__item:hover {
+	border-color: var(--wp--preset--color--primary, #06c);
+}
+
+/* Minimal Style - hide icons */
+.wp-block-theme-oh-my-brand-stats-counter--style-minimal .wp-block-theme-oh-my-brand-stats-counter__icon {
+	display: none;
+}
+
+/* ==========================================================================
+   Container Query Responsive Adjustments
+   ========================================================================== */
+
+@container stats (max-width: 600px) {
+	.wp-block-theme-oh-my-brand-stats-counter {
+		--stats-columns: 2;
+	}
+}
+
+@container stats (max-width: 400px) {
+	.wp-block-theme-oh-my-brand-stats-counter {
+		--stats-columns: 1;
+	}
+}

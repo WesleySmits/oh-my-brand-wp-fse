@@ -276,6 +276,52 @@ export default class GalleryCarousel { }
 
 ---
 
+## ESLint Validation
+
+This project uses ESLint with TypeScript-specific rules. Key rules to follow:
+
+### No Unused Variables
+
+ESLint disallows unused variables, parameters, and imports:
+
+```typescript
+/* ❌ Bad - unused parameter causes eslint error */
+function updateDisplay(element: HTMLElement, value: number, isFinal: boolean): void {
+    element.textContent = value.toString();
+    // isFinal is never used!
+}
+
+/* ✅ Good - remove unused parameters */
+function updateDisplay(element: HTMLElement, value: number): void {
+    element.textContent = value.toString();
+}
+
+/* ✅ Good - prefix with underscore if intentionally unused */
+function callback(_event: Event, data: string): void {
+    console.log(data);
+}
+```
+
+### Key Principles
+
+1. Remove unused variables, parameters, and imports
+2. Prefix intentionally unused parameters with `_` (underscore)
+3. Follow all rules defined in the project's ESLint configuration
+
+---
+
+## Validation
+
+**Always run ESLint after making TypeScript/JavaScript changes:**
+
+```bash
+pnpm run lint:js
+```
+
+Fix any issues before committing. This ensures consistent code style and catches common errors.
+
+---
+
 ## Related Skills
 
 - [web-components](../web-components/SKILL.md) - Web Component patterns
