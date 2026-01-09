@@ -25,7 +25,7 @@
         "test": "phpunit",
         "test:coverage": "phpunit --coverage-html coverage/php",
         "phpcs": "phpcs",
-        "phpcs-staged": "phpcs --ignore=blocks/*",
+        "phpcs-staged": "phpcs --ignore=blocks/*,.github/*",
         "phpcbf": "phpcbf",
         "lint:php": "@phpcs"
     },

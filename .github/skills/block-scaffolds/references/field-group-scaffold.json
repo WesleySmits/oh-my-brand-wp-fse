@@ -1,0 +1,40 @@
+{
+    "key": "group_UNIQUE_ID",
+    "title": "Block: BLOCK_TITLE",
+    "fields": [
+        {
+            "key": "field_UNIQUE_ID",
+            "label": "Items",
+            "name": "items",
+            "type": "repeater",
+            "layout": "table",
+            "min": 0,
+            "max": 0,
+            "button_label": "Add Item",
+            "sub_fields": [
+                {
+                    "key": "field_SUB_UNIQUE_ID",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "required": 1
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf/BLOCK_NAME"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+}

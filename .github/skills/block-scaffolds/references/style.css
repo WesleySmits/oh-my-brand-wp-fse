@@ -1,0 +1,52 @@
+/**
+ * BLOCK_TITLE - Frontend styles.
+ *
+ * @package theme-oh-my-brand
+ */
+
+.wp-block-theme-oh-my-brand-BLOCK_NAME {
+	/* CSS custom properties */
+	--block-gap: var(--wp--preset--spacing--20, 1rem);
+}
+
+.wp-block-theme-oh-my-brand-BLOCK_NAME__inner {
+	/* Inner container styles */
+	display: flex;
+	gap: var(--block-gap);
+}
+
+/* Focus states */
+.wp-block-theme-oh-my-brand-BLOCK_NAME:focus-visible,
+.wp-block-theme-oh-my-brand-BLOCK_NAME *:focus-visible {
+	outline: 2px solid var(--wp--preset--color--primary, #06c);
+	outline-offset: 2px;
+}
+
+/* Live region (visually hidden) */
+.wp-block-theme-oh-my-brand-BLOCK_NAME__live {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.wp-block-theme-oh-my-brand-BLOCK_NAME,
+	.wp-block-theme-oh-my-brand-BLOCK_NAME * {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* Responsive: Mobile */
+@media (width <= 48rem) {
+	.wp-block-theme-oh-my-brand-BLOCK_NAME {
+		/* Mobile styles */
+	}
+}

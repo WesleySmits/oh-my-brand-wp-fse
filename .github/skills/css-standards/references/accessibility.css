@@ -1,0 +1,131 @@
+/**
+ * Accessibility CSS Patterns
+ *
+ * Focus styles, reduced motion, high contrast, and screen reader utilities.
+ */
+
+/* ==========================================================================
+   Focus Styles
+   ========================================================================== */
+
+/* Use :focus-visible for keyboard focus only */
+.button:focus-visible {
+	outline: 2px solid var(--wp--preset--color--primary);
+	outline-offset: 2px;
+}
+
+/* Alternative: box-shadow for rounded elements */
+.button-rounded:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 3px var(--wp--preset--color--primary);
+}
+
+/* Link focus with underline */
+a:focus-visible {
+	outline: 2px solid currentcolor;
+	outline-offset: 4px;
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+/* Define transitions normally */
+.animated-element {
+	transition:
+		transform 300ms ease-out,
+		opacity 300ms ease-out;
+}
+
+/* Respect user preference */
+@media (prefers-reduced-motion: reduce) {
+	.animated-element {
+		transition: none;
+	}
+
+	.carousel__track {
+		scroll-behavior: auto;
+	}
+
+	/* Remove all animations */
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* ==========================================================================
+   High Contrast Mode
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+	.button {
+		border: 2px solid currentcolor;
+	}
+
+	.card {
+		border: 2px solid currentcolor;
+	}
+
+	.active-item {
+		outline: 3px solid currentcolor;
+		outline-offset: 2px;
+	}
+
+	/* Ensure text is always visible */
+	.overlay-text {
+		background: Canvas;
+		color: CanvasText;
+	}
+}
+
+/* ==========================================================================
+   Screen Reader Only (Visually Hidden)
+   ========================================================================== */
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Allow element to be focusable when navigated to */
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+	position: static;
+	width: auto;
+	height: auto;
+	padding: inherit;
+	margin: inherit;
+	overflow: visible;
+	clip: auto;
+	white-space: normal;
+}
+
+/* ==========================================================================
+   Skip Link
+   ========================================================================== */
+
+.skip-link {
+	position: absolute;
+	top: -100%;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 1rem 2rem;
+	background: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--base);
+	z-index: 9999;
+}
+
+.skip-link:focus {
+	top: 0;
+}

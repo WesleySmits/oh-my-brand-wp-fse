@@ -1,0 +1,23 @@
+{
+    "$schema": "https://advancedcustomfields.com/schemas/json/main/block.json",
+    "name": "acf/BLOCK_NAME",
+    "title": "BLOCK_TITLE",
+    "description": "DESCRIPTION",
+    "category": "formatting",
+    "icon": "admin-generic",
+    "keywords": [],
+    "supports": {
+        "align": ["wide", "full"],
+        "anchor": true,
+        "customClassName": true,
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "render.php"
+    },
+    "style": "file:./style.css"
+}

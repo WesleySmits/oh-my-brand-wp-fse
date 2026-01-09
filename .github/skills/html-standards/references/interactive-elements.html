@@ -1,0 +1,67 @@
+<!--
+ * Interactive Elements - Buttons, Links, and Forms
+ *
+ * Accessible patterns for interactive elements with proper
+ * ARIA attributes and keyboard support.
+ -->
+
+<!-- ==========================================================================
+   Buttons
+   ========================================================================== -->
+
+<!-- Button with icon (needs aria-label) -->
+<button type="button" aria-label="Close dialog" aria-expanded="false" aria-controls="dialog-content">
+	<span class="sr-only">Close</span>
+	<svg aria-hidden="true">...</svg>
+</button>
+
+<!-- Button with visible text -->
+<button type="button" aria-expanded="false" aria-controls="panel-id" disabled>Button Text</button>
+
+<!-- ==========================================================================
+   Links
+   ========================================================================== -->
+
+<!-- External link (opens in new tab) -->
+<a href="https://example.com" target="_blank" rel="noopener noreferrer">
+	Visit Example Site
+	<span class="sr-only">(opens in new tab)</span>
+</a>
+
+<!-- Internal link -->
+<a href="/page/">Internal Page</a>
+
+<!-- Download link -->
+<a href="/file.pdf" download> Download PDF </a>
+
+<!-- ==========================================================================
+   Form Inputs
+   ========================================================================== -->
+
+<!-- Email input with label and error -->
+<label for="email">Email address</label>
+<input
+	type="email"
+	id="email"
+	name="email"
+	required
+	autocomplete="email"
+	aria-describedby="email-hint email-error"
+	aria-invalid="true"
+/>
+<span id="email-hint" class="hint">We'll never share your email.</span>
+<span id="email-error" role="alert"> Please enter a valid email </span>
+
+<!-- ==========================================================================
+   Focusable Container (for keyboard navigation)
+   ========================================================================== -->
+
+<div class="gallery" tabindex="0" role="region" aria-label="Image gallery">
+	<!-- Content -->
+</div>
+
+<!-- ==========================================================================
+   Skip Link (for keyboard users)
+   ========================================================================== -->
+
+<a href="#main-content" class="skip-link"> Skip to main content </a>

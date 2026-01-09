@@ -43,7 +43,46 @@ This document serves as the central reference for AI assistants (GitHub Copilot,
 - **[TESTING.md](docs/TESTING.md)** - Testing strategies and guidelines
 - **[WORKFLOWS.md](docs/WORKFLOWS.md)** - Development, Git, and CI/CD workflows
 
+## Skills
+
+Specialized guides for common development tasks:
+
+### Block Development
+
+| Skill | Description |
+|-------|-------------|
+| [Native Block Development](.github/skills/native-block-development/SKILL.md) | Creating native WordPress blocks with `@wordpress/scripts` |
+| [ACF Block Registration](.github/skills/acf-block-registration/SKILL.md) | ACF PRO blocks with field groups |
+| [Web Components](.github/skills/web-components/SKILL.md) | Frontend interactivity patterns |
+| [Block Editor Components](.github/skills/block-editor-components/SKILL.md) | React editor components |
+| [Block Scaffolds](.github/skills/block-scaffolds/SKILL.md) | Copy-paste templates for new blocks |
+
+### Coding Standards
+
+| Skill | Description |
+|-------|-------------|
+| [PHP Standards](.github/skills/php-standards/SKILL.md) | PHP type safety and WordPress standards |
+| [TypeScript Standards](.github/skills/typescript-standards/SKILL.md) | TypeScript strict mode and patterns |
+| [CSS Standards](.github/skills/css-standards/SKILL.md) | BEM methodology and theme.json tokens |
+| [HTML Standards](.github/skills/html-standards/SKILL.md) | Semantic markup and accessibility |
+
+### Testing
+
+| Skill | Description |
+|-------|-------------|
+| [Vitest Testing](.github/skills/vitest-testing/SKILL.md) | TypeScript unit testing |
+| [PHPUnit Testing](.github/skills/phpunit-testing/SKILL.md) | PHP unit testing |
+| [Playwright Testing](.github/skills/playwright-testing/SKILL.md) | E2E browser testing |
+
+### Workflow & Architecture
+
+| Skill | Description |
+|-------|-------------|
+| [FSE Architecture](.github/skills/fse-architecture/SKILL.md) | Project structure and data flow |
+| [FSE Git Workflow](.github/skills/fse-git-workflow/SKILL.md) | Conventional Commits and CI/CD |
+
 ## Code Guidelines Summary
+
 
 ### PHP Guidelines
 
@@ -167,17 +206,38 @@ test(gallery): add carousel navigation tests
 
 ## Common Tasks
 
+### Creating a New Native Block
+
+For native WordPress blocks using `@wordpress/scripts`:
+
+1. Create block directory: `src/blocks/{block-name}/`
+2. Add required files:
+   - `block.json` - Block metadata (WordPress schema)
+   - `edit.tsx` - Editor React component
+   - `render.php` - Server-side rendering
+   - `helpers.php` - Helper functions
+   - `view.ts` - Frontend Web Component
+   - `style.css` - Frontend styles
+   - `editor.css` - Editor-only styles
+3. Build: `pnpm run build`
+
+**See:** [FSE Block Development Skill](.github/skills/fse-block-development/SKILL.md) for detailed guide.
+
 ### Creating a New ACF Block
+
+For ACF PRO blocks with field groups:
 
 1. Create block directory: `blocks/acf-{block-name}/`
 2. Add required files:
-   - `block.json` - Block registration
+   - `block.json` - Block metadata (ACF schema)
    - `render.php` - Server-side rendering
    - `helpers.php` - Helper functions
    - `style.css` - Block styles
-   - `index.ts` - Client-side functionality (if needed)
-3. Register in `functions.php` if not auto-discovered
-4. Add ACF field group in admin or `acf-json/`
+3. Create field group in WP Admin > ACF
+4. Register in `functions.php` `$acf_blocks` array
+5. ACF auto-saves field group to `acf-json/`
+
+**See:** [ACF Block Registration Skill](.github/skills/acf-block-registration/SKILL.md) for detailed guide.
 
 ### Adding Tests
 
@@ -255,29 +315,48 @@ oh-my-brand/
 │   ├── js/                # Compiled JavaScript
 │   ├── icons/             # SVG icons
 │   └── images/            # Theme images
+├── src/                    # Source files (built with @wordpress/scripts)
+│   └── blocks/            # Native WordPress blocks
+│       ├── gallery/       # Individual block
+│       │   ├── block.json
+│       │   ├── edit.tsx
+│       │   ├── render.php
+│       │   ├── helpers.php
+│       │   ├── view.ts
+│       │   ├── style.css
+│       │   └── editor.css
+│       └── utils/         # Shared utilities
+├── build/                  # Compiled output (generated)
+│   └── blocks/            # Built block assets
 ├── blocks/                 # ACF custom blocks
-│   ├── acf-{name}/        # Individual block
+│   ├── acf-{name}/        # Individual ACF block
 │   │   ├── block.json
 │   │   ├── render.php
 │   │   ├── helpers.php
-│   │   ├── style.css
-│   │   └── *.ts           # TypeScript if needed
+│   │   └── style.css
 │   └── utils/             # Shared utilities
 ├── includes/              # PHP includes
 │   ├── assets.php         # Asset registration
 │   ├── block-helpers.php  # Block utilities
 │   └── post-types/        # Custom post types
 ├── patterns/              # Block patterns
-├── acf-json/              # ACF field groups
+├── acf-json/              # ACF field groups (auto-sync)
 ├── tests/                 # Test files
 │   ├── php/              # PHPUnit tests
 │   ├── e2e/              # Playwright tests
 │   └── setup.ts          # Vitest setup
-└── docs/                  # Documentation
-    ├── CODING_STANDARDS.md
-    ├── ARCHITECTURE.md
-    ├── TESTING.md
-    └── WORKFLOWS.md
+├── docs/                  # Documentation
+│   ├── CODING_STANDARDS.md
+│   ├── ARCHITECTURE.md
+│   ├── TESTING.md
+│   └── WORKFLOWS.md
+└── .github/
+    ├── copilot-instructions.md
+    └── skills/            # Copilot Skills
+        ├── fse-block-development/
+        │   └── SKILL.md
+        └── acf-block-registration/
+            └── SKILL.md
 ```
 
 ## Important Conventions
@@ -291,9 +370,10 @@ oh-my-brand/
 | PHP Constants | SCREAMING_SNAKE | `THEME_VERSION` |
 | TS Classes | PascalCase | `GalleryCarousel` |
 | TS Functions | camelCase | `initCarousel()` |
-| CSS Classes | kebab-case BEM | `.acf-gallery__item--active` |
+| CSS Classes | kebab-case BEM | `.wp-block-theme-oh-my-brand-gallery__item--active` |
 | Files | kebab-case | `gallery-carousel.ts` |
-| Blocks | acf-{name} | `acf-gallery-block` |
+| Native Blocks | theme-oh-my-brand/{name} | `theme-oh-my-brand/gallery` |
+| ACF Blocks | acf/{name} | `acf/faq` |
 
 ### Security Practices
 

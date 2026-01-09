@@ -1,0 +1,74 @@
+/**
+ * Theme.json Token Usage Examples
+ *
+ * Demonstrates how to use WordPress design tokens from theme.json
+ * in CSS custom properties.
+ */
+
+/* ==========================================================================
+   Color Tokens
+   ========================================================================== */
+
+.example-color-usage {
+	/* Text colors */
+	color: var(--wp--preset--color--contrast);
+
+	/* Background colors */
+	background: var(--wp--preset--color--base);
+	background-color: var(--wp--preset--color--background);
+
+	/* Brand colors */
+	border-color: var(--wp--preset--color--primary);
+}
+
+.example-button {
+	background: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--base);
+}
+
+.example-button:hover {
+	background: var(--wp--preset--color--primary-dark);
+}
+
+/* ==========================================================================
+   Spacing Tokens
+   ========================================================================== */
+
+.example-spacing-usage {
+	/* Padding */
+	padding: var(--wp--preset--spacing--40);
+	padding-block: var(--wp--preset--spacing--60);
+	padding-inline: var(--wp--preset--spacing--30);
+
+	/* Margin */
+	margin-block: var(--wp--preset--spacing--60);
+
+	/* Gap */
+	gap: var(--wp--preset--spacing--20);
+}
+
+/* ==========================================================================
+   Typography Tokens
+   ========================================================================== */
+
+.example-typography-usage {
+	/* Font family */
+	font-family: var(--wp--preset--font-family--heading);
+
+	/* Font size */
+	font-size: var(--wp--preset--font-size--x-large);
+
+	/* Line height (custom) */
+	line-height: var(--wp--custom--line-height--tight);
+}
+
+/* ==========================================================================
+   Layout Tokens
+   ========================================================================== */
+
+.example-layout-usage {
+	/* Content width */
+
+	/* Wide width */
+	max-width: var(--wp--style--global--wide-size);
+}

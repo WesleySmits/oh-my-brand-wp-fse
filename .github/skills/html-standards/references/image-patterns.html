@@ -1,0 +1,46 @@
+<!--
+ * Image Patterns - Accessibility and Performance
+ *
+ * Examples of accessible image markup with proper alt text,
+ * lazy loading, and LCP optimization.
+ -->
+
+<!-- ==========================================================================
+   Informative Image
+   ========================================================================== -->
+
+<img
+	src="product.jpg"
+	alt="Red ceramic coffee mug with company logo"
+	width="400"
+	height="300"
+	loading="lazy"
+	decoding="async"
+/>
+
+<!-- ==========================================================================
+   Decorative Image (no alt text needed)
+   ========================================================================== -->
+
+<img src="decoration.jpg" alt="" role="presentation" loading="lazy" />
+
+<!-- ==========================================================================
+   Complex Image with Extended Description
+   ========================================================================== -->
+
+<figure>
+	<img src="chart.jpg" alt="Sales chart showing 25% growth" aria-describedby="chart-description" />
+	<figcaption id="chart-description">Detailed description of the chart data...</figcaption>
+</figure>
+
+<!-- ==========================================================================
+   First Image - Eager Loading for LCP (Largest Contentful Paint)
+   ========================================================================== -->
+
+<img src="hero.jpg" alt="Hero image" width="1200" height="600" loading="eager" fetchpriority="high" />
+
+<!-- ==========================================================================
+   Subsequent Images - Lazy Loading
+   ========================================================================== -->
+
+<img src="gallery-1.jpg" alt="Gallery image" loading="lazy" decoding="async" />
