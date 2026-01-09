@@ -1,0 +1,85 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "theme-oh-my-brand/cards",
+	"version": "1.0.0",
+	"title": "Cards Grid",
+	"category": "theme-oh-my-brand",
+	"description": "Display content in a responsive card grid layout.",
+	"textdomain": "oh-my-brand",
+	"keywords": ["cards", "grid", "features", "services", "boxes"],
+	"attributes": {
+		"heading": {
+			"type": "string",
+			"default": ""
+		},
+		"headingLevel": {
+			"type": "string",
+			"default": "h2"
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		},
+		"cards": {
+			"type": "array",
+			"default": [],
+			"items": {
+				"type": "object"
+			}
+		},
+		"columns": {
+			"type": "number",
+			"default": 3
+		},
+		"cardStyle": {
+			"type": "string",
+			"default": "elevated"
+		},
+		"showImages": {
+			"type": "boolean",
+			"default": true
+		},
+		"imagePosition": {
+			"type": "string",
+			"default": "top"
+		},
+		"imageAspectRatio": {
+			"type": "string",
+			"default": "16/9"
+		},
+		"showIcons": {
+			"type": "boolean",
+			"default": false
+		},
+		"equalHeight": {
+			"type": "boolean",
+			"default": true
+		},
+		"contentAlignment": {
+			"type": "string",
+			"default": "left"
+		}
+	},
+	"supports": {
+		"align": ["wide", "full"],
+		"anchor": true,
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"render": "file:./render.php"
+}

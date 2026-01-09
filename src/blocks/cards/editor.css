@@ -1,0 +1,116 @@
+/**
+ * Cards Grid Block - Editor Styles
+ *
+ * Styles specific to the block editor experience.
+ *
+ * @package theme-oh-my-brand
+ */
+
+/* ==========================================================================
+   Editor-specific Card Styles
+   ========================================================================== */
+
+/* Add visual indication for editable areas */
+.wp-block-theme-oh-my-brand-cards__heading[data-rich-text-placeholder]::before,
+.wp-block-theme-oh-my-brand-cards__description[data-rich-text-placeholder]::before,
+.wp-block-theme-oh-my-brand-cards__card-title[data-rich-text-placeholder]::before,
+.wp-block-theme-oh-my-brand-cards__card-description[data-rich-text-placeholder]::before {
+	opacity: 50%;
+}
+
+/* ==========================================================================
+   Card Item Editor Controls
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-cards__item {
+	position: relative;
+}
+
+.wp-block-theme-oh-my-brand-cards__remove-card {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	z-index: 10;
+	opacity: 0%;
+	transition: opacity 0.2s ease;
+}
+
+.wp-block-theme-oh-my-brand-cards__item:hover .wp-block-theme-oh-my-brand-cards__remove-card,
+.wp-block-theme-oh-my-brand-cards__item:focus-within .wp-block-theme-oh-my-brand-cards__remove-card {
+	opacity: 100%;
+}
+
+/* ==========================================================================
+   Image Upload Button
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-cards__image-wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 120px;
+	background-color: var(--wp--preset--color--base-2, #f5f5f5);
+}
+
+.wp-block-theme-oh-my-brand-cards__add-image {
+	margin: 1rem;
+}
+
+.wp-block-theme-oh-my-brand-cards__remove-image {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	z-index: 10;
+	opacity: 0%;
+	transition: opacity 0.2s ease;
+}
+
+.wp-block-theme-oh-my-brand-cards__image-wrapper:hover .wp-block-theme-oh-my-brand-cards__remove-image,
+.wp-block-theme-oh-my-brand-cards__image-wrapper:focus-within .wp-block-theme-oh-my-brand-cards__remove-image {
+	opacity: 100%;
+}
+
+/* ==========================================================================
+   Link Settings in Editor
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-cards__link-settings {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	padding-top: 1rem;
+	margin-top: auto;
+	border-top: 1px solid var(--wp--preset--color--contrast-2, #e0e0e0);
+}
+
+.wp-block-theme-oh-my-brand-cards__link-settings .components-base-control {
+	margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Placeholder State
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-cards .components-placeholder {
+	min-height: 200px;
+}
+
+/* ==========================================================================
+   Add Card Button
+   ========================================================================== */
+
+.wp-block-theme-oh-my-brand-cards > .components-h-stack {
+	margin-top: var(--wp--preset--spacing--40, 1.5rem);
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	.wp-block-theme-oh-my-brand-cards__remove-card,
+	.wp-block-theme-oh-my-brand-cards__remove-image {
+		transition: none;
+	}
+}
