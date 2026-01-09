@@ -1,0 +1,86 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "theme-oh-my-brand/breadcrumbs",
+	"version": "1.0.0",
+	"title": "Breadcrumbs",
+	"category": "theme-oh-my-brand",
+	"description": "Display a hierarchical navigation trail showing the path to the current page.",
+	"textdomain": "theme-oh-my-brand",
+	"keywords": ["breadcrumbs", "navigation", "path", "hierarchy", "trail"],
+	"attributes": {
+		"separator": {
+			"type": "string",
+			"default": "›"
+		},
+		"showHome": {
+			"type": "boolean",
+			"default": true
+		},
+		"homeLabel": {
+			"type": "string",
+			"default": "Home"
+		},
+		"homeUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"showCurrent": {
+			"type": "boolean",
+			"default": true
+		},
+		"linkCurrent": {
+			"type": "boolean",
+			"default": false
+		},
+		"truncateOnMobile": {
+			"type": "boolean",
+			"default": true
+		},
+		"maxVisibleItems": {
+			"type": "number",
+			"default": 3
+		},
+		"showSchema": {
+			"type": "boolean",
+			"default": true
+		},
+		"taxonomyPriority": {
+			"type": "array",
+			"default": ["category", "post_tag"],
+			"items": {
+				"type": "string"
+			}
+		}
+	},
+	"supports": {
+		"align": ["wide", "full"],
+		"anchor": true,
+		"className": true,
+		"color": {
+			"background": true,
+			"text": true,
+			"link": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		},
+		"__experimentalBorder": {
+			"radius": true,
+			"width": true,
+			"color": true,
+			"style": true
+		}
+	},
+	"usesContext": ["postId", "postType"],
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}

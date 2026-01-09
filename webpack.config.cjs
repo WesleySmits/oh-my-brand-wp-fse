@@ -10,6 +10,8 @@ const path = require('path');
 module.exports = {
 	...defaultConfig,
 	entry: {
+		'blocks/breadcrumbs/index': path.resolve(__dirname, 'src/blocks/breadcrumbs/index.ts'),
+		'blocks/breadcrumbs/view': path.resolve(__dirname, 'src/blocks/breadcrumbs/view.ts'),
 		'blocks/faq/index': path.resolve(__dirname, 'src/blocks/faq/index.js'),
 		'blocks/gallery/index': path.resolve(__dirname, 'src/blocks/gallery/index.js'),
 		'blocks/gallery/view': path.resolve(__dirname, 'src/blocks/gallery/view.ts'),

@@ -1,0 +1,24 @@
+/**
+ * Breadcrumbs block editor styles.
+ *
+ * @package theme-oh-my-brand
+ */
+
+.wp-block-theme-oh-my-brand-breadcrumbs {
+	/* Make links look like links but not clickable in editor */
+	pointer-events: none;
+}
+
+.wp-block-theme-oh-my-brand-breadcrumbs__link {
+	cursor: default;
+}
+
+/* Editor placeholder styling */
+.block-editor-block-list__block .wp-block-theme-oh-my-brand-breadcrumbs {
+	padding: 0.5rem 0;
+}
+
+/* Allow block selection */
+.block-editor-block-list__block[data-type='theme-oh-my-brand/breadcrumbs'] {
+	pointer-events: auto;
+}
