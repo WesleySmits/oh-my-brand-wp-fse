@@ -36,7 +36,9 @@ export default {
 				'deps', // Dependencies
 				'config', // Configuration files
 				'ci', // CI/CD
-				'vscode' // VSCode settings
+				'vscode', // VSCode settings
+				'skills', // Agent skills documentation
+				'docs' // Documentation
 			]
 		],
 
