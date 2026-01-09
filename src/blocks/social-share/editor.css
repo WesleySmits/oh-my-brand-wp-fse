@@ -1,0 +1,238 @@
+/**
+ * Social Share Block - Editor Styles
+ *
+ * Styles specific to the block editor experience.
+ *
+ * @package theme-oh-my-brand
+ */
+
+/* ==========================================================================
+   Platform List (Inspector Panel)
+   ========================================================================== */
+
+.social-share-platform-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.social-share-platform-list__header {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	margin-bottom: 0.25rem;
+	padding-bottom: 0.25rem;
+	border-bottom: 1px solid #ddd;
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.social-share-platform-list__header svg {
+	width: 14px;
+	height: 14px;
+	opacity: 60%;
+}
+
+/* ==========================================================================
+   Sortable Platform Item
+   ========================================================================== */
+
+.social-share-platform-item {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	padding: 0.5rem;
+	border-radius: 4px;
+	background: #f0f0f0;
+	transition:
+		background-color 150ms ease,
+		box-shadow 150ms ease,
+		transform 150ms ease;
+}
+
+.social-share-platform-item:hover {
+	background: #e8e8e8;
+}
+
+.social-share-platform-item--dragging {
+	z-index: 100;
+	background: #fff;
+	box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+}
+
+.social-share-platform-item--drag-overlay {
+	background: #fff;
+	box-shadow: 0 8px 20px rgb(0 0 0 / 20%);
+	opacity: 90%;
+}
+
+.social-share-platform-item__drag-handle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.25rem;
+	border: none;
+	background: transparent;
+	color: #757575;
+	cursor: grab;
+	touch-action: none;
+}
+
+.social-share-platform-item__drag-handle:hover {
+	color: #333;
+}
+
+.social-share-platform-item__drag-handle:active {
+	cursor: grabbing;
+}
+
+.social-share-platform-item__drag-handle svg {
+	width: 16px;
+	height: 16px;
+}
+
+.social-share-platform-item__icon {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+}
+
+.social-share-platform-item__icon svg {
+	width: 100%;
+	height: 100%;
+}
+
+.social-share-platform-item__label {
+	flex: 1;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.social-share-platform-item__toggle {
+	flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Inactive Platform Item
+   ========================================================================== */
+
+.social-share-platform-item--inactive {
+	background: #f8f8f8;
+	opacity: 70%;
+}
+
+.social-share-platform-item--inactive .social-share-platform-item__icon {
+	opacity: 50%;
+}
+
+.social-share-platform-item--inactive .social-share-platform-item__label {
+	color: #757575;
+}
+
+/* ==========================================================================
+   Editor Preview
+   ========================================================================== */
+
+.social-share-editor-preview {
+	padding: 1rem;
+	border: 1px dashed #ccc;
+	border-radius: 4px;
+	background: #f9f9f9;
+}
+
+.social-share-editor-preview .social-share {
+	pointer-events: none;
+}
+
+/* ==========================================================================
+   Empty State
+   ========================================================================== */
+
+.social-share-empty-state {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem;
+	border: 2px dashed #ccc;
+	border-radius: 4px;
+	background: #f9f9f9;
+	color: #757575;
+	text-align: center;
+}
+
+.social-share-empty-state__icon {
+	width: 48px;
+	height: 48px;
+	opacity: 50%;
+}
+
+.social-share-empty-state__text {
+	font-size: 14px;
+}
+
+/* ==========================================================================
+   Panel Sections
+   ========================================================================== */
+
+.social-share-panel-section {
+	margin-bottom: 1rem;
+}
+
+.social-share-panel-section__title {
+	margin-bottom: 0.5rem;
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   Help Text
+   ========================================================================== */
+
+.social-share-help-text {
+	margin-top: 0.25rem;
+	color: #757575;
+	font-size: 12px;
+	font-style: italic;
+}
+
+/* ==========================================================================
+   Drag and Drop States
+   ========================================================================== */
+
+.social-share-platform-list--dragging {
+	user-select: none;
+}
+
+.social-share-platform-item--placeholder {
+	background: #e3f2fd;
+	border: 2px dashed #2196f3;
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+.social-share-platform-item__drag-handle:focus-visible {
+	outline: 2px solid #007cba;
+	outline-offset: 2px;
+}
+
+/* Screen reader text */
+.social-share-sr-only {
+	position: absolute;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	width: 1px;
+	height: 1px;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

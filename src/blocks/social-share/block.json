@@ -1,0 +1,71 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "theme-oh-my-brand/social-share",
+	"version": "1.0.0",
+	"title": "Social Share",
+	"category": "theme-oh-my-brand",
+	"description": "Add social media sharing buttons to let visitors share your content.",
+	"textdomain": "theme-oh-my-brand",
+	"keywords": ["social", "share", "facebook", "twitter", "linkedin", "sharing"],
+	"attributes": {
+		"platforms": {
+			"type": "array",
+			"default": ["facebook", "x", "linkedin", "email"]
+		},
+		"displayStyle": {
+			"type": "string",
+			"enum": ["icon", "icon-label", "label"],
+			"default": "icon"
+		},
+		"layout": {
+			"type": "string",
+			"enum": ["horizontal", "vertical"],
+			"default": "horizontal"
+		},
+		"size": {
+			"type": "string",
+			"enum": ["small", "medium", "large"],
+			"default": "medium"
+		},
+		"useNativeShare": {
+			"type": "boolean",
+			"default": true
+		},
+		"showLabel": {
+			"type": "boolean",
+			"default": false
+		},
+		"labelText": {
+			"type": "string",
+			"default": "Share this:"
+		},
+		"openInPopup": {
+			"type": "boolean",
+			"default": true
+		},
+		"alignment": {
+			"type": "string",
+			"enum": ["left", "center", "right"],
+			"default": "left"
+		}
+	},
+	"supports": {
+		"align": false,
+		"anchor": true,
+		"className": true,
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}

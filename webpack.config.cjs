@@ -15,6 +15,8 @@ module.exports = {
 		'blocks/gallery/view': path.resolve(__dirname, 'src/blocks/gallery/view.ts'),
 		'blocks/logo-grid/index': path.resolve(__dirname, 'src/blocks/logo-grid/index.ts'),
 		'blocks/logo-grid/view': path.resolve(__dirname, 'src/blocks/logo-grid/view.ts'),
+		'blocks/social-share/index': path.resolve(__dirname, 'src/blocks/social-share/index.ts'),
+		'blocks/social-share/view': path.resolve(__dirname, 'src/blocks/social-share/view.ts'),
 		'blocks/youtube/index': path.resolve(__dirname, 'src/blocks/youtube/index.js'),
 		'blocks/youtube/view': path.resolve(__dirname, 'src/blocks/youtube/view.ts')
 	},
