@@ -29,6 +29,9 @@
 .gitattributes text eol=lf
 .gitignore text eol=lf
 
+# Symlinks
+.shared/**/skills symlink
+
 # Binary files
 *.png binary
 *.jpg binary
@@ -50,6 +53,8 @@ composer.lock -diff
 # Exclude from export
 .github/ export-ignore
 .husky/ export-ignore
+.agent/ export-ignore
+.shared/ export-ignore
 tests/ export-ignore
 node_modules/ export-ignore
 vendor/ export-ignore

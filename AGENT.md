@@ -36,13 +36,6 @@ This document serves as the central reference for AI assistants (GitHub Copilot,
 | Run PHP tests | `composer test` |
 | Run E2E tests | `pnpm run test:e2e` |
 
-## Documentation Structure
-
-- **[CODING_STANDARDS.md](docs/CODING_STANDARDS.md)** - Code style, naming conventions, patterns
-- **[ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Project structure, block anatomy, data flow
-- **[TESTING.md](docs/TESTING.md)** - Testing strategies and guidelines
-- **[WORKFLOWS.md](docs/WORKFLOWS.md)** - Development, Git, and CI/CD workflows
-
 ## Skills
 
 Specialized guides for common development tasks:
@@ -345,11 +338,8 @@ oh-my-brand/
 │   ├── php/              # PHPUnit tests
 │   ├── e2e/              # Playwright tests
 │   └── setup.ts          # Vitest setup
-├── docs/                  # Documentation
-│   ├── CODING_STANDARDS.md
-│   ├── ARCHITECTURE.md
-│   ├── TESTING.md
-│   └── WORKFLOWS.md
+├── docs/                  # Block documentation
+│   └── blocks/           # Individual block docs
 └── .github/
     ├── copilot-instructions.md
     └── skills/            # Copilot Skills

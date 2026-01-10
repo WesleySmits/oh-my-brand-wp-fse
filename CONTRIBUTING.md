@@ -60,7 +60,7 @@ pnpm test
    git checkout -b feature/your-feature-name
    ```
 
-2. Make your changes following our [coding standards](docs/CODING_STANDARDS.md)
+2. Make your changes following our coding standards (see `.github/skills/` for detailed guides)
 
 3. Run linting and tests:
    ```bash
@@ -120,13 +120,12 @@ docs(readme): update installation instructions
 
 ## Coding Standards
 
-Please refer to our comprehensive documentation:
+Please refer to our skills documentation in `.github/skills/`:
 
-- [Coding Standards Overview](docs/CODING_STANDARDS.md)
-- [PHP Standards](docs/CODING_STANDARDS_PHP.md)
-- [TypeScript Standards](docs/CODING_STANDARDS_TYPESCRIPT.md)
-- [CSS Standards](docs/CODING_STANDARDS_CSS.md)
-- [WordPress Standards](docs/CODING_STANDARDS_WORDPRESS.md)
+- [PHP Standards](.github/skills/php-standards/SKILL.md)
+- [TypeScript Standards](.github/skills/typescript-standards/SKILL.md)
+- [CSS Standards](.github/skills/css-standards/SKILL.md)
+- [HTML Standards](.github/skills/html-standards/SKILL.md)
 
 ## Questions?
 
