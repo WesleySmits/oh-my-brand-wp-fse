@@ -201,7 +201,7 @@ jobs:
           wp-env start
 
       - name: Run E2E tests
-        run: pnpm run test:e2e -- --project=chromium
+        run: pnpm exec playwright test --project=chromium
         env:
           WP_BASE_URL: http://localhost:8888
 
