@@ -12,8 +12,12 @@ import Edit from './edit';
 import './style.css';
 import './editor.css';
 
-registerBlockType( metadata.name, {
-	...metadata,
-	icon: navigation,
-	edit: Edit,
-} );
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+registerBlockType(
+	metadata.name as any,
+	{
+		...metadata,
+		icon: navigation,
+		edit: Edit,
+	} as any
+);

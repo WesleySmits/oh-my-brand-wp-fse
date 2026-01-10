@@ -292,8 +292,7 @@ describe( 'createLightboxFromElements', () => {
 			</div>
 		`;
 
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const lightbox = createLightboxFromElements( '.gallery-image' );
+		createLightboxFromElements( '.gallery-image' );
 		const image = document.querySelector( '.gallery-image' ) as HTMLElement;
 
 		image.click();

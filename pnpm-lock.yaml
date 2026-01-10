@@ -60,6 +60,9 @@ importers:
       '@types/react-dom':
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.7)
+      '@types/wordpress__api-fetch':
+        specifier: ^3.23.1
+        version: 3.23.1
       '@types/wordpress__block-editor':
         specifier: ^15.0.0
         version: 15.0.0(@emotion/is-prop-valid@1.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -69,6 +72,9 @@ importers:
       '@types/wordpress__components':
         specifier: ^23.8.0
         version: 23.8.0(@emotion/is-prop-valid@1.4.0)(@types/react@19.2.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@types/wordpress__dom-ready':
+        specifier: ^2.9.0
+        version: 2.9.0
       '@types/wordpress__i18n':
         specifier: ^3.11.0
         version: 3.11.0
@@ -2396,6 +2402,10 @@ packages:
   '@types/tough-cookie@4.0.5':
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
 
+  '@types/wordpress__api-fetch@3.23.1':
+    resolution: {integrity: sha512-uyv+1AVutyIjRE308HAjwFnpLf0D3pRhN928i4HmKZ3Uu8C0RkJJYye3md4jg/YsgZBMbAed2baCsEKg7gdmoQ==}
+    deprecated: This is a stub types definition. @wordpress/api-fetch provides its own type definitions, so you do not need this installed.
+
   '@types/wordpress__block-editor@15.0.0':
     resolution: {integrity: sha512-yU2vzQMSEtUhq84xFCVSvc64jqOzzoUud2u6k6WUJxUZ5b3jXkzt0SdhOccWieRhab3YjJsKtNk0Hew//6YUSA==}
 
@@ -2405,6 +2415,10 @@ packages:
   '@types/wordpress__components@23.8.0':
     resolution: {integrity: sha512-xCkQMCwy4zLcvqQFC3BZG/X4q1TF+ShPDljT84YgBOjbXhTcOfeVd4BPftfxnZIyjymE3dqLGluEuJObrrALSg==}
     deprecated: This is a stub types definition. @wordpress/components provides its own type definitions, so you do not need this installed.
+
+  '@types/wordpress__dom-ready@2.9.0':
+    resolution: {integrity: sha512-cGTtbJOKXaN/r73/nJ5BxsQo5COU78Xo8jKKGLro6p5PKKVej9G7MHOsy+/0Q01WqQ5fedjmFyhrPoWuLrXY3w==}
+    deprecated: This is a stub types definition. wordpress__dom-ready provides its own type definitions, so you do not need this installed.
 
   '@types/wordpress__i18n@3.11.0':
     resolution: {integrity: sha512-l4OXE1LQH7IBqRXY//NGBCsM0jPv8sdUEubPaAzPxKUxYGe+I2UTREjwB0ejuh2+J0p90EhW3mX5FYM8a8lf2w==}
@@ -11167,6 +11181,10 @@ snapshots:
 
   '@types/tough-cookie@4.0.5': {}
 
+  '@types/wordpress__api-fetch@3.23.1':
+    dependencies:
+      '@wordpress/api-fetch': 7.37.0
+
   '@types/wordpress__block-editor@15.0.0(@emotion/is-prop-valid@1.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@types/react': 18.3.27
@@ -11205,6 +11223,10 @@ snapshots:
       - react
       - react-dom
       - supports-color
+
+  '@types/wordpress__dom-ready@2.9.0':
+    dependencies:
+      '@wordpress/dom-ready': 4.37.0
 
   '@types/wordpress__i18n@3.11.0':
     dependencies:

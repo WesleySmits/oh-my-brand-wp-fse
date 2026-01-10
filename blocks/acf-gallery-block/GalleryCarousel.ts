@@ -96,17 +96,19 @@ export class GalleryCarousel {
 
 		subscribe( () => {
 			const blocks = select( 'core/block-editor' ).getBlocks();
-			const currentBlock: {
-				attributes: {
-					data: {
-						field_visible_images?: number;
-						gallery?: string;
-					};
-				};
-			} = blocks.find(
+			const currentBlock = blocks.find(
 				( block: { name: string } ) =>
 					block.name === 'acf/acf-gallery-block'
-			);
+			) as
+				| {
+						attributes: {
+							data: {
+								field_visible_images?: number;
+								gallery?: string;
+							};
+						};
+				  }
+				| undefined;
 
 			if ( currentBlock ) {
 				const newVisibleImages =

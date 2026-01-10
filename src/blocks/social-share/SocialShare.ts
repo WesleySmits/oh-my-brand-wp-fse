@@ -19,7 +19,6 @@ export class SocialShare extends HTMLElement {
 	private openInPopup: boolean = true;
 	private shareUrl: string = '';
 	private shareTitle: string = '';
-	private shareImage: string = '';
 
 	connectedCallback(): void {
 		this.parseAttributes();
@@ -42,7 +41,6 @@ export class SocialShare extends HTMLElement {
 		this.openInPopup = this.dataset.popup !== 'false';
 		this.shareUrl = this.dataset.url || window.location.href;
 		this.shareTitle = this.dataset.title || document.title;
-		this.shareImage = this.dataset.image || '';
 	}
 
 	/**

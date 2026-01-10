@@ -38,15 +38,15 @@ interface BannerImage {
  */
 interface BannerAttributes {
 	heading: string;
-	headingLevel: string;
+	headingLevel: 'h2' | 'h3' | 'h4';
 	content: string;
 	image: BannerImage;
-	imagePosition: string;
-	imageSize: string;
-	imageFit: string;
-	verticalAlignment: string;
+	imagePosition: 'left' | 'right';
+	imageSize: '33' | '50' | '66';
+	imageFit: 'fill' | 'contain' | 'cover';
+	verticalAlignment: 'top' | 'center' | 'bottom';
 	button: BlockButton;
-	mobileStack: string;
+	mobileStack: 'image-first' | 'content-first';
 }
 
 /**
@@ -159,7 +159,9 @@ export default function Edit( {
 							},
 						] }
 						onChange={ ( value: string ) =>
-							setAttributes( { imagePosition: value } )
+							setAttributes( {
+								imagePosition: value as 'left' | 'right',
+							} )
 						}
 					/>
 
@@ -181,7 +183,9 @@ export default function Edit( {
 							},
 						] }
 						onChange={ ( value: string ) =>
-							setAttributes( { imageSize: value } )
+							setAttributes( {
+								imageSize: value as '33' | '50' | '66',
+							} )
 						}
 					/>
 
@@ -203,7 +207,9 @@ export default function Edit( {
 							},
 						] }
 						onChange={ ( value: string ) =>
-							setAttributes( { imageFit: value } )
+							setAttributes( {
+								imageFit: value as 'fill' | 'contain' | 'cover',
+							} )
 						}
 					/>
 
@@ -228,7 +234,12 @@ export default function Edit( {
 							},
 						] }
 						onChange={ ( value: string ) =>
-							setAttributes( { verticalAlignment: value } )
+							setAttributes( {
+								verticalAlignment: value as
+									| 'top'
+									| 'center'
+									| 'bottom',
+							} )
 						}
 					/>
 
@@ -252,7 +263,11 @@ export default function Edit( {
 							},
 						] }
 						onChange={ ( value: string ) =>
-							setAttributes( { mobileStack: value } )
+							setAttributes( {
+								mobileStack: value as
+									| 'image-first'
+									| 'content-first',
+							} )
 						}
 					/>
 				</PanelBody>
@@ -271,7 +286,9 @@ export default function Edit( {
 							{ label: 'H4', value: 'h4' },
 						] }
 						onChange={ ( value: string ) =>
-							setAttributes( { headingLevel: value } )
+							setAttributes( {
+								headingLevel: value as 'h2' | 'h3' | 'h4',
+							} )
 						}
 					/>
 				</PanelBody>

@@ -16,8 +16,12 @@ import './editor.css';
 /**
  * Register the CTA block.
  */
-registerBlockType( metadata.name, {
-	...metadata,
-	icon: ctaIcon,
-	edit: Edit,
-} );
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+registerBlockType(
+	metadata.name as any,
+	{
+		...metadata,
+		icon: ctaIcon,
+		edit: Edit,
+	} as any
+);

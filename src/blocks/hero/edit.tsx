@@ -43,16 +43,16 @@ interface BackgroundImage {
  */
 interface HeroAttributes {
 	heading: string;
-	headingLevel: string;
+	headingLevel: 'h1' | 'h2';
 	subheading: string;
 	content: string;
-	backgroundType: string;
+	backgroundType: 'image' | 'video' | 'color';
 	backgroundImage: BackgroundImage;
 	backgroundVideo: string;
 	overlayColor: string;
 	overlayOpacity: number;
-	contentAlignment: string;
-	verticalAlignment: string;
+	contentAlignment: 'left' | 'center' | 'right';
+	verticalAlignment: 'top' | 'center' | 'bottom';
 	minHeight: string;
 	primaryButton: BlockButton;
 	secondaryButton: BlockButton;
@@ -159,7 +159,12 @@ export default function Edit( {
 							},
 						] }
 						onChange={ ( value: string ) =>
-							setAttributes( { backgroundType: value } )
+							setAttributes( {
+								backgroundType: value as
+									| 'image'
+									| 'video'
+									| 'color',
+							} )
 						}
 					/>
 
@@ -305,7 +310,12 @@ export default function Edit( {
 							},
 						] }
 						onChange={ ( value: string ) =>
-							setAttributes( { contentAlignment: value } )
+							setAttributes( {
+								contentAlignment: value as
+									| 'left'
+									| 'center'
+									| 'right',
+							} )
 						}
 					/>
 
@@ -330,7 +340,12 @@ export default function Edit( {
 							},
 						] }
 						onChange={ ( value: string ) =>
-							setAttributes( { verticalAlignment: value } )
+							setAttributes( {
+								verticalAlignment: value as
+									| 'top'
+									| 'center'
+									| 'bottom',
+							} )
 						}
 					/>
 
@@ -342,7 +357,9 @@ export default function Edit( {
 							{ label: 'H2', value: 'h2' },
 						] }
 						onChange={ ( value: string ) =>
-							setAttributes( { headingLevel: value } )
+							setAttributes( {
+								headingLevel: value as 'h1' | 'h2',
+							} )
 						}
 					/>
 				</PanelBody>

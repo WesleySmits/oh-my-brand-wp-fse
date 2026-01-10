@@ -76,9 +76,10 @@ export class Lightbox {
 		}
 
 		this.currentIndex = this.clampIndex( index );
+		/* eslint-disable @wordpress/no-global-active-element */
 		this.triggerElement =
-			triggerElement ||
-			( this.container.ownerDocument.activeElement as HTMLElement );
+			triggerElement || ( document.activeElement as HTMLElement );
+		/* eslint-enable @wordpress/no-global-active-element */
 
 		this.createDialog();
 		this.updateContent();

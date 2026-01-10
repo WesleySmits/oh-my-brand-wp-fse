@@ -16,8 +16,12 @@ import './editor.css';
 /**
  * Register the Banner block.
  */
-registerBlockType( metadata.name, {
-	...metadata,
-	icon: bannerIcon,
-	edit: Edit,
-} );
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+registerBlockType(
+	metadata.name as any,
+	{
+		...metadata,
+		icon: bannerIcon,
+		edit: Edit,
+	} as any
+);

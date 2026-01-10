@@ -52,7 +52,7 @@ export class HeroSection extends HTMLElement {
 	}
 
 	attributeChangedCallback(
-		name: string,
+		_name: string,
 		oldValue: string | null,
 		newValue: string | null
 	): void {
