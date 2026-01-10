@@ -11,7 +11,7 @@ import metadata from './block.json';
 /**
  * Register the FAQ block.
  */
-registerBlockType(metadata.name, {
+registerBlockType( metadata.name, {
 	edit: Edit,
-	save: () => null // Dynamic block - rendered via PHP
-});
+	save: () => null, // Dynamic block - rendered via PHP
+} );
