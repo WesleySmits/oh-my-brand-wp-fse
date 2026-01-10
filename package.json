@@ -60,6 +60,7 @@
         "@typescript-eslint/eslint-plugin": "^8.52.0",
         "@typescript-eslint/parser": "^8.52.0",
         "@vitest/coverage-v8": "^2.1.8",
+        "@wordpress/env": "^10.37.0",
         "@wordpress/scripts": "^30.0.0",
         "copy-webpack-plugin": "^13.0.1",
         "eslint-config-prettier": "^10.1.8",

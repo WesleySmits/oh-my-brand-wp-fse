@@ -63,12 +63,23 @@ fi
 
 # Create Logo Grid Test Page
 if ! wp post list --post_type=page --name=logo-grid-test --format=ids | grep -q .; then
+    # Import a dummy image for the logo grid
+    # We use screenshot.png from the theme root as a placeholder
+    IMAGE_ID=$(wp media import screenshot.png --porcelain)
+    IMAGE_URL=$(wp media get "$IMAGE_ID" --field=source_url)
+
+    echo "🖼️  Imported placeholder image (ID: $IMAGE_ID)"
+
+    # Create the block content with the imported image
+    # valid JSON requires escaped quotes
+    CONTENT="<!-- wp:theme-oh-my-brand/logo-grid {\"heading\":\"Our Partners\",\"grayscale\":true,\"images\":[{\"id\":$IMAGE_ID,\"url\":\"$IMAGE_URL\",\"alt\":\"Partner Logo\",\"link\":\"\"},{\"id\":$IMAGE_ID,\"url\":\"$IMAGE_URL\",\"alt\":\"Partner Logo 2\",\"link\":\"\"},{\"id\":$IMAGE_ID,\"url\":\"$IMAGE_URL\",\"alt\":\"Partner Logo 3\",\"link\":\"\"},{\"id\":$IMAGE_ID,\"url\":\"$IMAGE_URL\",\"alt\":\"Partner Logo 4\",\"link\":\"\"}],\"columns\":4} /-->"
+
     wp post create \
         --post_type=page \
         --post_title="Logo Grid Test" \
         --post_name="logo-grid-test" \
         --post_status=publish \
-        --post_content='<!-- wp:theme-oh-my-brand/logo-grid {"heading":"Our Partners","grayscale":true} /-->'
+        --post_content="$CONTENT"
     echo "✅ Created Logo Grid Test Page"
 else
     echo "⏭️  Logo Grid Test Page already exists"
