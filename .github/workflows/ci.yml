@@ -248,8 +248,12 @@ jobs:
 
       - name: Verify build output
         run: |
-          if [ ! -f "assets/js/gallery.js" ]; then
-            echo "Build failed: assets/js/gallery.js not found"
+          if [ ! -d "build/blocks" ]; then
+            echo "Build failed: build/blocks directory not found"
+            exit 1
+          fi
+          if [ ! -f "build/blocks/gallery/index.js" ]; then
+            echo "Build failed: build/blocks/gallery/index.js not found"
             exit 1
           fi
           echo "Build successful!"

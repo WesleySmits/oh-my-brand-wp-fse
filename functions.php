@@ -75,41 +75,6 @@ function omb_setup_theme(): void {
 }
 
 // ==========================================================================
-// ACF Block Registration (Legacy - for backwards compatibility)
-// ==========================================================================
-
-add_action( 'init', 'omb_register_acf_blocks' );
-
-/**
- * Register ACF blocks for backwards compatibility.
- *
- * These are legacy blocks that may still be used in existing content.
- * New content should use the native blocks instead.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function omb_register_acf_blocks(): void {
-	if ( ! function_exists( 'acf_register_block_type' ) ) {
-		return;
-	}
-
-	$acf_blocks = [
-		'acf-faq',
-		'acf-gallery-block',
-		'acf-youtube-block',
-	];
-
-	foreach ( $acf_blocks as $block ) {
-		$block_path = OMB_PATH . '/blocks/' . $block;
-		if ( file_exists( $block_path . '/block.json' ) ) {
-			register_block_type( $block_path );
-		}
-	}
-}
-
-// ==========================================================================
 // ACF JSON Configuration
 // ==========================================================================
 

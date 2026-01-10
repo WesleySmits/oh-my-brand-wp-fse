@@ -82,11 +82,6 @@ oh-my-brand/
 │   │   ├── components.css
 │   │   └── utils.css
 │   └── js/               # Compiled JavaScript
-├── blocks/               # ACF custom blocks
-│   ├── acf-gallery-block/
-│   ├── acf-faq/
-│   ├── acf-youtube-block/
-│   └── utils/            # Shared TypeScript utilities
 ├── includes/             # PHP includes
 │   ├── post-types/       # Custom post types
 │   └── *.php
@@ -98,38 +93,6 @@ oh-my-brand/
 └── .github/
     ├── copilot-instructions.md
     └── workflows/ci.yml
-```
-
-### Creating a New ACF Block
-
-1. Create directory structure:
-   ```bash
-   mkdir -p blocks/acf-{block-name}
-   ```
-
-2. Add required files:
-   - `block.json` - Block registration
-   - `render.php` - Render template
-   - `helpers.php` - Helper functions (namespaced)
-   - `style.css` - Block styles
-   - `{BlockName}.ts` - TypeScript (if interactive)
-   - `{BlockName}.test.ts` - Unit tests
-
-3. Register in ACF
-
-Example `helpers.php`:
-
-```php
-<?php
-declare(strict_types=1);
-
-namespace OMB\Blocks\BlockName;
-
-function get_block_data(int $post_id): array {
-    return [
-        'field' => get_field('field_name', $post_id) ?? 'default',
-    ];
-}
 ```
 
 ### Code Style
@@ -165,7 +128,7 @@ Closes #123 (optional)
 
 **Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
 
-**Scopes**: `blocks`, `gallery`, `faq`, `youtube`, `theme`, `assets`, `acf`, `deps`, `config`, `ci`
+**Scopes**: `blocks`, `gallery`, `faq`, `youtube`, `theme`, `assets`, `deps`, `config`, `ci`
 
 ### Git Hooks
 
@@ -184,8 +147,8 @@ Commit message hook validates Conventional Commits format.
 Tests are co-located with source files:
 
 ```
-blocks/utils/debounce.ts
-blocks/utils/debounce.test.ts
+src/blocks/utils/debounce.ts
+src/blocks/utils/debounce.test.ts
 ```
 
 Run tests:
