@@ -140,47 +140,36 @@ jobs:
     name: Unit Tests (PHP)
     runs-on: ubuntu-latest
     needs: [lint-php]
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: wordpress_test
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
-          extensions: mysqli, pdo_mysql
           tools: composer:v2
-          coverage: xdebug
+          coverage: none
 
-      - name: Get Composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
+      - run: pnpm install --frozen-lockfile
       - run: composer install --prefer-dist --no-progress
 
-      - name: Install WordPress Test Suite
+      - name: Start wp-env
         run: |
-          bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1 latest true
+          pnpm add -g @wordpress/env
+          wp-env start
 
-      - name: Run PHPUnit
-        run: composer test
-        env:
-          WP_TESTS_DIR: /tmp/wordpress-tests-lib
+      - name: Run PHPUnit via wp-env
+        run: wp-env run tests-cli --env-cwd=wp-content/themes/oh-my-brand vendor/bin/phpunit
 
   # ============================================
   # E2E Tests (Playwright)
