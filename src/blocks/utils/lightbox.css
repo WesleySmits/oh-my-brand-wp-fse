@@ -44,11 +44,13 @@
 
 /* Closing animation */
 .lightbox--closing {
-	animation: lightbox-fade-out var(--lightbox-animation-duration) ease-in forwards;
+	animation: lightbox-fade-out var(--lightbox-animation-duration) ease-in
+		forwards;
 }
 
 .lightbox--closing .lightbox__image {
-	animation: lightbox-scale-out var(--lightbox-animation-duration) ease-in forwards;
+	animation: lightbox-scale-out var(--lightbox-animation-duration) ease-in
+		forwards;
 }
 
 @keyframes lightbox-fade-in {

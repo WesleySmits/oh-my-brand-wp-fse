@@ -151,16 +151,16 @@ omb-hero {
 }
 
 /* Pause icon (default state - video playing) */
-.wp-block-theme-oh-my-brand-hero__video-toggle[aria-pressed='false']
+.wp-block-theme-oh-my-brand-hero__video-toggle[aria-pressed="false"]
 	.wp-block-theme-oh-my-brand-hero__video-toggle-icon::before {
-	content: '⏸';
+	content: "⏸";
 	font-size: 1.25rem;
 }
 
 /* Play icon (video paused) */
-.wp-block-theme-oh-my-brand-hero__video-toggle[aria-pressed='true']
+.wp-block-theme-oh-my-brand-hero__video-toggle[aria-pressed="true"]
 	.wp-block-theme-oh-my-brand-hero__video-toggle-icon::before {
-	content: '▶';
+	content: "▶";
 	font-size: 1.25rem;
 }
 

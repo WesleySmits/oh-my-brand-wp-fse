@@ -9,6 +9,6 @@
 import { SocialShare } from './SocialShare';
 
 // Register custom element if not already defined
-if (!customElements.get(SocialShare.tagName)) {
-	customElements.define(SocialShare.tagName, SocialShare);
+if ( ! customElements.get( SocialShare.tagName ) ) {
+	customElements.define( SocialShare.tagName, SocialShare );
 }

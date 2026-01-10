@@ -9,6 +9,6 @@
 import { HeroSection } from './HeroSection';
 
 // Ensure component is registered
-if (!customElements.get(HeroSection.tagName)) {
-	customElements.define(HeroSection.tagName, HeroSection);
+if ( ! customElements.get( HeroSection.tagName ) ) {
+	customElements.define( HeroSection.tagName, HeroSection );
 }

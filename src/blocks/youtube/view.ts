@@ -23,7 +23,7 @@
  */
 class OmbYouTubeFacade extends HTMLElement {
 	/** Observed attributes for attributeChangedCallback */
-	static observedAttributes = ['embed-url', 'video-title'];
+	static observedAttributes = [ 'embed-url', 'video-title' ];
 
 	/** Embed URL for the YouTube video */
 	#embedUrl = '';
@@ -38,12 +38,13 @@ class OmbYouTubeFacade extends HTMLElement {
 	 * Called when the element is added to the DOM.
 	 */
 	connectedCallback(): void {
-		this.#embedUrl = this.getAttribute('embed-url') || '';
-		this.#videoTitle = this.getAttribute('video-title') || 'YouTube video';
+		this.#embedUrl = this.getAttribute( 'embed-url' ) || '';
+		this.#videoTitle =
+			this.getAttribute( 'video-title' ) || 'YouTube video';
 
-		if (!this.#embedUrl) {
+		if ( ! this.#embedUrl ) {
 			// eslint-disable-next-line no-console
-			console.warn('omb-youtube-facade: Missing embed-url attribute');
+			console.warn( 'omb-youtube-facade: Missing embed-url attribute' );
 			return;
 		}
 
@@ -56,12 +57,16 @@ class OmbYouTubeFacade extends HTMLElement {
 	 * @param oldValue
 	 * @param newValue
 	 */
-	attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-		if (oldValue === newValue) {
+	attributeChangedCallback(
+		name: string,
+		oldValue: string | null,
+		newValue: string | null
+	): void {
+		if ( oldValue === newValue ) {
 			return;
 		}
 
-		switch (name) {
+		switch ( name ) {
 			case 'embed-url':
 				this.#embedUrl = newValue || '';
 				break;
@@ -76,18 +81,18 @@ class OmbYouTubeFacade extends HTMLElement {
 	 */
 	#bindEvents(): void {
 		// Click handler
-		this.addEventListener('click', this.#handleActivation);
+		this.addEventListener( 'click', this.#handleActivation );
 
 		// Keyboard handler for Enter and Space
-		this.addEventListener('keydown', this.#handleKeydown);
+		this.addEventListener( 'keydown', this.#handleKeydown );
 	}
 
 	/**
 	 * Handle keyboard events.
 	 * @param event
 	 */
-	#handleKeydown = (event: KeyboardEvent): void => {
-		if (event.key === 'Enter' || event.key === ' ') {
+	#handleKeydown = ( event: KeyboardEvent ): void => {
+		if ( event.key === 'Enter' || event.key === ' ' ) {
 			event.preventDefault();
 			this.#activate();
 		}
@@ -104,47 +109,50 @@ class OmbYouTubeFacade extends HTMLElement {
 	 * Activate the video - replace facade with iframe.
 	 */
 	#activate(): void {
-		if (this.#isActivated) {
+		if ( this.#isActivated ) {
 			return;
 		}
 
 		this.#isActivated = true;
 
-		const iframe = document.createElement('iframe');
+		const iframe = document.createElement( 'iframe' );
 
-		iframe.src = `${this.#embedUrl}?autoplay=1`;
+		iframe.src = `${ this.#embedUrl }?autoplay=1`;
 		iframe.title = this.#videoTitle;
-		iframe.setAttribute('aria-label', `Embedded YouTube video: ${this.#videoTitle}`);
+		iframe.setAttribute(
+			'aria-label',
+			`Embedded YouTube video: ${ this.#videoTitle }`
+		);
 		iframe.setAttribute(
 			'allow',
 			'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
 		);
-		iframe.setAttribute('allowfullscreen', '');
+		iframe.setAttribute( 'allowfullscreen', '' );
 
 		// Clear content and append iframe
 		this.innerHTML = '';
-		this.appendChild(iframe);
+		this.appendChild( iframe );
 
 		// Add activated class for styling
-		this.classList.add('is-activated');
+		this.classList.add( 'is-activated' );
 
 		// Update parent wrapper if exists
-		const wrapper = this.closest('.wp-block-theme-oh-my-brand-youtube');
-		wrapper?.classList.add('is-activated');
+		const wrapper = this.closest( '.wp-block-theme-oh-my-brand-youtube' );
+		wrapper?.classList.add( 'is-activated' );
 	}
 
 	/**
 	 * Clean up when element is removed.
 	 */
 	disconnectedCallback(): void {
-		this.removeEventListener('click', this.#handleActivation);
-		this.removeEventListener('keydown', this.#handleKeydown);
+		this.removeEventListener( 'click', this.#handleActivation );
+		this.removeEventListener( 'keydown', this.#handleKeydown );
 	}
 }
 
 // Register the custom element
-if (!customElements.get('omb-youtube-facade')) {
-	customElements.define('omb-youtube-facade', OmbYouTubeFacade);
+if ( ! customElements.get( 'omb-youtube-facade' ) ) {
+	customElements.define( 'omb-youtube-facade', OmbYouTubeFacade );
 }
 
 // Export for testing

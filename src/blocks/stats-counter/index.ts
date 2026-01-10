@@ -62,9 +62,9 @@ export interface StatsCounterAttributes {
 /**
  * Register the Stats Counter block.
  */
-registerBlockType(metadata.name as 'theme-oh-my-brand/stats-counter', {
-	...(metadata as unknown as BlockConfiguration<StatsCounterAttributes>),
+registerBlockType( metadata.name as 'theme-oh-my-brand/stats-counter', {
+	...( metadata as unknown as BlockConfiguration< StatsCounterAttributes > ),
 	icon: chartBar,
 	edit: Edit,
-	save: () => null // Server-side rendered
-});
+	save: () => null, // Server-side rendered
+} );

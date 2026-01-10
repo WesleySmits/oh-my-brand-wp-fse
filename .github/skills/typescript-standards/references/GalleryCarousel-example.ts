@@ -23,7 +23,7 @@ interface CarouselOptions {
 export class GalleryCarousel {
 	// Private fields with # prefix
 	readonly #element: HTMLElement;
-	readonly #options: Required<CarouselOptions>;
+	readonly #options: Required< CarouselOptions >;
 	#currentIndex: number = 0;
 	#isAnimating: boolean = false;
 
@@ -33,9 +33,9 @@ export class GalleryCarousel {
 	 * @param element - The container element.
 	 * @param options - Configuration options.
 	 */
-	constructor(element: HTMLElement, options: CarouselOptions = {}) {
+	constructor( element: HTMLElement, options: CarouselOptions = {} ) {
 		this.#element = element;
-		this.#options = this.#mergeOptions(options);
+		this.#options = this.#mergeOptions( options );
 		this.#init();
 	}
 
@@ -44,13 +44,13 @@ export class GalleryCarousel {
 	 *
 	 * @param index - The slide index to navigate to.
 	 */
-	public goToSlide(index: number): void {
-		if (this.#isAnimating || index === this.#currentIndex) {
+	public goToSlide( index: number ): void {
+		if ( this.#isAnimating || index === this.#currentIndex ) {
 			return;
 		}
 
 		this.#isAnimating = true;
-		this.#currentIndex = this.#normalizeIndex(index);
+		this.#currentIndex = this.#normalizeIndex( index );
 		this.#updateSlides();
 	}
 
@@ -58,14 +58,14 @@ export class GalleryCarousel {
 	 * Navigate to the next slide.
 	 */
 	public next(): void {
-		this.goToSlide(this.#currentIndex + 1);
+		this.goToSlide( this.#currentIndex + 1 );
 	}
 
 	/**
 	 * Navigate to the previous slide.
 	 */
 	public prev(): void {
-		this.goToSlide(this.#currentIndex - 1);
+		this.goToSlide( this.#currentIndex - 1 );
 	}
 
 	/**
@@ -87,22 +87,22 @@ export class GalleryCarousel {
 		this.#attachEventListeners();
 	}
 
-	#mergeOptions(options: CarouselOptions): Required<CarouselOptions> {
+	#mergeOptions( options: CarouselOptions ): Required< CarouselOptions > {
 		return {
 			visibleCount: 3,
 			autoplay: false,
 			interval: 5000,
-			...options
+			...options,
 		};
 	}
 
-	#normalizeIndex(index: number): number {
+	#normalizeIndex( index: number ): number {
 		const slideCount = this.#getSlideCount();
-		return ((index % slideCount) + slideCount) % slideCount;
+		return ( ( index % slideCount ) + slideCount ) % slideCount;
 	}
 
 	#getSlideCount(): number {
-		return this.#element.querySelectorAll('[data-slide]').length;
+		return this.#element.querySelectorAll( '[data-slide]' ).length;
 	}
 
 	#setupDOM(): void {

@@ -6,7 +6,12 @@
 
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, ToggleControl, SelectControl, TextControl } from '@wordpress/components';
+import {
+	PanelBody,
+	ToggleControl,
+	SelectControl,
+	TextControl,
+} from '@wordpress/components';
 import {
 	DndContext,
 	closestCenter,
@@ -14,14 +19,14 @@ import {
 	PointerSensor,
 	useSensor,
 	useSensors,
-	type DragEndEvent
+	type DragEndEvent,
 } from '@dnd-kit/core';
 import {
 	arrayMove,
 	SortableContext,
 	sortableKeyboardCoordinates,
 	verticalListSortingStrategy,
-	useSortable
+	useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { dragHandle, Icon } from '@wordpress/icons';
@@ -60,13 +65,13 @@ const AVAILABLE_PLATFORMS: Platform[] = [
 	{ slug: 'pinterest', name: 'Pinterest' },
 	{ slug: 'whatsapp', name: 'WhatsApp' },
 	{ slug: 'email', name: 'Email' },
-	{ slug: 'copy', name: 'Copy Link' }
+	{ slug: 'copy', name: 'Copy Link' },
 ];
 
 /**
  * SVG Icons for platforms.
  */
-const PLATFORM_ICONS: Record<string, JSX.Element> = {
+const PLATFORM_ICONS: Record< string, JSX.Element > = {
 	facebook: (
 		<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
 			<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
@@ -106,7 +111,7 @@ const PLATFORM_ICONS: Record<string, JSX.Element> = {
 				clipRule="evenodd"
 			/>
 		</svg>
-	)
+	),
 };
 
 /**
@@ -125,33 +130,56 @@ interface SortablePlatformItemProps {
  * @param root0.isActive
  * @param root0.onToggle
  */
-function SortablePlatformItem({ platform, isActive, onToggle }: SortablePlatformItemProps): JSX.Element {
-	const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+function SortablePlatformItem( {
+	platform,
+	isActive,
+	onToggle,
+}: SortablePlatformItemProps ): JSX.Element {
+	const {
+		attributes,
+		listeners,
+		setNodeRef,
+		transform,
+		transition,
+		isDragging,
+	} = useSortable( {
 		id: platform.slug,
-		disabled: !isActive
-	});
+		disabled: ! isActive,
+	} );
 
 	const style = {
-		transform: CSS.Transform.toString(transform),
+		transform: CSS.Transform.toString( transform ),
 		transition,
-		opacity: isDragging ? 0.5 : 1
+		opacity: isDragging ? 0.5 : 1,
 	};
 
 	return (
-		<div ref={setNodeRef} style={style} className={`social-share-platform-item ${isActive ? 'is-active' : ''}`}>
-			<div className="social-share-platform-item__drag" {...attributes} {...listeners}>
-				<Icon icon={dragHandle} />
+		<div
+			ref={ setNodeRef }
+			style={ style }
+			className={ `social-share-platform-item ${
+				isActive ? 'is-active' : ''
+			}` }
+		>
+			<div
+				className="social-share-platform-item__drag"
+				{ ...attributes }
+				{ ...listeners }
+			>
+				<Icon icon={ dragHandle } />
 			</div>
 			<ToggleControl
 				__nextHasNoMarginBottom
 				label={
 					<span className="social-share-platform-item__label">
-						<span className="social-share-platform-item__icon">{PLATFORM_ICONS[platform.slug]}</span>
-						{platform.name}
+						<span className="social-share-platform-item__icon">
+							{ PLATFORM_ICONS[ platform.slug ] }
+						</span>
+						{ platform.name }
 					</span>
 				}
-				checked={isActive}
-				onChange={onToggle}
+				checked={ isActive }
+				onChange={ onToggle }
 			/>
 		</div>
 	);
@@ -163,35 +191,47 @@ function SortablePlatformItem({ platform, isActive, onToggle }: SortablePlatform
  * @param root0.attributes
  * @param root0.setAttributes
  */
-export default function Edit({ attributes, setAttributes }: BlockEditProps<SocialShareAttributes>): JSX.Element {
-	const { platforms, displayStyle, layout, size, useNativeShare, showLabel, labelText, openInPopup, alignment } =
-		attributes;
+export default function Edit( {
+	attributes,
+	setAttributes,
+}: BlockEditProps< SocialShareAttributes > ): JSX.Element {
+	const {
+		platforms,
+		displayStyle,
+		layout,
+		size,
+		useNativeShare,
+		showLabel,
+		labelText,
+		openInPopup,
+		alignment,
+	} = attributes;
 
 	const sensors = useSensors(
-		useSensor(PointerSensor),
-		useSensor(KeyboardSensor, {
-			coordinateGetter: sortableKeyboardCoordinates
-		})
+		useSensor( PointerSensor ),
+		useSensor( KeyboardSensor, {
+			coordinateGetter: sortableKeyboardCoordinates,
+		} )
 	);
 
-	const blockProps = useBlockProps({
-		className: `social-share social-share--layout-${layout} social-share--style-${displayStyle} social-share--size-${size} social-share--align-${alignment}`
-	});
+	const blockProps = useBlockProps( {
+		className: `social-share social-share--layout-${ layout } social-share--style-${ displayStyle } social-share--size-${ size } social-share--align-${ alignment }`,
+	} );
 
 	/**
 	 * Handle drag end for platform reordering.
 	 * @param event
 	 */
-	const handleDragEnd = (event: DragEndEvent): void => {
+	const handleDragEnd = ( event: DragEndEvent ): void => {
 		const { active, over } = event;
 
-		if (over && active.id !== over.id) {
-			const oldIndex = platforms.indexOf(active.id as string);
-			const newIndex = platforms.indexOf(over.id as string);
+		if ( over && active.id !== over.id ) {
+			const oldIndex = platforms.indexOf( active.id as string );
+			const newIndex = platforms.indexOf( over.id as string );
 
-			if (oldIndex !== -1 && newIndex !== -1) {
-				const newPlatforms = arrayMove(platforms, oldIndex, newIndex);
-				setAttributes({ platforms: newPlatforms });
+			if ( oldIndex !== -1 && newIndex !== -1 ) {
+				const newPlatforms = arrayMove( platforms, oldIndex, newIndex );
+				setAttributes( { platforms: newPlatforms } );
 			}
 		}
 	};
@@ -200,11 +240,13 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<Socia
 	 * Toggle platform on/off.
 	 * @param slug
 	 */
-	const togglePlatform = (slug: string): void => {
-		if (platforms.includes(slug)) {
-			setAttributes({ platforms: platforms.filter((p) => p !== slug) });
+	const togglePlatform = ( slug: string ): void => {
+		if ( platforms.includes( slug ) ) {
+			setAttributes( {
+				platforms: platforms.filter( ( p ) => p !== slug ),
+			} );
 		} else {
-			setAttributes({ platforms: [...platforms, slug] });
+			setAttributes( { platforms: [ ...platforms, slug ] } );
 		}
 	};
 
@@ -213,186 +255,314 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<Socia
 	 */
 	const getActivePlatforms = (): Platform[] => {
 		return platforms
-			.map((slug) => AVAILABLE_PLATFORMS.find((p) => p.slug === slug))
-			.filter((p): p is Platform => p !== undefined);
+			.map( ( slug ) =>
+				AVAILABLE_PLATFORMS.find( ( p ) => p.slug === slug )
+			)
+			.filter( ( p ): p is Platform => p !== undefined );
 	};
 
 	/**
 	 * Get inactive platforms.
 	 */
 	const getInactivePlatforms = (): Platform[] => {
-		return AVAILABLE_PLATFORMS.filter((p) => !platforms.includes(p.slug));
+		return AVAILABLE_PLATFORMS.filter(
+			( p ) => ! platforms.includes( p.slug )
+		);
 	};
 
 	return (
 		<>
 			<InspectorControls>
-				{/* Platforms Panel */}
-				<PanelBody title={__('Platforms', 'theme-oh-my-brand')} initialOpen={true}>
-					<p className="components-base-control__help" style={{ marginTop: 0 }}>
-						{__('Toggle platforms and drag to reorder active ones.', 'theme-oh-my-brand')}
+				{ /* Platforms Panel */ }
+				<PanelBody
+					title={ __( 'Platforms', 'theme-oh-my-brand' ) }
+					initialOpen={ true }
+				>
+					<p
+						className="components-base-control__help"
+						style={ { marginTop: 0 } }
+					>
+						{ __(
+							'Toggle platforms and drag to reorder active ones.',
+							'theme-oh-my-brand'
+						) }
 					</p>
 
-					{/* Active platforms (sortable) */}
-					{platforms.length > 0 && (
+					{ /* Active platforms (sortable) */ }
+					{ platforms.length > 0 && (
 						<div className="social-share-platforms-active">
-							<p className="social-share-platforms-heading">{__('Active', 'theme-oh-my-brand')}</p>
-							<DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-								<SortableContext items={platforms} strategy={verticalListSortingStrategy}>
-									{getActivePlatforms().map((platform) => (
-										<SortablePlatformItem
-											key={platform.slug}
-											platform={platform}
-											isActive={true}
-											onToggle={() => togglePlatform(platform.slug)}
-										/>
-									))}
+							<p className="social-share-platforms-heading">
+								{ __( 'Active', 'theme-oh-my-brand' ) }
+							</p>
+							<DndContext
+								sensors={ sensors }
+								collisionDetection={ closestCenter }
+								onDragEnd={ handleDragEnd }
+							>
+								<SortableContext
+									items={ platforms }
+									strategy={ verticalListSortingStrategy }
+								>
+									{ getActivePlatforms().map(
+										( platform ) => (
+											<SortablePlatformItem
+												key={ platform.slug }
+												platform={ platform }
+												isActive={ true }
+												onToggle={ () =>
+													togglePlatform(
+														platform.slug
+													)
+												}
+											/>
+										)
+									) }
 								</SortableContext>
 							</DndContext>
 						</div>
-					)}
+					) }
 
-					{/* Inactive platforms */}
-					{getInactivePlatforms().length > 0 && (
+					{ /* Inactive platforms */ }
+					{ getInactivePlatforms().length > 0 && (
 						<div className="social-share-platforms-inactive">
-							<p className="social-share-platforms-heading">{__('Available', 'theme-oh-my-brand')}</p>
-							{getInactivePlatforms().map((platform) => (
-								<div key={platform.slug} className="social-share-platform-item">
+							<p className="social-share-platforms-heading">
+								{ __( 'Available', 'theme-oh-my-brand' ) }
+							</p>
+							{ getInactivePlatforms().map( ( platform ) => (
+								<div
+									key={ platform.slug }
+									className="social-share-platform-item"
+								>
 									<div className="social-share-platform-item__drag social-share-platform-item__drag--disabled">
-										<Icon icon={dragHandle} />
+										<Icon icon={ dragHandle } />
 									</div>
 									<ToggleControl
 										__nextHasNoMarginBottom
 										label={
 											<span className="social-share-platform-item__label">
 												<span className="social-share-platform-item__icon">
-													{PLATFORM_ICONS[platform.slug]}
+													{
+														PLATFORM_ICONS[
+															platform.slug
+														]
+													}
 												</span>
-												{platform.name}
+												{ platform.name }
 											</span>
 										}
-										checked={false}
-										onChange={() => togglePlatform(platform.slug)}
+										checked={ false }
+										onChange={ () =>
+											togglePlatform( platform.slug )
+										}
 									/>
 								</div>
-							))}
+							) ) }
 						</div>
-					)}
+					) }
 				</PanelBody>
 
-				{/* Display Settings */}
-				<PanelBody title={__('Display Settings', 'theme-oh-my-brand')}>
+				{ /* Display Settings */ }
+				<PanelBody
+					title={ __( 'Display Settings', 'theme-oh-my-brand' ) }
+				>
 					<SelectControl
 						__nextHasNoMarginBottom
-						label={__('Display Style', 'theme-oh-my-brand')}
-						value={displayStyle}
-						options={[
-							{ label: __('Icon Only', 'theme-oh-my-brand'), value: 'icon' },
-							{ label: __('Icon + Label', 'theme-oh-my-brand'), value: 'icon-label' },
-							{ label: __('Label Only', 'theme-oh-my-brand'), value: 'label' }
-						]}
-						onChange={(value) =>
-							setAttributes({ displayStyle: value as SocialShareAttributes['displayStyle'] })
+						label={ __( 'Display Style', 'theme-oh-my-brand' ) }
+						value={ displayStyle }
+						options={ [
+							{
+								label: __( 'Icon Only', 'theme-oh-my-brand' ),
+								value: 'icon',
+							},
+							{
+								label: __(
+									'Icon + Label',
+									'theme-oh-my-brand'
+								),
+								value: 'icon-label',
+							},
+							{
+								label: __( 'Label Only', 'theme-oh-my-brand' ),
+								value: 'label',
+							},
+						] }
+						onChange={ ( value ) =>
+							setAttributes( {
+								displayStyle:
+									value as SocialShareAttributes[ 'displayStyle' ],
+							} )
 						}
 					/>
 					<SelectControl
 						__nextHasNoMarginBottom
-						label={__('Layout', 'theme-oh-my-brand')}
-						value={layout}
-						options={[
-							{ label: __('Horizontal', 'theme-oh-my-brand'), value: 'horizontal' },
-							{ label: __('Vertical', 'theme-oh-my-brand'), value: 'vertical' }
-						]}
-						onChange={(value) => setAttributes({ layout: value as SocialShareAttributes['layout'] })}
+						label={ __( 'Layout', 'theme-oh-my-brand' ) }
+						value={ layout }
+						options={ [
+							{
+								label: __( 'Horizontal', 'theme-oh-my-brand' ),
+								value: 'horizontal',
+							},
+							{
+								label: __( 'Vertical', 'theme-oh-my-brand' ),
+								value: 'vertical',
+							},
+						] }
+						onChange={ ( value ) =>
+							setAttributes( {
+								layout: value as SocialShareAttributes[ 'layout' ],
+							} )
+						}
 					/>
 					<SelectControl
 						__nextHasNoMarginBottom
-						label={__('Size', 'theme-oh-my-brand')}
-						value={size}
-						options={[
-							{ label: __('Small', 'theme-oh-my-brand'), value: 'small' },
-							{ label: __('Medium', 'theme-oh-my-brand'), value: 'medium' },
-							{ label: __('Large', 'theme-oh-my-brand'), value: 'large' }
-						]}
-						onChange={(value) => setAttributes({ size: value as SocialShareAttributes['size'] })}
+						label={ __( 'Size', 'theme-oh-my-brand' ) }
+						value={ size }
+						options={ [
+							{
+								label: __( 'Small', 'theme-oh-my-brand' ),
+								value: 'small',
+							},
+							{
+								label: __( 'Medium', 'theme-oh-my-brand' ),
+								value: 'medium',
+							},
+							{
+								label: __( 'Large', 'theme-oh-my-brand' ),
+								value: 'large',
+							},
+						] }
+						onChange={ ( value ) =>
+							setAttributes( {
+								size: value as SocialShareAttributes[ 'size' ],
+							} )
+						}
 					/>
 					<SelectControl
 						__nextHasNoMarginBottom
-						label={__('Alignment', 'theme-oh-my-brand')}
-						value={alignment}
-						options={[
-							{ label: __('Left', 'theme-oh-my-brand'), value: 'left' },
-							{ label: __('Center', 'theme-oh-my-brand'), value: 'center' },
-							{ label: __('Right', 'theme-oh-my-brand'), value: 'right' }
-						]}
-						onChange={(value) => setAttributes({ alignment: value as SocialShareAttributes['alignment'] })}
+						label={ __( 'Alignment', 'theme-oh-my-brand' ) }
+						value={ alignment }
+						options={ [
+							{
+								label: __( 'Left', 'theme-oh-my-brand' ),
+								value: 'left',
+							},
+							{
+								label: __( 'Center', 'theme-oh-my-brand' ),
+								value: 'center',
+							},
+							{
+								label: __( 'Right', 'theme-oh-my-brand' ),
+								value: 'right',
+							},
+						] }
+						onChange={ ( value ) =>
+							setAttributes( {
+								alignment:
+									value as SocialShareAttributes[ 'alignment' ],
+							} )
+						}
 					/>
 				</PanelBody>
 
-				{/* Label Settings */}
-				<PanelBody title={__('Label', 'theme-oh-my-brand')} initialOpen={false}>
+				{ /* Label Settings */ }
+				<PanelBody
+					title={ __( 'Label', 'theme-oh-my-brand' ) }
+					initialOpen={ false }
+				>
 					<ToggleControl
 						__nextHasNoMarginBottom
-						label={__('Show Label', 'theme-oh-my-brand')}
-						checked={showLabel}
-						onChange={(value) => setAttributes({ showLabel: value })}
+						label={ __( 'Show Label', 'theme-oh-my-brand' ) }
+						checked={ showLabel }
+						onChange={ ( value ) =>
+							setAttributes( { showLabel: value } )
+						}
 					/>
-					{showLabel && (
+					{ showLabel && (
 						<TextControl
 							__nextHasNoMarginBottom
-							label={__('Label Text', 'theme-oh-my-brand')}
-							value={labelText}
-							onChange={(value) => setAttributes({ labelText: value })}
+							label={ __( 'Label Text', 'theme-oh-my-brand' ) }
+							value={ labelText }
+							onChange={ ( value ) =>
+								setAttributes( { labelText: value } )
+							}
 						/>
-					)}
+					) }
 				</PanelBody>
 
-				{/* Behavior Settings */}
-				<PanelBody title={__('Behavior', 'theme-oh-my-brand')} initialOpen={false}>
+				{ /* Behavior Settings */ }
+				<PanelBody
+					title={ __( 'Behavior', 'theme-oh-my-brand' ) }
+					initialOpen={ false }
+				>
 					<ToggleControl
 						__nextHasNoMarginBottom
-						label={__('Use Native Share API', 'theme-oh-my-brand')}
-						help={__('On supported devices, shows the native share dialog.', 'theme-oh-my-brand')}
-						checked={useNativeShare}
-						onChange={(value) => setAttributes({ useNativeShare: value })}
+						label={ __(
+							'Use Native Share API',
+							'theme-oh-my-brand'
+						) }
+						help={ __(
+							'On supported devices, shows the native share dialog.',
+							'theme-oh-my-brand'
+						) }
+						checked={ useNativeShare }
+						onChange={ ( value ) =>
+							setAttributes( { useNativeShare: value } )
+						}
 					/>
 					<ToggleControl
 						__nextHasNoMarginBottom
-						label={__('Open in Popup', 'theme-oh-my-brand')}
-						help={__('Open share dialogs in a popup window instead of a new tab.', 'theme-oh-my-brand')}
-						checked={openInPopup}
-						onChange={(value) => setAttributes({ openInPopup: value })}
+						label={ __( 'Open in Popup', 'theme-oh-my-brand' ) }
+						help={ __(
+							'Open share dialogs in a popup window instead of a new tab.',
+							'theme-oh-my-brand'
+						) }
+						checked={ openInPopup }
+						onChange={ ( value ) =>
+							setAttributes( { openInPopup: value } )
+						}
 					/>
 				</PanelBody>
 			</InspectorControls>
 
-			<div {...blockProps}>
-				{showLabel && <span className="social-share__label">{labelText}</span>}
+			<div { ...blockProps }>
+				{ showLabel && (
+					<span className="social-share__label">{ labelText }</span>
+				) }
 
-				{platforms.length === 0 ? (
+				{ platforms.length === 0 ? (
 					<p className="social-share__empty">
-						{__('Select platforms in the block settings.', 'theme-oh-my-brand')}
+						{ __(
+							'Select platforms in the block settings.',
+							'theme-oh-my-brand'
+						) }
 					</p>
 				) : (
 					<ul className="social-share__list">
-						{getActivePlatforms().map((platform) => (
-							<li key={platform.slug} className="social-share__item">
+						{ getActivePlatforms().map( ( platform ) => (
+							<li
+								key={ platform.slug }
+								className="social-share__item"
+							>
 								<button
 									type="button"
-									className={`social-share__button social-share__button--${platform.slug}`}
-									aria-label={platform.name}
+									className={ `social-share__button social-share__button--${ platform.slug }` }
+									aria-label={ platform.name }
 								>
-									{displayStyle !== 'label' && (
-										<span className="social-share__icon">{PLATFORM_ICONS[platform.slug]}</span>
-									)}
-									{displayStyle !== 'icon' && (
-										<span className="social-share__text">{platform.name}</span>
-									)}
+									{ displayStyle !== 'label' && (
+										<span className="social-share__icon">
+											{ PLATFORM_ICONS[ platform.slug ] }
+										</span>
+									) }
+									{ displayStyle !== 'icon' && (
+										<span className="social-share__text">
+											{ platform.name }
+										</span>
+									) }
 								</button>
 							</li>
-						))}
+						) ) }
 					</ul>
-				)}
+				) }
 			</div>
 		</>
 	);

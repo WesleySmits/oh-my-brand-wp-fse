@@ -35,8 +35,10 @@
 	transition: opacity 0.2s ease;
 }
 
-.wp-block-theme-oh-my-brand-cards__item:hover .wp-block-theme-oh-my-brand-cards__remove-card,
-.wp-block-theme-oh-my-brand-cards__item:focus-within .wp-block-theme-oh-my-brand-cards__remove-card {
+.wp-block-theme-oh-my-brand-cards__item:hover
+	.wp-block-theme-oh-my-brand-cards__remove-card,
+.wp-block-theme-oh-my-brand-cards__item:focus-within
+	.wp-block-theme-oh-my-brand-cards__remove-card {
 	opacity: 100%;
 }
 
@@ -66,8 +68,10 @@
 	transition: opacity 0.2s ease;
 }
 
-.wp-block-theme-oh-my-brand-cards__image-wrapper:hover .wp-block-theme-oh-my-brand-cards__remove-image,
-.wp-block-theme-oh-my-brand-cards__image-wrapper:focus-within .wp-block-theme-oh-my-brand-cards__remove-image {
+.wp-block-theme-oh-my-brand-cards__image-wrapper:hover
+	.wp-block-theme-oh-my-brand-cards__remove-image,
+.wp-block-theme-oh-my-brand-cards__image-wrapper:focus-within
+	.wp-block-theme-oh-my-brand-cards__remove-image {
 	opacity: 100%;
 }
 

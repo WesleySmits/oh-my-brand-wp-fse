@@ -13,10 +13,18 @@
 	}
 
 	.wp-block-button.is-style-button-brand .wp-block-button__link:hover {
-		background: color-mix(in oklab, var(--wp--preset--color--primary) 90%, white);
+		background: color-mix(
+			in oklab,
+			var(--wp--preset--color--primary) 90%,
+			white
+		);
 	}
 
 	.wp-block-button.is-style-secondary-button .wp-block-button__link:hover {
-		background: color-mix(in oklab, var(--wp--preset--color--tertiary) 97%, black);
+		background: color-mix(
+			in oklab,
+			var(--wp--preset--color--tertiary) 97%,
+			black
+		);
 	}
 }

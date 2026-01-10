@@ -5,7 +5,13 @@
  */
 
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, MediaUpload, MediaUploadCheck, InspectorControls, RichText } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	MediaUpload,
+	MediaUploadCheck,
+	InspectorControls,
+	RichText,
+} from '@wordpress/block-editor';
 import {
 	Button,
 	PanelBody,
@@ -15,7 +21,7 @@ import {
 	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
 	__experimentalUnitControl as UnitControl,
 	ColorPicker,
-	Placeholder
+	Placeholder,
 } from '@wordpress/components';
 import { cover as heroIcon } from '@wordpress/icons';
 import type { BlockEditProps } from '@wordpress/blocks';
@@ -73,7 +79,10 @@ interface MediaItem {
  * @param root0.attributes
  * @param root0.setAttributes
  */
-export default function Edit({ attributes, setAttributes }: BlockEditProps<HeroAttributes>): JSX.Element {
+export default function Edit( {
+	attributes,
+	setAttributes,
+}: BlockEditProps< HeroAttributes > ): JSX.Element {
 	const {
 		heading,
 		headingLevel,
@@ -88,265 +97,378 @@ export default function Edit({ attributes, setAttributes }: BlockEditProps<HeroA
 		verticalAlignment,
 		minHeight,
 		primaryButton,
-		secondaryButton
+		secondaryButton,
 	} = attributes;
 
-	const blockProps = useBlockProps({
+	const blockProps = useBlockProps( {
 		className: 'wp-block-theme-oh-my-brand-hero',
 		style: {
 			'--hero-min-height': minHeight,
 			'--hero-overlay-opacity': overlayOpacity / 100,
 			'--hero-content-align': contentAlignment,
-			'--hero-vertical-align': verticalAlignment
-		} as React.CSSProperties
-	});
+			'--hero-vertical-align': verticalAlignment,
+		} as React.CSSProperties,
+	} );
 
 	/**
 	 * Handle background image selection.
 	 * @param media
 	 */
-	const onSelectBackgroundImage = (media: MediaItem): void => {
-		setAttributes({
+	const onSelectBackgroundImage = ( media: MediaItem ): void => {
+		setAttributes( {
 			backgroundImage: {
 				id: media.id,
 				url: media.sizes?.large?.url || media.url,
 				alt: media.alt || '',
 				width: media.width,
-				height: media.height
-			}
-		});
+				height: media.height,
+			},
+		} );
 	};
 
 	/**
 	 * Remove background image.
 	 */
 	const removeBackgroundImage = (): void => {
-		setAttributes({ backgroundImage: {} });
+		setAttributes( { backgroundImage: {} } );
 	};
 
 	return (
 		<>
 			<InspectorControls>
-				{/* Background Settings */}
-				<PanelBody title={__('Background Settings', 'theme-oh-my-brand')} initialOpen={true}>
+				{ /* Background Settings */ }
+				<PanelBody
+					title={ __( 'Background Settings', 'theme-oh-my-brand' ) }
+					initialOpen={ true }
+				>
 					<SelectControl
-						label={__('Background Type', 'theme-oh-my-brand')}
-						value={backgroundType}
-						options={[
-							{ label: __('Color', 'theme-oh-my-brand'), value: 'color' },
-							{ label: __('Image', 'theme-oh-my-brand'), value: 'image' },
-							{ label: __('Video', 'theme-oh-my-brand'), value: 'video' }
-						]}
-						onChange={(value: string) => setAttributes({ backgroundType: value })}
+						label={ __( 'Background Type', 'theme-oh-my-brand' ) }
+						value={ backgroundType }
+						options={ [
+							{
+								label: __( 'Color', 'theme-oh-my-brand' ),
+								value: 'color',
+							},
+							{
+								label: __( 'Image', 'theme-oh-my-brand' ),
+								value: 'image',
+							},
+							{
+								label: __( 'Video', 'theme-oh-my-brand' ),
+								value: 'video',
+							},
+						] }
+						onChange={ ( value: string ) =>
+							setAttributes( { backgroundType: value } )
+						}
 					/>
 
-					{backgroundType === 'image' && (
+					{ backgroundType === 'image' && (
 						<MediaUploadCheck>
 							<MediaUpload
-								onSelect={onSelectBackgroundImage}
-								allowedTypes={['image']}
-								value={backgroundImage?.id}
-								render={({ open }) => (
+								onSelect={ onSelectBackgroundImage }
+								allowedTypes={ [ 'image' ] }
+								value={ backgroundImage?.id }
+								render={ ( { open } ) => (
 									<div className="hero-background-image-control">
-										{backgroundImage?.url ? (
+										{ backgroundImage?.url ? (
 											<>
 												<img
-													src={backgroundImage.url}
-													alt={backgroundImage.alt || ''}
-													style={{ maxWidth: '100%', marginBottom: '8px' }}
+													src={ backgroundImage.url }
+													alt={
+														backgroundImage.alt ||
+														''
+													}
+													style={ {
+														maxWidth: '100%',
+														marginBottom: '8px',
+													} }
 												/>
 												<Button
 													variant="secondary"
-													onClick={open}
-													style={{ marginRight: '8px' }}
+													onClick={ open }
+													style={ {
+														marginRight: '8px',
+													} }
 												>
-													{__('Replace Image', 'theme-oh-my-brand')}
+													{ __(
+														'Replace Image',
+														'theme-oh-my-brand'
+													) }
 												</Button>
-												<Button variant="link" isDestructive onClick={removeBackgroundImage}>
-													{__('Remove', 'theme-oh-my-brand')}
+												<Button
+													variant="link"
+													isDestructive
+													onClick={
+														removeBackgroundImage
+													}
+												>
+													{ __(
+														'Remove',
+														'theme-oh-my-brand'
+													) }
 												</Button>
 											</>
 										) : (
-											<Button variant="secondary" onClick={open}>
-												{__('Select Background Image', 'theme-oh-my-brand')}
+											<Button
+												variant="secondary"
+												onClick={ open }
+											>
+												{ __(
+													'Select Background Image',
+													'theme-oh-my-brand'
+												) }
 											</Button>
-										)}
+										) }
 									</div>
-								)}
+								) }
 							/>
 						</MediaUploadCheck>
-					)}
+					) }
 
-					{backgroundType === 'video' && (
+					{ backgroundType === 'video' && (
 						<TextControl
-							label={__('Video URL', 'theme-oh-my-brand')}
-							help={__('Enter a video file URL (MP4, WebM)', 'theme-oh-my-brand')}
-							value={backgroundVideo}
-							onChange={(value: string) => setAttributes({ backgroundVideo: value })}
+							label={ __( 'Video URL', 'theme-oh-my-brand' ) }
+							help={ __(
+								'Enter a video file URL (MP4, WebM)',
+								'theme-oh-my-brand'
+							) }
+							value={ backgroundVideo }
+							onChange={ ( value: string ) =>
+								setAttributes( { backgroundVideo: value } )
+							}
 						/>
-					)}
+					) }
 
-					<div style={{ marginTop: '16px' }}>
-						<p style={{ marginBottom: '8px' }}>{__('Overlay Color', 'theme-oh-my-brand')}</p>
+					<div style={ { marginTop: '16px' } }>
+						<p style={ { marginBottom: '8px' } }>
+							{ __( 'Overlay Color', 'theme-oh-my-brand' ) }
+						</p>
 						<ColorPicker
-							color={overlayColor}
-							onChange={(value: string) => setAttributes({ overlayColor: value })}
+							color={ overlayColor }
+							onChange={ ( value: string ) =>
+								setAttributes( { overlayColor: value } )
+							}
 							enableAlpha
 						/>
 					</div>
 
 					<RangeControl
-						label={__('Overlay Opacity', 'theme-oh-my-brand')}
-						value={overlayOpacity}
-						onChange={(value: number | undefined) => {
-							if (value !== undefined) {
-								setAttributes({ overlayOpacity: value });
+						label={ __( 'Overlay Opacity', 'theme-oh-my-brand' ) }
+						value={ overlayOpacity }
+						onChange={ ( value: number | undefined ) => {
+							if ( value !== undefined ) {
+								setAttributes( { overlayOpacity: value } );
 							}
-						}}
-						min={0}
-						max={100}
-						step={5}
+						} }
+						min={ 0 }
+						max={ 100 }
+						step={ 5 }
 					/>
 				</PanelBody>
 
-				{/* Layout Settings */}
-				<PanelBody title={__('Layout Settings', 'theme-oh-my-brand')} initialOpen={false}>
+				{ /* Layout Settings */ }
+				<PanelBody
+					title={ __( 'Layout Settings', 'theme-oh-my-brand' ) }
+					initialOpen={ false }
+				>
 					<UnitControl
-						label={__('Minimum Height', 'theme-oh-my-brand')}
-						value={minHeight}
-						onChange={(value: string | undefined) => {
-							if (value !== undefined) {
-								setAttributes({ minHeight: value });
+						label={ __( 'Minimum Height', 'theme-oh-my-brand' ) }
+						value={ minHeight }
+						onChange={ ( value: string | undefined ) => {
+							if ( value !== undefined ) {
+								setAttributes( { minHeight: value } );
 							}
-						}}
-						units={[
+						} }
+						units={ [
 							{ value: 'vh', label: 'vh' },
 							{ value: 'px', label: 'px' },
-							{ value: '%', label: '%' }
-						]}
+							{ value: '%', label: '%' },
+						] }
 					/>
 
 					<SelectControl
-						label={__('Content Alignment', 'theme-oh-my-brand')}
-						value={contentAlignment}
-						options={[
-							{ label: __('Left', 'theme-oh-my-brand'), value: 'left' },
-							{ label: __('Center', 'theme-oh-my-brand'), value: 'center' },
-							{ label: __('Right', 'theme-oh-my-brand'), value: 'right' }
-						]}
-						onChange={(value: string) => setAttributes({ contentAlignment: value })}
+						label={ __( 'Content Alignment', 'theme-oh-my-brand' ) }
+						value={ contentAlignment }
+						options={ [
+							{
+								label: __( 'Left', 'theme-oh-my-brand' ),
+								value: 'left',
+							},
+							{
+								label: __( 'Center', 'theme-oh-my-brand' ),
+								value: 'center',
+							},
+							{
+								label: __( 'Right', 'theme-oh-my-brand' ),
+								value: 'right',
+							},
+						] }
+						onChange={ ( value: string ) =>
+							setAttributes( { contentAlignment: value } )
+						}
 					/>
 
 					<SelectControl
-						label={__('Vertical Alignment', 'theme-oh-my-brand')}
-						value={verticalAlignment}
-						options={[
-							{ label: __('Top', 'theme-oh-my-brand'), value: 'top' },
-							{ label: __('Center', 'theme-oh-my-brand'), value: 'center' },
-							{ label: __('Bottom', 'theme-oh-my-brand'), value: 'bottom' }
-						]}
-						onChange={(value: string) => setAttributes({ verticalAlignment: value })}
+						label={ __(
+							'Vertical Alignment',
+							'theme-oh-my-brand'
+						) }
+						value={ verticalAlignment }
+						options={ [
+							{
+								label: __( 'Top', 'theme-oh-my-brand' ),
+								value: 'top',
+							},
+							{
+								label: __( 'Center', 'theme-oh-my-brand' ),
+								value: 'center',
+							},
+							{
+								label: __( 'Bottom', 'theme-oh-my-brand' ),
+								value: 'bottom',
+							},
+						] }
+						onChange={ ( value: string ) =>
+							setAttributes( { verticalAlignment: value } )
+						}
 					/>
 
 					<SelectControl
-						label={__('Heading Level', 'theme-oh-my-brand')}
-						value={headingLevel}
-						options={[
+						label={ __( 'Heading Level', 'theme-oh-my-brand' ) }
+						value={ headingLevel }
+						options={ [
 							{ label: 'H1', value: 'h1' },
-							{ label: 'H2', value: 'h2' }
-						]}
-						onChange={(value: string) => setAttributes({ headingLevel: value })}
+							{ label: 'H2', value: 'h2' },
+						] }
+						onChange={ ( value: string ) =>
+							setAttributes( { headingLevel: value } )
+						}
 					/>
 				</PanelBody>
 
-				{/* Primary Button Settings */}
+				{ /* Primary Button Settings */ }
 				<ButtonSettingsPanel
-					title={__('Primary Button', 'theme-oh-my-brand')}
-					button={primaryButton || { text: '', url: '', openInNewTab: false }}
-					onChange={(button: BlockButton) => setAttributes({ primaryButton: button })}
+					title={ __( 'Primary Button', 'theme-oh-my-brand' ) }
+					button={
+						primaryButton || {
+							text: '',
+							url: '',
+							openInNewTab: false,
+						}
+					}
+					onChange={ ( button: BlockButton ) =>
+						setAttributes( { primaryButton: button } )
+					}
 				/>
 
-				{/* Secondary Button Settings */}
+				{ /* Secondary Button Settings */ }
 				<ButtonSettingsPanel
-					title={__('Secondary Button', 'theme-oh-my-brand')}
-					button={secondaryButton || { text: '', url: '', openInNewTab: false }}
-					onChange={(button: BlockButton) => setAttributes({ secondaryButton: button })}
+					title={ __( 'Secondary Button', 'theme-oh-my-brand' ) }
+					button={
+						secondaryButton || {
+							text: '',
+							url: '',
+							openInNewTab: false,
+						}
+					}
+					onChange={ ( button: BlockButton ) =>
+						setAttributes( { secondaryButton: button } )
+					}
 				/>
 			</InspectorControls>
 
-			<div {...blockProps}>
-				{/* Background */}
-				{backgroundType === 'image' && backgroundImage?.url && (
+			<div { ...blockProps }>
+				{ /* Background */ }
+				{ backgroundType === 'image' && backgroundImage?.url && (
 					<div className="wp-block-theme-oh-my-brand-hero__background">
-						<img src={backgroundImage.url} alt="" />
+						<img src={ backgroundImage.url } alt="" />
 					</div>
-				)}
-				{backgroundType === 'video' && backgroundVideo && (
+				) }
+				{ backgroundType === 'video' && backgroundVideo && (
 					<div className="wp-block-theme-oh-my-brand-hero__background">
-						<video src={backgroundVideo} muted loop playsInline />
+						<video src={ backgroundVideo } muted loop playsInline />
 					</div>
-				)}
+				) }
 
-				{/* Overlay */}
+				{ /* Overlay */ }
 				<div
 					className="wp-block-theme-oh-my-brand-hero__overlay"
-					style={{ backgroundColor: overlayColor, opacity: overlayOpacity / 100 }}
+					style={ {
+						backgroundColor: overlayColor,
+						opacity: overlayOpacity / 100,
+					} }
 				/>
 
-				{/* Content */}
+				{ /* Content */ }
 				<div className="wp-block-theme-oh-my-brand-hero__content">
-					{!heading && !subheading && !content ? (
+					{ ! heading && ! subheading && ! content ? (
 						<Placeholder
-							icon={heroIcon}
-							label={__('Hero Section', 'theme-oh-my-brand')}
-							instructions={__(
+							icon={ heroIcon }
+							label={ __( 'Hero Section', 'theme-oh-my-brand' ) }
+							instructions={ __(
 								'Add a heading, subheading, and content for your hero section.',
 								'theme-oh-my-brand'
-							)}
+							) }
 						/>
-					) : null}
+					) : null }
 
 					<header className="wp-block-theme-oh-my-brand-hero__header">
 						<RichText
-							tagName={headingLevel as 'h1' | 'h2'}
+							tagName={ headingLevel as 'h1' | 'h2' }
 							className="wp-block-theme-oh-my-brand-hero__heading"
-							placeholder={__('Add heading…', 'theme-oh-my-brand')}
-							value={heading}
-							onChange={(value: string) => setAttributes({ heading: value })}
+							placeholder={ __(
+								'Add heading…',
+								'theme-oh-my-brand'
+							) }
+							value={ heading }
+							onChange={ ( value: string ) =>
+								setAttributes( { heading: value } )
+							}
 						/>
 
 						<RichText
 							tagName="p"
 							className="wp-block-theme-oh-my-brand-hero__subheading"
-							placeholder={__('Add subheading…', 'theme-oh-my-brand')}
-							value={subheading}
-							onChange={(value: string) => setAttributes({ subheading: value })}
+							placeholder={ __(
+								'Add subheading…',
+								'theme-oh-my-brand'
+							) }
+							value={ subheading }
+							onChange={ ( value: string ) =>
+								setAttributes( { subheading: value } )
+							}
 						/>
 					</header>
 
 					<RichText
 						tagName="p"
 						className="wp-block-theme-oh-my-brand-hero__text"
-						placeholder={__('Add content…', 'theme-oh-my-brand')}
-						value={content}
-						onChange={(value: string) => setAttributes({ content: value })}
+						placeholder={ __(
+							'Add content…',
+							'theme-oh-my-brand'
+						) }
+						value={ content }
+						onChange={ ( value: string ) =>
+							setAttributes( { content: value } )
+						}
 					/>
 
-					{/* Buttons Preview */}
-					{(primaryButton?.text || secondaryButton?.text) && (
+					{ /* Buttons Preview */ }
+					{ ( primaryButton?.text || secondaryButton?.text ) && (
 						<nav className="wp-block-theme-oh-my-brand-hero__buttons">
-							{primaryButton?.text && (
+							{ primaryButton?.text && (
 								<span className="wp-block-theme-oh-my-brand-hero__button wp-block-theme-oh-my-brand-hero__button--primary">
-									{primaryButton.text}
+									{ primaryButton.text }
 								</span>
-							)}
-							{secondaryButton?.text && (
+							) }
+							{ secondaryButton?.text && (
 								<span className="wp-block-theme-oh-my-brand-hero__button wp-block-theme-oh-my-brand-hero__button--secondary">
-									{secondaryButton.text}
+									{ secondaryButton.text }
 								</span>
-							)}
+							) }
 						</nav>
-					)}
+					) }
 				</div>
 			</div>
 		</>

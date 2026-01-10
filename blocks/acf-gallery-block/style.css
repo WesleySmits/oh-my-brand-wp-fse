@@ -21,7 +21,10 @@
 	scroll-padding: 0;
 
 	--item-width: calc(100% / var(--visible-images));
-	--gap-offset: calc((var(--acf-gallery-gap) * (var(--visible-images) - 1)) / var(--visible-images));
+	--gap-offset: calc(
+		(var(--acf-gallery-gap) * (var(--visible-images) - 1)) /
+			var(--visible-images)
+	);
 	--gallery-item-width: calc(var(--item-width) - var(--gap-offset));
 }
 

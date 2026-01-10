@@ -1,9 +1,9 @@
 @layer base, layout, typography, components, utilities;
 
-@import url('./base.css');
-@import url('./layout.css') layer(layout);
-@import url('./typography.css') layer(typography);
-@import url('./buttons.css') layer(components);
-@import url('./components.css') layer(components);
-@import url('./media.css') layer(utilities);
-@import url('./utils.css') layer(utilities);
+@import url("./base.css");
+@import url("./layout.css") layer(layout);
+@import url("./typography.css") layer(typography);
+@import url("./buttons.css") layer(components);
+@import url("./components.css") layer(components);
+@import url("./media.css") layer(utilities);
+@import url("./utils.css") layer(utilities);

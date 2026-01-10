@@ -7,7 +7,12 @@
  */
 
 import { __ } from '@wordpress/i18n';
-import { PanelBody, TextControl, ToggleControl, SelectControl } from '@wordpress/components';
+import {
+	PanelBody,
+	TextControl,
+	ToggleControl,
+	SelectControl,
+} from '@wordpress/components';
 
 /**
  * Button object interface.
@@ -29,11 +34,11 @@ type ButtonVariant = 'primary' | 'secondary';
 interface ButtonSettingsPanelProps {
 	title: string;
 	button: BlockButton;
-	onChange: (button: BlockButton) => void;
+	onChange: ( button: BlockButton ) => void;
 	initialOpen?: boolean;
 	showVariant?: boolean;
 	variant?: ButtonVariant;
-	onVariantChange?: (variant: ButtonVariant) => void;
+	onVariantChange?: ( variant: ButtonVariant ) => void;
 }
 
 /**
@@ -48,57 +53,68 @@ interface ButtonSettingsPanelProps {
  * @param props.variant         - Current variant value
  * @param props.onVariantChange - Callback for variant changes
  */
-export function ButtonSettingsPanel({
+export function ButtonSettingsPanel( {
 	title,
 	button,
 	onChange,
 	initialOpen = false,
 	showVariant = false,
 	variant = 'primary',
-	onVariantChange
-}: ButtonSettingsPanelProps): JSX.Element {
+	onVariantChange,
+}: ButtonSettingsPanelProps ): JSX.Element {
 	/**
 	 * Update a single button property.
 	 *
 	 * @param key   - Property name to update
 	 * @param value - New value
 	 */
-	const updateButton = (key: keyof BlockButton, value: string | boolean): void => {
-		onChange({
+	const updateButton = (
+		key: keyof BlockButton,
+		value: string | boolean
+	): void => {
+		onChange( {
 			...button,
-			[key]: value
-		});
+			[ key ]: value,
+		} );
 	};
 
 	return (
-		<PanelBody title={title} initialOpen={initialOpen}>
+		<PanelBody title={ title } initialOpen={ initialOpen }>
 			<TextControl
-				label={__('Button Text', 'theme-oh-my-brand')}
-				value={button?.text || ''}
-				onChange={(value: string) => updateButton('text', value)}
+				label={ __( 'Button Text', 'theme-oh-my-brand' ) }
+				value={ button?.text || '' }
+				onChange={ ( value: string ) => updateButton( 'text', value ) }
 			/>
 			<TextControl
-				label={__('Button URL', 'theme-oh-my-brand')}
-				value={button?.url || ''}
-				onChange={(value: string) => updateButton('url', value)}
+				label={ __( 'Button URL', 'theme-oh-my-brand' ) }
+				value={ button?.url || '' }
+				onChange={ ( value: string ) => updateButton( 'url', value ) }
 				type="url"
 			/>
 			<ToggleControl
-				label={__('Open in new tab', 'theme-oh-my-brand')}
-				checked={button?.openInNewTab || false}
-				onChange={(value: boolean) => updateButton('openInNewTab', value)}
+				label={ __( 'Open in new tab', 'theme-oh-my-brand' ) }
+				checked={ button?.openInNewTab || false }
+				onChange={ ( value: boolean ) =>
+					updateButton( 'openInNewTab', value )
+				}
 			/>
-			{showVariant && onVariantChange && (
-				<SelectControl<ButtonVariant>
-					label={__('Button Style', 'theme-oh-my-brand')}
-					value={variant}
-					options={[
-						{ label: __('Primary', 'theme-oh-my-brand'), value: 'primary' },
-						{ label: __('Secondary', 'theme-oh-my-brand'), value: 'secondary' }
-					]}
-					onChange={(value) => onVariantChange(value)}
+			{ showVariant && onVariantChange && (
+				<SelectControl< ButtonVariant >
+					label={ __( 'Button Style', 'theme-oh-my-brand' ) }
+					value={ variant }
+					options={ [
+						{
+							label: __( 'Primary', 'theme-oh-my-brand' ),
+							value: 'primary',
+						},
+						{
+							label: __( 'Secondary', 'theme-oh-my-brand' ),
+							value: 'secondary',
+						},
+					] }
+					onChange={ ( value ) => onVariantChange( value ) }
 				/>
-			)}
+			) }
 		</PanelBody>
 	);
 }

@@ -21,28 +21,28 @@ export default defineConfig( {
 		baseURL: process.env.WP_BASE_URL || 'http://demo-site.local',
 		trace: 'on-first-retry',
 		screenshot: 'only-on-failure',
-		video: 'retain-on-failure'
+		video: 'retain-on-failure',
 	},
 
 	projects: [
 		{
 			name: 'chromium',
-			use: { ...devices[ 'Desktop Chrome' ] }
+			use: { ...devices[ 'Desktop Chrome' ] },
 		},
 		{
 			name: 'webkit',
-			use: { ...devices[ 'Desktop Safari' ] }
+			use: { ...devices[ 'Desktop Safari' ] },
 		},
 		// Mobile viewports
 		{
 			name: 'mobile-chrome',
-			use: { ...devices[ 'Pixel 5' ] }
+			use: { ...devices[ 'Pixel 5' ] },
 		},
 		{
 			name: 'mobile-safari',
-			use: { ...devices[ 'iPhone 12' ] }
-		}
-	]
+			use: { ...devices[ 'iPhone 12' ] },
+		},
+	],
 
 	// Web server configuration (optional - for CI with wp-env)
 	// Uncomment if using wp-env locally

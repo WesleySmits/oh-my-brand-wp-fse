@@ -59,7 +59,8 @@
 	height: 1rem;
 }
 
-.wp-block-theme-oh-my-brand-gallery__item:hover .wp-block-theme-oh-my-brand-gallery__remove {
+.wp-block-theme-oh-my-brand-gallery__item:hover
+	.wp-block-theme-oh-my-brand-gallery__remove {
 	opacity: 100%;
 }
 

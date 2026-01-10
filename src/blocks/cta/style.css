@@ -42,17 +42,20 @@
 }
 
 /* Alignment variants */
-.wp-block-theme-oh-my-brand-cta--align-left .wp-block-theme-oh-my-brand-cta__content {
+.wp-block-theme-oh-my-brand-cta--align-left
+	.wp-block-theme-oh-my-brand-cta__content {
 	align-items: flex-start;
 	text-align: left;
 }
 
-.wp-block-theme-oh-my-brand-cta--align-center .wp-block-theme-oh-my-brand-cta__content {
+.wp-block-theme-oh-my-brand-cta--align-center
+	.wp-block-theme-oh-my-brand-cta__content {
 	align-items: center;
 	text-align: center;
 }
 
-.wp-block-theme-oh-my-brand-cta--align-right .wp-block-theme-oh-my-brand-cta__content {
+.wp-block-theme-oh-my-brand-cta--align-right
+	.wp-block-theme-oh-my-brand-cta__content {
 	align-items: flex-end;
 	text-align: right;
 }
@@ -90,12 +93,14 @@
 }
 
 /* Center buttons for center alignment */
-.wp-block-theme-oh-my-brand-cta--align-center .wp-block-theme-oh-my-brand-cta__buttons {
+.wp-block-theme-oh-my-brand-cta--align-center
+	.wp-block-theme-oh-my-brand-cta__buttons {
 	justify-content: center;
 }
 
 /* Right-align buttons for right alignment */
-.wp-block-theme-oh-my-brand-cta--align-right .wp-block-theme-oh-my-brand-cta__buttons {
+.wp-block-theme-oh-my-brand-cta--align-right
+	.wp-block-theme-oh-my-brand-cta__buttons {
 	justify-content: flex-end;
 }
 

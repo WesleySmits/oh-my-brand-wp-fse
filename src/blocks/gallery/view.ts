@@ -24,7 +24,7 @@ import '../utils/lightbox.css';
  */
 class OmbGalleryCarousel extends HTMLElement {
 	/** Observed attributes for attributeChangedCallback */
-	static observedAttributes = ['visible-images', 'lightbox'];
+	static observedAttributes = [ 'visible-images', 'lightbox' ];
 
 	/** Gallery container element */
 	#gallery: HTMLElement | null = null;
@@ -39,7 +39,7 @@ class OmbGalleryCarousel extends HTMLElement {
 	#liveRegion: HTMLElement | null = null;
 
 	/** Gallery item elements */
-	#items: NodeListOf<HTMLElement> | null = null;
+	#items: NodeListOf< HTMLElement > | null = null;
 
 	/** Number of visible images */
 	#visibleImages = 3;
@@ -48,7 +48,7 @@ class OmbGalleryCarousel extends HTMLElement {
 	#lightboxEnabled = true;
 
 	/** Debounced update function */
-	#debouncedUpdate: (() => void) | null = null;
+	#debouncedUpdate: ( () => void ) | null = null;
 
 	/** Current scroll index */
 	#currentIndex = 0;
@@ -61,24 +61,27 @@ class OmbGalleryCarousel extends HTMLElement {
 	 */
 	connectedCallback(): void {
 		// Read attributes
-		const visibleAttr = this.getAttribute('visible-images');
-		this.#visibleImages = visibleAttr ? parseInt(visibleAttr, 10) : 3;
+		const visibleAttr = this.getAttribute( 'visible-images' );
+		this.#visibleImages = visibleAttr ? parseInt( visibleAttr, 10 ) : 3;
 
-		const lightboxAttr = this.getAttribute('lightbox');
+		const lightboxAttr = this.getAttribute( 'lightbox' );
 		this.#lightboxEnabled = lightboxAttr !== 'false';
 
 		// Query child elements
-		this.#gallery = this.querySelector('[data-gallery]');
-		this.#prevButton = this.querySelector('[data-gallery-previous]');
-		this.#nextButton = this.querySelector('[data-gallery-next]');
-		this.#liveRegion = this.querySelector('[data-gallery-live]');
-		this.#items = this.querySelectorAll('[data-gallery-item]');
+		this.#gallery = this.querySelector( '[data-gallery]' );
+		this.#prevButton = this.querySelector( '[data-gallery-previous]' );
+		this.#nextButton = this.querySelector( '[data-gallery-next]' );
+		this.#liveRegion = this.querySelector( '[data-gallery-live]' );
+		this.#items = this.querySelectorAll( '[data-gallery-item]' );
 
-		if (!this.#gallery || !this.#prevButton || !this.#nextButton) {
+		if ( ! this.#gallery || ! this.#prevButton || ! this.#nextButton ) {
 			return;
 		}
 
-		this.#debouncedUpdate = debounce(this.#updateArrows.bind(this), 100);
+		this.#debouncedUpdate = debounce(
+			this.#updateArrows.bind( this ),
+			100
+		);
 
 		this.#bindEvents();
 		this.#refresh();
@@ -91,14 +94,18 @@ class OmbGalleryCarousel extends HTMLElement {
 	 * @param oldValue
 	 * @param newValue
 	 */
-	attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-		if (oldValue === newValue) {
+	attributeChangedCallback(
+		name: string,
+		oldValue: string | null,
+		newValue: string | null
+	): void {
+		if ( oldValue === newValue ) {
 			return;
 		}
 
-		switch (name) {
+		switch ( name ) {
 			case 'visible-images':
-				this.#visibleImages = newValue ? parseInt(newValue, 10) : 3;
+				this.#visibleImages = newValue ? parseInt( newValue, 10 ) : 3;
 				this.#refresh();
 				break;
 			case 'lightbox':
@@ -111,22 +118,29 @@ class OmbGalleryCarousel extends HTMLElement {
 	 * Initialize lightbox for gallery images.
 	 */
 	#initLightbox(): void {
-		if (!this.#lightboxEnabled) {
+		if ( ! this.#lightboxEnabled ) {
 			return;
 		}
 
-		this.#lightbox = createLightboxFromElements('[data-gallery-item] img', this, {
-			closeLabel: 'Close gallery',
-			prevLabel: 'Previous image',
-			nextLabel: 'Next image'
-		});
+		this.#lightbox = createLightboxFromElements(
+			'[data-gallery-item] img',
+			this,
+			{
+				closeLabel: 'Close gallery',
+				prevLabel: 'Previous image',
+				nextLabel: 'Next image',
+			}
+		);
 	}
 
 	/**
 	 * Refresh gallery state.
 	 */
 	#refresh(): void {
-		this.#gallery?.style.setProperty('--visible-images', this.#visibleImages.toString());
+		this.#gallery?.style.setProperty(
+			'--visible-images',
+			this.#visibleImages.toString()
+		);
 		this.#updateArrows();
 	}
 
@@ -134,18 +148,26 @@ class OmbGalleryCarousel extends HTMLElement {
 	 * Update navigation arrows visibility.
 	 */
 	#updateArrows(): void {
-		if (!this.#gallery || !this.#prevButton || !this.#nextButton) {
+		if ( ! this.#gallery || ! this.#prevButton || ! this.#nextButton ) {
 			return;
 		}
 
 		const canScrollPrev = this.#gallery.scrollLeft > 0;
-		const canScrollNext = this.#gallery.scrollLeft + this.#gallery.clientWidth < this.#gallery.scrollWidth - 1;
+		const canScrollNext =
+			this.#gallery.scrollLeft + this.#gallery.clientWidth <
+			this.#gallery.scrollWidth - 1;
 
 		this.#prevButton.style.display = canScrollPrev ? 'block' : 'none';
-		this.#prevButton.setAttribute('aria-disabled', (!canScrollPrev).toString());
+		this.#prevButton.setAttribute(
+			'aria-disabled',
+			( ! canScrollPrev ).toString()
+		);
 
 		this.#nextButton.style.display = canScrollNext ? 'block' : 'none';
-		this.#nextButton.setAttribute('aria-disabled', (!canScrollNext).toString());
+		this.#nextButton.setAttribute(
+			'aria-disabled',
+			( ! canScrollNext ).toString()
+		);
 
 		this.#updateCurrentIndex();
 	}
@@ -154,14 +176,14 @@ class OmbGalleryCarousel extends HTMLElement {
 	 * Update current index based on scroll position.
 	 */
 	#updateCurrentIndex(): void {
-		if (!this.#gallery || !this.#items?.length) {
+		if ( ! this.#gallery || ! this.#items?.length ) {
 			return;
 		}
 
 		const itemWidth = this.#gallery.clientWidth / this.#visibleImages;
-		const newIndex = Math.round(this.#gallery.scrollLeft / itemWidth);
+		const newIndex = Math.round( this.#gallery.scrollLeft / itemWidth );
 
-		if (newIndex !== this.#currentIndex) {
+		if ( newIndex !== this.#currentIndex ) {
 			this.#currentIndex = newIndex;
 			this.#announcePosition();
 		}
@@ -171,13 +193,13 @@ class OmbGalleryCarousel extends HTMLElement {
 	 * Announce current position to screen readers.
 	 */
 	#announcePosition(): void {
-		if (!this.#liveRegion || !this.#items?.length) {
+		if ( ! this.#liveRegion || ! this.#items?.length ) {
 			return;
 		}
 
 		const totalItems = this.#items.length;
-		const currentItem = Math.min(this.#currentIndex + 1, totalItems);
-		const message = `Image ${currentItem} of ${totalItems}`;
+		const currentItem = Math.min( this.#currentIndex + 1, totalItems );
+		const message = `Image ${ currentItem } of ${ totalItems }`;
 
 		this.#liveRegion.textContent = message;
 	}
@@ -186,47 +208,47 @@ class OmbGalleryCarousel extends HTMLElement {
 	 * Bind event listeners.
 	 */
 	#bindEvents(): void {
-		this.#prevButton?.addEventListener('click', this.#handlePrevClick);
-		this.#nextButton?.addEventListener('click', this.#handleNextClick);
+		this.#prevButton?.addEventListener( 'click', this.#handlePrevClick );
+		this.#nextButton?.addEventListener( 'click', this.#handleNextClick );
 
-		if (this.#debouncedUpdate) {
-			this.#gallery?.addEventListener('scroll', this.#debouncedUpdate);
+		if ( this.#debouncedUpdate ) {
+			this.#gallery?.addEventListener( 'scroll', this.#debouncedUpdate );
 		}
 
 		// Keyboard navigation
-		this.addEventListener('keydown', this.#handleKeydown);
+		this.addEventListener( 'keydown', this.#handleKeydown );
 
 		// Initial arrow update after layout settles
-		setTimeout(() => this.#updateArrows(), 200);
+		setTimeout( () => this.#updateArrows(), 200 );
 	}
 
 	/**
 	 * Handle previous button click.
 	 */
 	#handlePrevClick = (): void => {
-		this.#scrollBy(-1);
+		this.#scrollBy( -1 );
 	};
 
 	/**
 	 * Handle next button click.
 	 */
 	#handleNextClick = (): void => {
-		this.#scrollBy(1);
+		this.#scrollBy( 1 );
 	};
 
 	/**
 	 * Handle keyboard navigation.
 	 * @param event
 	 */
-	#handleKeydown = (event: KeyboardEvent): void => {
-		switch (event.key) {
+	#handleKeydown = ( event: KeyboardEvent ): void => {
+		switch ( event.key ) {
 			case 'ArrowLeft':
 				event.preventDefault();
-				this.#scrollBy(-1);
+				this.#scrollBy( -1 );
 				break;
 			case 'ArrowRight':
 				event.preventDefault();
-				this.#scrollBy(1);
+				this.#scrollBy( 1 );
 				break;
 			case 'Home':
 				event.preventDefault();
@@ -243,20 +265,20 @@ class OmbGalleryCarousel extends HTMLElement {
 	 * Scroll to start of gallery.
 	 */
 	#scrollToStart(): void {
-		this.#gallery?.scrollTo({
+		this.#gallery?.scrollTo( {
 			left: 0,
-			behavior: 'smooth'
-		});
+			behavior: 'smooth',
+		} );
 	}
 
 	/**
 	 * Scroll to end of gallery.
 	 */
 	#scrollToEnd(): void {
-		this.#gallery?.scrollTo({
+		this.#gallery?.scrollTo( {
 			left: this.#gallery.scrollWidth,
-			behavior: 'smooth'
-		});
+			behavior: 'smooth',
+		} );
 	}
 
 	/**
@@ -264,28 +286,31 @@ class OmbGalleryCarousel extends HTMLElement {
 	 *
 	 * @param direction Scroll direction (-1 or 1).
 	 */
-	#scrollBy(direction: number): void {
-		if (!this.#gallery) {
+	#scrollBy( direction: number ): void {
+		if ( ! this.#gallery ) {
 			return;
 		}
 
 		const amount = this.#gallery.clientWidth / this.#visibleImages;
-		this.#gallery.scrollBy({
+		this.#gallery.scrollBy( {
 			left: amount * direction,
-			behavior: 'smooth'
-		});
+			behavior: 'smooth',
+		} );
 	}
 
 	/**
 	 * Clean up when element is removed.
 	 */
 	disconnectedCallback(): void {
-		this.#prevButton?.removeEventListener('click', this.#handlePrevClick);
-		this.#nextButton?.removeEventListener('click', this.#handleNextClick);
-		this.removeEventListener('keydown', this.#handleKeydown);
+		this.#prevButton?.removeEventListener( 'click', this.#handlePrevClick );
+		this.#nextButton?.removeEventListener( 'click', this.#handleNextClick );
+		this.removeEventListener( 'keydown', this.#handleKeydown );
 
-		if (this.#debouncedUpdate) {
-			this.#gallery?.removeEventListener('scroll', this.#debouncedUpdate);
+		if ( this.#debouncedUpdate ) {
+			this.#gallery?.removeEventListener(
+				'scroll',
+				this.#debouncedUpdate
+			);
 		}
 
 		// Clean up lightbox
@@ -295,8 +320,8 @@ class OmbGalleryCarousel extends HTMLElement {
 }
 
 // Register the custom element
-if (!customElements.get('omb-gallery-carousel')) {
-	customElements.define('omb-gallery-carousel', OmbGalleryCarousel);
+if ( ! customElements.get( 'omb-gallery-carousel' ) ) {
+	customElements.define( 'omb-gallery-carousel', OmbGalleryCarousel );
 }
 
 // Export for testing

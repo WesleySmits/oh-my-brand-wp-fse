@@ -261,37 +261,37 @@
    Platform-specific Colors (optional, for branded styling)
    ========================================================================== */
 
-.social-share--branded .social-share__button[data-platform='facebook']:hover {
+.social-share--branded .social-share__button[data-platform="facebook"]:hover {
 	--social-share-hover-bg: #1877f2;
 	color: #fff;
 }
 
-.social-share--branded .social-share__button[data-platform='x']:hover {
+.social-share--branded .social-share__button[data-platform="x"]:hover {
 	--social-share-hover-bg: #000;
 	color: #fff;
 }
 
-.social-share--branded .social-share__button[data-platform='linkedin']:hover {
+.social-share--branded .social-share__button[data-platform="linkedin"]:hover {
 	--social-share-hover-bg: #0a66c2;
 	color: #fff;
 }
 
-.social-share--branded .social-share__button[data-platform='pinterest']:hover {
+.social-share--branded .social-share__button[data-platform="pinterest"]:hover {
 	--social-share-hover-bg: #e60023;
 	color: #fff;
 }
 
-.social-share--branded .social-share__button[data-platform='whatsapp']:hover {
+.social-share--branded .social-share__button[data-platform="whatsapp"]:hover {
 	--social-share-hover-bg: #25d366;
 	color: #fff;
 }
 
-.social-share--branded .social-share__button[data-platform='email']:hover {
+.social-share--branded .social-share__button[data-platform="email"]:hover {
 	--social-share-hover-bg: #666;
 	color: #fff;
 }
 
-.social-share--branded .social-share__button[data-platform='copy']:hover {
+.social-share--branded .social-share__button[data-platform="copy"]:hover {
 	--social-share-hover-bg: #333;
 	color: #fff;
 }

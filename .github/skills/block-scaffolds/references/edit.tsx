@@ -19,20 +19,26 @@ interface BlockAttributes {
 /**
  * Edit component.
  */
-export default function Edit({ attributes, setAttributes }: BlockEditProps<BlockAttributes>): JSX.Element {
-	const blockProps = useBlockProps({
-		className: 'wp-block-theme-oh-my-brand-BLOCK_NAME'
-	});
+export default function Edit( {
+	attributes,
+	setAttributes,
+}: BlockEditProps< BlockAttributes > ): JSX.Element {
+	const blockProps = useBlockProps( {
+		className: 'wp-block-theme-oh-my-brand-BLOCK_NAME',
+	} );
 
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={__('Settings', 'theme-oh-my-brand')} initialOpen={true}>
-					{/* Controls */}
+				<PanelBody
+					title={ __( 'Settings', 'theme-oh-my-brand' ) }
+					initialOpen={ true }
+				>
+					{ /* Controls */ }
 				</PanelBody>
 			</InspectorControls>
 
-			<div {...blockProps}>{/* Block content */}</div>
+			<div { ...blockProps }>{ /* Block content */ }</div>
 		</>
 	);
 }

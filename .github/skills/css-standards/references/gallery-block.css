@@ -40,7 +40,8 @@
 .wp-block-theme-oh-my-brand-gallery__track {
 	display: flex;
 	gap: var(--gallery-gap);
-	transition: transform var(--gallery-transition-duration) var(--gallery-transition-timing);
+	transition: transform var(--gallery-transition-duration)
+		var(--gallery-transition-timing);
 }
 
 .wp-block-theme-oh-my-brand-gallery__slide {

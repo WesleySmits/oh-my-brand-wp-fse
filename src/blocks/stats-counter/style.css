@@ -13,7 +13,7 @@
    ========================================================================== */
 
 @property --counter-value {
-	syntax: '<integer>';
+	syntax: "<integer>";
 	initial-value: 0;
 	inherits: false;
 }
@@ -32,7 +32,11 @@
 	--stats-gap: clamp(1.5rem, 4cqi, 2.5rem);
 
 	/* Smart grid: min-width calculated from columns preference */
-	--stats-min-width: clamp(150px, calc(100% / var(--stats-columns) - var(--stats-gap)), 300px);
+	--stats-min-width: clamp(
+		150px,
+		calc(100% / var(--stats-columns) - var(--stats-gap)),
+		300px
+	);
 
 	/* Typography - fluid with clamp() using container query units */
 	--stats-heading-size: clamp(1.5rem, 4cqi, 2.25rem);
@@ -71,11 +75,13 @@
 	text-align: inherit;
 }
 
-.wp-block-theme-oh-my-brand-stats-counter--align-center .wp-block-theme-oh-my-brand-stats-counter__header {
+.wp-block-theme-oh-my-brand-stats-counter--align-center
+	.wp-block-theme-oh-my-brand-stats-counter__header {
 	text-align: center;
 }
 
-.wp-block-theme-oh-my-brand-stats-counter--align-right .wp-block-theme-oh-my-brand-stats-counter__header {
+.wp-block-theme-oh-my-brand-stats-counter--align-right
+	.wp-block-theme-oh-my-brand-stats-counter__header {
 	text-align: right;
 }
 
@@ -93,7 +99,8 @@
 	max-width: 65ch;
 }
 
-.wp-block-theme-oh-my-brand-stats-counter--align-center .wp-block-theme-oh-my-brand-stats-counter__description {
+.wp-block-theme-oh-my-brand-stats-counter--align-center
+	.wp-block-theme-oh-my-brand-stats-counter__description {
 	margin-inline: auto;
 }
 
@@ -103,7 +110,10 @@
 
 .wp-block-theme-oh-my-brand-stats-counter__list {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(var(--stats-min-width), 1fr));
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(var(--stats-min-width), 1fr)
+	);
 	gap: var(--stats-gap);
 	margin: 0;
 	padding: 0;
@@ -122,12 +132,14 @@
 	gap: 0.5rem;
 }
 
-.wp-block-theme-oh-my-brand-stats-counter--align-left .wp-block-theme-oh-my-brand-stats-counter__item {
+.wp-block-theme-oh-my-brand-stats-counter--align-left
+	.wp-block-theme-oh-my-brand-stats-counter__item {
 	align-items: flex-start;
 	text-align: left;
 }
 
-.wp-block-theme-oh-my-brand-stats-counter--align-right .wp-block-theme-oh-my-brand-stats-counter__item {
+.wp-block-theme-oh-my-brand-stats-counter--align-right
+	.wp-block-theme-oh-my-brand-stats-counter__item {
 	align-items: flex-end;
 	text-align: right;
 }
@@ -177,7 +189,8 @@
    ========================================================================== */
 
 /* Boxed Style */
-.wp-block-theme-oh-my-brand-stats-counter--style-boxed .wp-block-theme-oh-my-brand-stats-counter__item {
+.wp-block-theme-oh-my-brand-stats-counter--style-boxed
+	.wp-block-theme-oh-my-brand-stats-counter__item {
 	background: var(--wp--preset--color--base, #fff);
 	padding: var(--stats-padding);
 	border-radius: var(--stats-border-radius);
@@ -187,25 +200,29 @@
 		transform var(--stats-transition);
 }
 
-.wp-block-theme-oh-my-brand-stats-counter--style-boxed .wp-block-theme-oh-my-brand-stats-counter__item:hover {
+.wp-block-theme-oh-my-brand-stats-counter--style-boxed
+	.wp-block-theme-oh-my-brand-stats-counter__item:hover {
 	box-shadow: var(--stats-shadow-hover);
 	transform: translateY(-2px);
 }
 
 /* Bordered Style */
-.wp-block-theme-oh-my-brand-stats-counter--style-bordered .wp-block-theme-oh-my-brand-stats-counter__item {
+.wp-block-theme-oh-my-brand-stats-counter--style-bordered
+	.wp-block-theme-oh-my-brand-stats-counter__item {
 	padding: var(--stats-padding);
 	border: 2px solid var(--wp--preset--color--contrast-2, #e0e0e0);
 	border-radius: var(--stats-border-radius);
 	transition: border-color var(--stats-transition);
 }
 
-.wp-block-theme-oh-my-brand-stats-counter--style-bordered .wp-block-theme-oh-my-brand-stats-counter__item:hover {
+.wp-block-theme-oh-my-brand-stats-counter--style-bordered
+	.wp-block-theme-oh-my-brand-stats-counter__item:hover {
 	border-color: var(--wp--preset--color--primary, #06c);
 }
 
 /* Minimal Style - hide icons */
-.wp-block-theme-oh-my-brand-stats-counter--style-minimal .wp-block-theme-oh-my-brand-stats-counter__icon {
+.wp-block-theme-oh-my-brand-stats-counter--style-minimal
+	.wp-block-theme-oh-my-brand-stats-counter__icon {
 	display: none;
 }
 

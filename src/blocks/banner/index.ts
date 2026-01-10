@@ -16,8 +16,8 @@ import './editor.css';
 /**
  * Register the Banner block.
  */
-registerBlockType(metadata.name, {
+registerBlockType( metadata.name, {
 	...metadata,
 	icon: bannerIcon,
-	edit: Edit
-});
+	edit: Edit,
+} );

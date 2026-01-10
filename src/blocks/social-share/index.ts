@@ -25,7 +25,10 @@ interface SocialShareAttributes {
 	alignment: 'left' | 'center' | 'right';
 }
 
-registerBlockType<SocialShareAttributes>(metadata as unknown as BlockConfiguration<SocialShareAttributes>, {
-	icon: shareIcon,
-	edit: Edit
-});
+registerBlockType< SocialShareAttributes >(
+	metadata as unknown as BlockConfiguration< SocialShareAttributes >,
+	{
+		icon: shareIcon,
+		edit: Edit,
+	}
+);

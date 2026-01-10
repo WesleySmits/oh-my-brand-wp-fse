@@ -78,8 +78,10 @@
 	fill: #fff;
 }
 
-.wp-block-theme-oh-my-brand-logo-grid__item:hover .wp-block-theme-oh-my-brand-logo-grid__remove,
-.wp-block-theme-oh-my-brand-logo-grid__item:focus-within .wp-block-theme-oh-my-brand-logo-grid__remove {
+.wp-block-theme-oh-my-brand-logo-grid__item:hover
+	.wp-block-theme-oh-my-brand-logo-grid__remove,
+.wp-block-theme-oh-my-brand-logo-grid__item:focus-within
+	.wp-block-theme-oh-my-brand-logo-grid__remove {
 	opacity: 100%;
 }
 

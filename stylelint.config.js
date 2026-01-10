@@ -16,16 +16,23 @@ export default {
 		'at-rule-no-unknown': [
 			true,
 			{
-				ignoreAtRules: [ 'layer', 'tailwind', 'apply', 'variants', 'responsive', 'screen' ]
-			}
+				ignoreAtRules: [
+					'layer',
+					'tailwind',
+					'apply',
+					'variants',
+					'responsive',
+					'screen',
+				],
+			},
 		],
 
 		// Allow newer pseudo-classes (scroll markers, etc.)
 		'selector-pseudo-class-no-unknown': [
 			true,
 			{
-				ignorePseudoClasses: [ 'target-current' ]
-			}
+				ignorePseudoClasses: [ 'target-current' ],
+			},
 		],
 
 		// Allow empty blocks (useful for placeholders)
@@ -46,7 +53,13 @@ export default {
 
 		// Allow vendor prefixes (autoprefixer handles this, but allow manual ones)
 		'property-no-vendor-prefix': null,
-		'value-no-vendor-prefix': null
+		'value-no-vendor-prefix': null,
 	},
-	ignoreFiles: [ 'node_modules/**', 'vendor/**', 'assets/js/**', 'coverage/**', '**/*.min.css' ]
+	ignoreFiles: [
+		'node_modules/**',
+		'vendor/**',
+		'assets/js/**',
+		'coverage/**',
+		'**/*.min.css',
+	],
 };

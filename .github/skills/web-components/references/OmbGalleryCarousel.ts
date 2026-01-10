@@ -14,13 +14,13 @@
 
 class OmbGalleryCarousel extends HTMLElement {
 	/** Observed attributes for attributeChangedCallback */
-	static observedAttributes = ['visible-images'];
+	static observedAttributes = [ 'visible-images' ];
 
 	/** Gallery container */
 	#gallery: HTMLElement | null = null;
 
 	/** Gallery items */
-	#items: NodeListOf<HTMLElement> | null = null;
+	#items: NodeListOf< HTMLElement > | null = null;
 
 	/** Previous button */
 	#prevButton: HTMLButtonElement | null = null;
@@ -57,14 +57,18 @@ class OmbGalleryCarousel extends HTMLElement {
 	/**
 	 * Called when observed attribute changes.
 	 */
-	attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-		if (oldValue === newValue) {
+	attributeChangedCallback(
+		name: string,
+		oldValue: string | null,
+		newValue: string | null
+	): void {
+		if ( oldValue === newValue ) {
 			return;
 		}
 
-		switch (name) {
+		switch ( name ) {
 			case 'visible-images':
-				this.#visibleImages = newValue ? parseInt(newValue, 10) : 3;
+				this.#visibleImages = newValue ? parseInt( newValue, 10 ) : 3;
 				this.#updateStyles();
 				break;
 		}
@@ -74,19 +78,19 @@ class OmbGalleryCarousel extends HTMLElement {
 	 * Read initial attributes.
 	 */
 	#readAttributes(): void {
-		const visibleAttr = this.getAttribute('visible-images');
-		this.#visibleImages = visibleAttr ? parseInt(visibleAttr, 10) : 3;
+		const visibleAttr = this.getAttribute( 'visible-images' );
+		this.#visibleImages = visibleAttr ? parseInt( visibleAttr, 10 ) : 3;
 	}
 
 	/**
 	 * Query child elements.
 	 */
 	#queryElements(): void {
-		this.#gallery = this.querySelector('[data-gallery]');
-		this.#items = this.querySelectorAll('[data-gallery-item]');
-		this.#prevButton = this.querySelector('[data-gallery-previous]');
-		this.#nextButton = this.querySelector('[data-gallery-next]');
-		this.#liveRegion = this.querySelector('[data-gallery-live]');
+		this.#gallery = this.querySelector( '[data-gallery]' );
+		this.#items = this.querySelectorAll( '[data-gallery-item]' );
+		this.#prevButton = this.querySelector( '[data-gallery-previous]' );
+		this.#nextButton = this.querySelector( '[data-gallery-next]' );
+		this.#liveRegion = this.querySelector( '[data-gallery-live]' );
 	}
 
 	/**
@@ -101,53 +105,56 @@ class OmbGalleryCarousel extends HTMLElement {
 	 * Update CSS custom properties.
 	 */
 	#updateStyles(): void {
-		this.style.setProperty('--visible-images', this.#visibleImages.toString());
+		this.style.setProperty(
+			'--visible-images',
+			this.#visibleImages.toString()
+		);
 	}
 
 	/**
 	 * Bind event listeners.
 	 */
 	#bindEvents(): void {
-		this.#prevButton?.addEventListener('click', this.#handlePrevClick);
-		this.#nextButton?.addEventListener('click', this.#handleNextClick);
-		this.addEventListener('keydown', this.#handleKeydown);
+		this.#prevButton?.addEventListener( 'click', this.#handlePrevClick );
+		this.#nextButton?.addEventListener( 'click', this.#handleNextClick );
+		this.addEventListener( 'keydown', this.#handleKeydown );
 	}
 
 	/**
 	 * Unbind event listeners.
 	 */
 	#unbindEvents(): void {
-		this.#prevButton?.removeEventListener('click', this.#handlePrevClick);
-		this.#nextButton?.removeEventListener('click', this.#handleNextClick);
-		this.removeEventListener('keydown', this.#handleKeydown);
+		this.#prevButton?.removeEventListener( 'click', this.#handlePrevClick );
+		this.#nextButton?.removeEventListener( 'click', this.#handleNextClick );
+		this.removeEventListener( 'keydown', this.#handleKeydown );
 	}
 
 	/**
 	 * Handle previous button click.
 	 */
 	#handlePrevClick = (): void => {
-		this.#navigate(-1);
+		this.#navigate( -1 );
 	};
 
 	/**
 	 * Handle next button click.
 	 */
 	#handleNextClick = (): void => {
-		this.#navigate(1);
+		this.#navigate( 1 );
 	};
 
 	/**
 	 * Handle keyboard navigation.
 	 */
-	#handleKeydown = (event: KeyboardEvent): void => {
-		switch (event.key) {
+	#handleKeydown = ( event: KeyboardEvent ): void => {
+		switch ( event.key ) {
 			case 'ArrowLeft':
 				event.preventDefault();
-				this.#navigate(-1);
+				this.#navigate( -1 );
 				break;
 			case 'ArrowRight':
 				event.preventDefault();
-				this.#navigate(1);
+				this.#navigate( 1 );
 				break;
 		}
 	};
@@ -155,11 +162,17 @@ class OmbGalleryCarousel extends HTMLElement {
 	/**
 	 * Navigate by delta.
 	 */
-	#navigate(delta: number): void {
-		const maxIndex = Math.max(0, (this.#items?.length ?? 0) - this.#visibleImages);
-		const newIndex = Math.max(0, Math.min(this.#currentIndex + delta, maxIndex));
+	#navigate( delta: number ): void {
+		const maxIndex = Math.max(
+			0,
+			( this.#items?.length ?? 0 ) - this.#visibleImages
+		);
+		const newIndex = Math.max(
+			0,
+			Math.min( this.#currentIndex + delta, maxIndex )
+		);
 
-		if (newIndex === this.#currentIndex) {
+		if ( newIndex === this.#currentIndex ) {
 			return;
 		}
 
@@ -173,30 +186,33 @@ class OmbGalleryCarousel extends HTMLElement {
 	 * Scroll gallery to current index.
 	 */
 	#scrollToIndex(): void {
-		if (!this.#gallery || !this.#items?.length) {
+		if ( ! this.#gallery || ! this.#items?.length ) {
 			return;
 		}
 
-		const item = this.#items[this.#currentIndex];
-		if (!item) {
+		const item = this.#items[ this.#currentIndex ];
+		if ( ! item ) {
 			return;
 		}
 
 		const scrollLeft = item.offsetLeft;
-		this.#gallery.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+		this.#gallery.scrollTo( { left: scrollLeft, behavior: 'smooth' } );
 	}
 
 	/**
 	 * Update navigation button states.
 	 */
 	#updateButtonStates(): void {
-		const maxIndex = Math.max(0, (this.#items?.length ?? 0) - this.#visibleImages);
+		const maxIndex = Math.max(
+			0,
+			( this.#items?.length ?? 0 ) - this.#visibleImages
+		);
 
-		if (this.#prevButton) {
+		if ( this.#prevButton ) {
 			this.#prevButton.disabled = this.#currentIndex === 0;
 		}
 
-		if (this.#nextButton) {
+		if ( this.#nextButton ) {
 			this.#nextButton.disabled = this.#currentIndex >= maxIndex;
 		}
 	}
@@ -205,17 +221,17 @@ class OmbGalleryCarousel extends HTMLElement {
 	 * Announce current position to screen readers.
 	 */
 	#announce(): void {
-		if (!this.#liveRegion || !this.#items?.length) {
+		if ( ! this.#liveRegion || ! this.#items?.length ) {
 			return;
 		}
 
 		const current = this.#currentIndex + 1;
 		const total = this.#items.length;
-		this.#liveRegion.textContent = `Showing image ${current} of ${total}`;
+		this.#liveRegion.textContent = `Showing image ${ current } of ${ total }`;
 	}
 }
 
 // Register custom element
-if (!customElements.get('omb-gallery-carousel')) {
-	customElements.define('omb-gallery-carousel', OmbGalleryCarousel);
+if ( ! customElements.get( 'omb-gallery-carousel' ) ) {
+	customElements.define( 'omb-gallery-carousel', OmbGalleryCarousel );
 }

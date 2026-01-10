@@ -65,12 +65,14 @@
 }
 
 /* Alignment variations */
-.wp-block-theme-oh-my-brand-hero[style*='--hero-content-align: left'] .wp-block-theme-oh-my-brand-hero__content {
+.wp-block-theme-oh-my-brand-hero[style*="--hero-content-align: left"]
+	.wp-block-theme-oh-my-brand-hero__content {
 	text-align: left;
 	justify-self: start;
 }
 
-.wp-block-theme-oh-my-brand-hero[style*='--hero-content-align: right'] .wp-block-theme-oh-my-brand-hero__content {
+.wp-block-theme-oh-my-brand-hero[style*="--hero-content-align: right"]
+	.wp-block-theme-oh-my-brand-hero__content {
 	text-align: right;
 	justify-self: end;
 }
@@ -130,11 +132,13 @@
 	justify-content: center;
 }
 
-.wp-block-theme-oh-my-brand-hero[style*='--hero-content-align: left'] .wp-block-theme-oh-my-brand-hero__buttons {
+.wp-block-theme-oh-my-brand-hero[style*="--hero-content-align: left"]
+	.wp-block-theme-oh-my-brand-hero__buttons {
 	justify-content: flex-start;
 }
 
-.wp-block-theme-oh-my-brand-hero[style*='--hero-content-align: right'] .wp-block-theme-oh-my-brand-hero__buttons {
+.wp-block-theme-oh-my-brand-hero[style*="--hero-content-align: right"]
+	.wp-block-theme-oh-my-brand-hero__buttons {
 	justify-content: flex-end;
 }
 

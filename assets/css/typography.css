@@ -1,5 +1,5 @@
 @layer typography {
-    .wp-block-heading {
-        text-wrap: balance;
-    }
+	.wp-block-heading {
+		text-wrap: balance;
+	}
 }

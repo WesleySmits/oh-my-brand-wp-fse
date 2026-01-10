@@ -10,99 +10,99 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 // Mock Functions
 // ==========================================================================
 
-describe('Mock Functions', () => {
-	it('creates and configures mock functions', () => {
+describe( 'Mock Functions', () => {
+	it( 'creates and configures mock functions', () => {
 		// Create a mock function
 		const mockCallback = vi.fn();
 
 		// Configure return value
-		mockCallback.mockReturnValue('mocked value');
+		mockCallback.mockReturnValue( 'mocked value' );
 
-		expect(mockCallback()).toBe('mocked value');
-	});
+		expect( mockCallback() ).toBe( 'mocked value' );
+	} );
 
-	it('tracks call arguments', () => {
+	it( 'tracks call arguments', () => {
 		const mockCallback = vi.fn();
 
-		mockCallback('arg1', 'arg2');
+		mockCallback( 'arg1', 'arg2' );
 
-		expect(mockCallback).toHaveBeenCalled();
-		expect(mockCallback).toHaveBeenCalledTimes(1);
-		expect(mockCallback).toHaveBeenCalledWith('arg1', 'arg2');
-	});
+		expect( mockCallback ).toHaveBeenCalled();
+		expect( mockCallback ).toHaveBeenCalledTimes( 1 );
+		expect( mockCallback ).toHaveBeenCalledWith( 'arg1', 'arg2' );
+	} );
 
-	it('mocks async functions', async () => {
+	it( 'mocks async functions', async () => {
 		const mockAsync = vi.fn();
 
-		mockAsync.mockResolvedValue({ data: [] });
+		mockAsync.mockResolvedValue( { data: [] } );
 
 		const result = await mockAsync();
-		expect(result).toEqual({ data: [] });
-	});
+		expect( result ).toEqual( { data: [] } );
+	} );
 
-	it('mocks rejected promises', async () => {
+	it( 'mocks rejected promises', async () => {
 		const mockAsync = vi.fn();
 
-		mockAsync.mockRejectedValue(new Error('Failed'));
+		mockAsync.mockRejectedValue( new Error( 'Failed' ) );
 
-		await expect(mockAsync()).rejects.toThrow('Failed');
-	});
-});
+		await expect( mockAsync() ).rejects.toThrow( 'Failed' );
+	} );
+} );
 
 // ==========================================================================
 // Mock Modules
 // ==========================================================================
 
 // Mock entire module
-vi.mock('./utils/api', () => ({
-	fetchData: vi.fn().mockResolvedValue({ data: [] }),
-	postData: vi.fn().mockResolvedValue({ success: true })
-}));
+vi.mock( './utils/api', () => ( {
+	fetchData: vi.fn().mockResolvedValue( { data: [] } ),
+	postData: vi.fn().mockResolvedValue( { success: true } ),
+} ) );
 
 // Mock WordPress modules
-vi.mock('@wordpress/dom-ready', () => ({
-	default: (callback: () => void) => callback()
-}));
+vi.mock( '@wordpress/dom-ready', () => ( {
+	default: ( callback: () => void ) => callback(),
+} ) );
 
 // ==========================================================================
 // Mock Timers
 // ==========================================================================
 
-describe('Mock Timers', () => {
-	beforeEach(() => {
+describe( 'Mock Timers', () => {
+	beforeEach( () => {
 		vi.useFakeTimers();
-	});
+	} );
 
-	afterEach(() => {
+	afterEach( () => {
 		vi.useRealTimers();
-	});
+	} );
 
-	it('advances time', () => {
+	it( 'advances time', () => {
 		const callback = vi.fn();
-		setTimeout(callback, 1000);
+		setTimeout( callback, 1000 );
 
-		vi.advanceTimersByTime(1000);
+		vi.advanceTimersByTime( 1000 );
 
-		expect(callback).toHaveBeenCalled();
-	});
+		expect( callback ).toHaveBeenCalled();
+	} );
 
-	it('runs all timers', () => {
+	it( 'runs all timers', () => {
 		const callback = vi.fn();
-		setTimeout(callback, 5000);
+		setTimeout( callback, 5000 );
 
 		vi.runAllTimers();
 
-		expect(callback).toHaveBeenCalled();
-	});
-});
+		expect( callback ).toHaveBeenCalled();
+	} );
+} );
 
 // ==========================================================================
 // Mock matchMedia (Reduced Motion)
 // ==========================================================================
 
-describe('Mock matchMedia', () => {
-	it('mocks reduced motion preference', () => {
-		vi.spyOn(window, 'matchMedia').mockReturnValue({
+describe( 'Mock matchMedia', () => {
+	it( 'mocks reduced motion preference', () => {
+		vi.spyOn( window, 'matchMedia' ).mockReturnValue( {
 			matches: true, // User prefers reduced motion
 			media: '(prefers-reduced-motion: reduce)',
 			onchange: null,
@@ -110,39 +110,39 @@ describe('Mock matchMedia', () => {
 			removeListener: vi.fn(),
 			addEventListener: vi.fn(),
 			removeEventListener: vi.fn(),
-			dispatchEvent: vi.fn()
-		});
+			dispatchEvent: vi.fn(),
+		} );
 
-		const result = window.matchMedia('(prefers-reduced-motion: reduce)');
-		expect(result.matches).toBe(true);
-	});
-});
+		const result = window.matchMedia( '(prefers-reduced-motion: reduce)' );
+		expect( result.matches ).toBe( true );
+	} );
+} );
 
 // ==========================================================================
 // Spy on Methods
 // ==========================================================================
 
-describe('Spy on Methods', () => {
-	it('spies on object methods', () => {
+describe( 'Spy on Methods', () => {
+	it( 'spies on object methods', () => {
 		const object = {
-			method: () => 'original'
+			method: () => 'original',
 		};
 
-		const spy = vi.spyOn(object, 'method');
+		const spy = vi.spyOn( object, 'method' );
 
 		object.method();
 
-		expect(spy).toHaveBeenCalled();
-	});
+		expect( spy ).toHaveBeenCalled();
+	} );
 
-	it('mocks spy implementation', () => {
+	it( 'mocks spy implementation', () => {
 		const object = {
-			method: () => 'original'
+			method: () => 'original',
 		};
 
-		const spy = vi.spyOn(object, 'method');
-		spy.mockReturnValue('mocked');
+		const spy = vi.spyOn( object, 'method' );
+		spy.mockReturnValue( 'mocked' );
 
-		expect(object.method()).toBe('mocked');
-	});
-});
+		expect( object.method() ).toBe( 'mocked' );
+	} );
+} );

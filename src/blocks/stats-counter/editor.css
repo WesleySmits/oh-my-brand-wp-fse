@@ -54,7 +54,8 @@
 	margin-top: 0.5rem;
 }
 
-.wp-block-theme-oh-my-brand-stats-counter__stat-controls .components-base-control {
+.wp-block-theme-oh-my-brand-stats-counter__stat-controls
+	.components-base-control {
 	margin-bottom: 0;
 }
 

@@ -22,6 +22,9 @@
 	}
 
 	.wp-block-group.ollie-sticky-top {
-		top: calc(20px + var(--header-height) + var(--wp-admin--admin-bar--position-offset, 0px)) !important;
+		top: calc(
+			20px + var(--header-height) +
+				var(--wp-admin--admin-bar--position-offset, 0px)
+		) !important;
 	}
 }

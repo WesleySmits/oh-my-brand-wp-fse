@@ -16,8 +16,8 @@ import './editor.css';
 /**
  * Register the CTA block.
  */
-registerBlockType(metadata.name, {
+registerBlockType( metadata.name, {
 	...metadata,
 	icon: ctaIcon,
-	edit: Edit
-});
+	edit: Edit,
+} );

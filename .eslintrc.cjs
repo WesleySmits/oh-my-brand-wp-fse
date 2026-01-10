@@ -1,5 +1,5 @@
 module.exports = {
-	extends: ['plugin:@wordpress/eslint-plugin/recommended'],
+	extends: [ 'plugin:@wordpress/eslint-plugin/recommended' ],
 	ignorePatterns: [
 		'node_modules/**',
 		'vendor/**',
@@ -7,19 +7,19 @@ module.exports = {
 		'build/**',
 		'*.min.js',
 		'coverage/**',
-		'blocks/**'
+		'blocks/**',
 	],
 	rules: {
-		'no-console': ['warn', { allow: ['warn', 'error'] }],
+		'no-console': [ 'warn', { allow: [ 'warn', 'error' ] } ],
 		'prefer-const': 'error',
-		'no-var': 'error'
+		'no-var': 'error',
 	},
 	overrides: [
 		{
-			files: ['*.config.js', 'webpack.config.js'],
+			files: [ '*.config.js', 'webpack.config.js' ],
 			env: {
-				node: true
-			}
-		}
-	]
+				node: true,
+			},
+		},
+	],
 };

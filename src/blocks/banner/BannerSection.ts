@@ -16,7 +16,13 @@ export class BannerSection extends HTMLElement {
 	 * Observed attributes that trigger attributeChangedCallback.
 	 */
 	static get observedAttributes(): string[] {
-		return ['image-position', 'image-size', 'vertical-align', 'mobile-stack', 'image-fit'];
+		return [
+			'image-position',
+			'image-size',
+			'vertical-align',
+			'mobile-stack',
+			'image-fit',
+		];
 	}
 
 	/**
@@ -24,7 +30,7 @@ export class BannerSection extends HTMLElement {
 	 */
 	constructor() {
 		super();
-		this.attachShadow({ mode: 'open' });
+		this.attachShadow( { mode: 'open' } );
 	}
 
 	/**
@@ -41,8 +47,12 @@ export class BannerSection extends HTMLElement {
 	 * @param oldValue - Previous value
 	 * @param newValue - New value
 	 */
-	attributeChangedCallback(_name: string, oldValue: string | null, newValue: string | null): void {
-		if (oldValue === newValue) {
+	attributeChangedCallback(
+		_name: string,
+		oldValue: string | null,
+		newValue: string | null
+	): void {
+		if ( oldValue === newValue ) {
 			return;
 		}
 		this.updateLayout();
@@ -52,12 +62,12 @@ export class BannerSection extends HTMLElement {
 	 * Render the component's Shadow DOM content.
 	 */
 	private render(): void {
-		if (!this.shadowRoot) {
+		if ( ! this.shadowRoot ) {
 			return;
 		}
 
 		this.shadowRoot.innerHTML = `
-			<style>${this.getStyles()}</style>
+			<style>${ this.getStyles() }</style>
 			<div class="banner" part="container">
 				<div class="banner__image" part="image-wrapper">
 					<slot name="image"></slot>
@@ -212,6 +222,6 @@ export class BannerSection extends HTMLElement {
 }
 
 // Register the custom element
-if (!customElements.get(BannerSection.tagName)) {
-	customElements.define(BannerSection.tagName, BannerSection);
+if ( ! customElements.get( BannerSection.tagName ) ) {
+	customElements.define( BannerSection.tagName, BannerSection );
 }

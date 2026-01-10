@@ -1,3 +1,4 @@
+/build/
 /coverage/
 /jest/
 /jest-coverage/
@@ -5,6 +6,7 @@
 /public/
 /public/build/
 /public/assets/
+/vendor/
 *.yaml
 *.yml
 *.json

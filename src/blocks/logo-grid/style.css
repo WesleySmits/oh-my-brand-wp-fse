@@ -144,14 +144,16 @@ omb-logo-marquee {
 }
 
 /* Override grid for marquee mode */
-.wp-block-theme-oh-my-brand-logo-grid--marquee .wp-block-theme-oh-my-brand-logo-grid__list {
+.wp-block-theme-oh-my-brand-logo-grid--marquee
+	.wp-block-theme-oh-my-brand-logo-grid__list {
 	display: flex;
 	flex-wrap: nowrap;
 	gap: var(--logo-grid-gap);
 }
 
 /* Marquee items need fixed width */
-.wp-block-theme-oh-my-brand-logo-grid__list--marquee-active .wp-block-theme-oh-my-brand-logo-grid__item {
+.wp-block-theme-oh-my-brand-logo-grid__list--marquee-active
+	.wp-block-theme-oh-my-brand-logo-grid__item {
 	flex-shrink: 0;
 	width: auto;
 	min-width: calc(var(--logo-grid-logo-height) * 1.5);
@@ -171,6 +173,6 @@ omb-logo-marquee {
 
 /* Hide duplicated items when reduced motion is active */
 .wp-block-theme-oh-my-brand-logo-grid__list--marquee-active.wp-block-theme-oh-my-brand-logo-grid__list--reduced-motion
-	.wp-block-theme-oh-my-brand-logo-grid__item[aria-hidden='true'] {
+	.wp-block-theme-oh-my-brand-logo-grid__item[aria-hidden="true"] {
 	display: none;
 }

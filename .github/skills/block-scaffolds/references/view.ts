@@ -20,15 +20,19 @@ class OmbBLOCK_CLASS extends HTMLElement {
 		this.#unbindEvents();
 	}
 
-	attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-		if (oldValue === newValue) {
+	attributeChangedCallback(
+		name: string,
+		oldValue: string | null,
+		newValue: string | null
+	): void {
+		if ( oldValue === newValue ) {
 			return;
 		}
 		// Handle attribute changes.
 	}
 
 	#queryElements(): void {
-		this.#liveRegion = this.querySelector('[data-live-region]');
+		this.#liveRegion = this.querySelector( '[data-live-region]' );
 	}
 
 	#initialize(): void {
@@ -36,15 +40,15 @@ class OmbBLOCK_CLASS extends HTMLElement {
 	}
 
 	#bindEvents(): void {
-		this.addEventListener('keydown', this.#handleKeydown);
+		this.addEventListener( 'keydown', this.#handleKeydown );
 	}
 
 	#unbindEvents(): void {
-		this.removeEventListener('keydown', this.#handleKeydown);
+		this.removeEventListener( 'keydown', this.#handleKeydown );
 	}
 
-	#handleKeydown = (event: KeyboardEvent): void => {
-		switch (event.key) {
+	#handleKeydown = ( event: KeyboardEvent ): void => {
+		switch ( event.key ) {
 			case 'ArrowLeft':
 				event.preventDefault();
 				// Handle left
@@ -60,13 +64,13 @@ class OmbBLOCK_CLASS extends HTMLElement {
 		}
 	};
 
-	#announce(message: string): void {
-		if (this.#liveRegion) {
+	#announce( message: string ): void {
+		if ( this.#liveRegion ) {
 			this.#liveRegion.textContent = message;
 		}
 	}
 }
 
-if (!customElements.get('omb-BLOCK_NAME')) {
-	customElements.define('omb-BLOCK_NAME', OmbBLOCK_CLASS);
+if ( ! customElements.get( 'omb-BLOCK_NAME' ) ) {
+	customElements.define( 'omb-BLOCK_NAME', OmbBLOCK_CLASS );
 }

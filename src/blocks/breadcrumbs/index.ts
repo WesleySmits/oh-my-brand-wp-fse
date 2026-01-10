@@ -12,8 +12,8 @@ import Edit from './edit';
 import './style.css';
 import './editor.css';
 
-registerBlockType(metadata.name, {
+registerBlockType( metadata.name, {
 	...metadata,
 	icon: navigation,
-	edit: Edit
-});
+	edit: Edit,
+} );

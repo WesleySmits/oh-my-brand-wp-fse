@@ -19,6 +19,6 @@
 }
 
 /* Allow block selection */
-.block-editor-block-list__block[data-type='theme-oh-my-brand/breadcrumbs'] {
+.block-editor-block-list__block[data-type="theme-oh-my-brand/breadcrumbs"] {
 	pointer-events: auto;
 }

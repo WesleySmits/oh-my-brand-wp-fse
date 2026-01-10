@@ -25,7 +25,11 @@
 	 * Smart grid: min-width calculated from columns preference.
 	 * Formula: smaller column count = larger min-width, more columns = smaller min-width.
 	 */
-	--cards-min-width: clamp(200px, calc(100% / var(--cards-columns) - var(--cards-gap)), 400px);
+	--cards-min-width: clamp(
+		200px,
+		calc(100% / var(--cards-columns) - var(--cards-gap)),
+		400px
+	);
 
 	/* Typography - fluid with clamp() using container query units */
 	--cards-heading-size: clamp(1.5rem, 4cqi, 2.25rem);
@@ -76,7 +80,8 @@
 	text-align: inherit;
 }
 
-.wp-block-theme-oh-my-brand-cards--align-center .wp-block-theme-oh-my-brand-cards__header {
+.wp-block-theme-oh-my-brand-cards--align-center
+	.wp-block-theme-oh-my-brand-cards__header {
 	text-align: center;
 }
 
@@ -99,7 +104,10 @@
 
 .wp-block-theme-oh-my-brand-cards__list {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(var(--cards-min-width), 1fr));
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(var(--cards-min-width), 1fr)
+	);
 	gap: var(--cards-gap);
 	padding: 0;
 	margin: 0;
@@ -129,7 +137,8 @@
 }
 
 /* Equal height cards */
-.wp-block-theme-oh-my-brand-cards--equal-height .wp-block-theme-oh-my-brand-cards__card {
+.wp-block-theme-oh-my-brand-cards--equal-height
+	.wp-block-theme-oh-my-brand-cards__card {
 	height: 100%;
 }
 
@@ -137,11 +146,13 @@
    Card Styles - Elevated
    ========================================================================== */
 
-.wp-block-theme-oh-my-brand-cards--style-elevated .wp-block-theme-oh-my-brand-cards__card {
+.wp-block-theme-oh-my-brand-cards--style-elevated
+	.wp-block-theme-oh-my-brand-cards__card {
 	box-shadow: var(--cards-shadow);
 }
 
-.wp-block-theme-oh-my-brand-cards--style-elevated .wp-block-theme-oh-my-brand-cards__card:hover {
+.wp-block-theme-oh-my-brand-cards--style-elevated
+	.wp-block-theme-oh-my-brand-cards__card:hover {
 	box-shadow: var(--cards-shadow-hover);
 	transform: translateY(-2px);
 }
@@ -150,11 +161,13 @@
    Card Styles - Outlined
    ========================================================================== */
 
-.wp-block-theme-oh-my-brand-cards--style-outlined .wp-block-theme-oh-my-brand-cards__card {
+.wp-block-theme-oh-my-brand-cards--style-outlined
+	.wp-block-theme-oh-my-brand-cards__card {
 	border: 1px solid var(--cards-border-color);
 }
 
-.wp-block-theme-oh-my-brand-cards--style-outlined .wp-block-theme-oh-my-brand-cards__card:hover {
+.wp-block-theme-oh-my-brand-cards--style-outlined
+	.wp-block-theme-oh-my-brand-cards__card:hover {
 	border-color: var(--cards-border-color-hover);
 }
 
@@ -162,7 +175,8 @@
    Card Styles - Flat
    ========================================================================== */
 
-.wp-block-theme-oh-my-brand-cards--style-flat .wp-block-theme-oh-my-brand-cards__card {
+.wp-block-theme-oh-my-brand-cards--style-flat
+	.wp-block-theme-oh-my-brand-cards__card {
 	background-color: var(--cards-bg-flat);
 }
 
@@ -183,52 +197,61 @@
 }
 
 /* Image position - Top (default) */
-.wp-block-theme-oh-my-brand-cards--image-top .wp-block-theme-oh-my-brand-cards__card {
+.wp-block-theme-oh-my-brand-cards--image-top
+	.wp-block-theme-oh-my-brand-cards__card {
 	flex-direction: column;
 }
 
 /* Image position - Left */
-.wp-block-theme-oh-my-brand-cards--image-left .wp-block-theme-oh-my-brand-cards__card {
+.wp-block-theme-oh-my-brand-cards--image-left
+	.wp-block-theme-oh-my-brand-cards__card {
 	flex-direction: row;
 }
 
-.wp-block-theme-oh-my-brand-cards--image-left .wp-block-theme-oh-my-brand-cards__image-wrapper {
+.wp-block-theme-oh-my-brand-cards--image-left
+	.wp-block-theme-oh-my-brand-cards__image-wrapper {
 	flex: 0 0 40%;
 	aspect-ratio: auto;
 }
 
 /* Stack images on top for narrow containers with left image position */
 @container cards (max-width: 500px) {
-	.wp-block-theme-oh-my-brand-cards--image-left .wp-block-theme-oh-my-brand-cards__card {
+	.wp-block-theme-oh-my-brand-cards--image-left
+		.wp-block-theme-oh-my-brand-cards__card {
 		flex-direction: column;
 	}
 
-	.wp-block-theme-oh-my-brand-cards--image-left .wp-block-theme-oh-my-brand-cards__image-wrapper {
+	.wp-block-theme-oh-my-brand-cards--image-left
+		.wp-block-theme-oh-my-brand-cards__image-wrapper {
 		flex: none;
 		aspect-ratio: var(--cards-aspect-ratio);
 	}
 }
 
 /* Image position - Background */
-.wp-block-theme-oh-my-brand-cards--image-background .wp-block-theme-oh-my-brand-cards__card {
+.wp-block-theme-oh-my-brand-cards--image-background
+	.wp-block-theme-oh-my-brand-cards__card {
 	position: relative;
 	min-height: clamp(200px, 30cqi, 300px);
 }
 
-.wp-block-theme-oh-my-brand-cards--image-background .wp-block-theme-oh-my-brand-cards__image-wrapper {
+.wp-block-theme-oh-my-brand-cards--image-background
+	.wp-block-theme-oh-my-brand-cards__image-wrapper {
 	position: absolute;
 	inset: 0;
 	aspect-ratio: auto;
 }
 
-.wp-block-theme-oh-my-brand-cards--image-background .wp-block-theme-oh-my-brand-cards__image-wrapper::after {
+.wp-block-theme-oh-my-brand-cards--image-background
+	.wp-block-theme-oh-my-brand-cards__image-wrapper::after {
 	position: absolute;
 	inset: 0;
 	background: linear-gradient(to top, rgb(0 0 0 / 70%) 0%, transparent 100%);
-	content: '';
+	content: "";
 }
 
-.wp-block-theme-oh-my-brand-cards--image-background .wp-block-theme-oh-my-brand-cards__content {
+.wp-block-theme-oh-my-brand-cards--image-background
+	.wp-block-theme-oh-my-brand-cards__content {
 	position: relative;
 	z-index: 1;
 	margin-top: auto;
@@ -252,7 +275,8 @@
 	font-size: var(--cards-icon-font-size);
 }
 
-.wp-block-theme-oh-my-brand-cards--align-center .wp-block-theme-oh-my-brand-cards__icon {
+.wp-block-theme-oh-my-brand-cards--align-center
+	.wp-block-theme-oh-my-brand-cards__icon {
 	margin-inline: auto;
 }
 
@@ -268,7 +292,8 @@
 	padding: var(--cards-padding);
 }
 
-.wp-block-theme-oh-my-brand-cards--align-center .wp-block-theme-oh-my-brand-cards__content {
+.wp-block-theme-oh-my-brand-cards--align-center
+	.wp-block-theme-oh-my-brand-cards__content {
 	text-align: center;
 	align-items: center;
 }
@@ -315,12 +340,14 @@
 	transition: transform var(--cards-transition);
 }
 
-.wp-block-theme-oh-my-brand-cards__link:hover .wp-block-theme-oh-my-brand-cards__link-arrow {
+.wp-block-theme-oh-my-brand-cards__link:hover
+	.wp-block-theme-oh-my-brand-cards__link-arrow {
 	transform: translateX(2px);
 }
 
 /* Background image overlay link color */
-.wp-block-theme-oh-my-brand-cards--image-background .wp-block-theme-oh-my-brand-cards__link {
+.wp-block-theme-oh-my-brand-cards--image-background
+	.wp-block-theme-oh-my-brand-cards__link {
 	color: var(--wp--preset--color--base, #fff);
 }
 
@@ -335,7 +362,8 @@
 		transition: none;
 	}
 
-	.wp-block-theme-oh-my-brand-cards--style-elevated .wp-block-theme-oh-my-brand-cards__card:hover {
+	.wp-block-theme-oh-my-brand-cards--style-elevated
+		.wp-block-theme-oh-my-brand-cards__card:hover {
 		transform: none;
 	}
 }

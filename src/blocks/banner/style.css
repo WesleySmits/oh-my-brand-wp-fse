@@ -118,11 +118,13 @@
 		grid-template-columns: 1fr 50%;
 	}
 
-	.wp-block-theme-oh-my-brand-banner--image-right .wp-block-theme-oh-my-brand-banner__image-wrapper {
+	.wp-block-theme-oh-my-brand-banner--image-right
+		.wp-block-theme-oh-my-brand-banner__image-wrapper {
 		order: 2;
 	}
 
-	.wp-block-theme-oh-my-brand-banner--image-right .wp-block-theme-oh-my-brand-banner__article {
+	.wp-block-theme-oh-my-brand-banner--image-right
+		.wp-block-theme-oh-my-brand-banner__article {
 		order: 1;
 	}
 

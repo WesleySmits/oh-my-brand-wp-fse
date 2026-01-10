@@ -27,12 +27,17 @@ export class HeroSection extends HTMLElement {
 	private intersectionObserver: IntersectionObserver | null = null;
 
 	static get observedAttributes(): string[] {
-		return ['min-height', 'overlay-opacity', 'content-align', 'vertical-align'];
+		return [
+			'min-height',
+			'overlay-opacity',
+			'content-align',
+			'vertical-align',
+		];
 	}
 
 	constructor() {
 		super();
-		this.attachShadow({ mode: 'open' });
+		this.attachShadow( { mode: 'open' } );
 	}
 
 	connectedCallback(): void {
@@ -46,8 +51,12 @@ export class HeroSection extends HTMLElement {
 		this.intersectionObserver?.disconnect();
 	}
 
-	attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-		if (oldValue === newValue) {
+	attributeChangedCallback(
+		name: string,
+		oldValue: string | null,
+		newValue: string | null
+	): void {
+		if ( oldValue === newValue ) {
 			return;
 		}
 		this.updateStyles();
@@ -58,8 +67,10 @@ export class HeroSection extends HTMLElement {
 	 */
 	public play(): void {
 		this.video?.play();
-		this.updateToggleState(false);
-		this.dispatchEvent(new CustomEvent('omb-hero:video-play', { bubbles: true }));
+		this.updateToggleState( false );
+		this.dispatchEvent(
+			new CustomEvent( 'omb-hero:video-play', { bubbles: true } )
+		);
 	}
 
 	/**
@@ -67,15 +78,17 @@ export class HeroSection extends HTMLElement {
 	 */
 	public pause(): void {
 		this.video?.pause();
-		this.updateToggleState(true);
-		this.dispatchEvent(new CustomEvent('omb-hero:video-pause', { bubbles: true }));
+		this.updateToggleState( true );
+		this.dispatchEvent(
+			new CustomEvent( 'omb-hero:video-pause', { bubbles: true } )
+		);
 	}
 
 	/**
 	 * Toggle video play/pause state.
 	 */
 	public toggleVideo(): void {
-		if (this.video?.paused) {
+		if ( this.video?.paused ) {
 			this.play();
 		} else {
 			this.pause();
@@ -83,12 +96,12 @@ export class HeroSection extends HTMLElement {
 	}
 
 	private render(): void {
-		if (!this.shadowRoot) {
+		if ( ! this.shadowRoot ) {
 			return;
 		}
 
 		this.shadowRoot.innerHTML = `
-            <style>${this.getStyles()}</style>
+            <style>${ this.getStyles() }</style>
             <section class="hero" part="container">
                 <div class="hero__background" part="background">
                     <slot name="background"></slot>
@@ -196,77 +209,91 @@ export class HeroSection extends HTMLElement {
 
 	private setupVideo(): void {
 		// Find video in slotted content
-		const slot = this.shadowRoot?.querySelector('slot[name="background"]') as HTMLSlotElement | null;
-		if (!slot) {
+		const slot = this.shadowRoot?.querySelector(
+			'slot[name="background"]'
+		) as HTMLSlotElement | null;
+		if ( ! slot ) {
 			return;
 		}
 
 		const assignedElements = slot.assignedElements();
-		this.video = assignedElements.find((el) => el.tagName === 'VIDEO') as HTMLVideoElement | null;
+		this.video = assignedElements.find(
+			( el ) => el.tagName === 'VIDEO'
+		) as HTMLVideoElement | null;
 	}
 
 	private setupIntersectionObserver(): void {
-		if (!this.video) {
+		if ( ! this.video ) {
 			return;
 		}
 
 		// Check for reduced motion preference
-		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		if (prefersReducedMotion) {
+		const prefersReducedMotion = window.matchMedia(
+			'(prefers-reduced-motion: reduce)'
+		).matches;
+		if ( prefersReducedMotion ) {
 			this.video.pause();
 			return;
 		}
 
 		// Pause video when out of viewport for performance
 		this.intersectionObserver = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
+			( entries ) => {
+				entries.forEach( ( entry ) => {
+					if ( entry.isIntersecting ) {
 						this.video?.play();
 					} else {
 						this.video?.pause();
 					}
-				});
+				} );
 			},
 			{ threshold: 0.1 }
 		);
 
-		this.intersectionObserver.observe(this);
+		this.intersectionObserver.observe( this );
 	}
 
 	private setupVideoToggle(): void {
 		// Find toggle button in light DOM
-		this.pauseButton = this.querySelector('.wp-block-theme-oh-my-brand-hero__video-toggle');
-		if (!this.pauseButton || !this.video) {
+		this.pauseButton = this.querySelector(
+			'.wp-block-theme-oh-my-brand-hero__video-toggle'
+		);
+		if ( ! this.pauseButton || ! this.video ) {
 			return;
 		}
 
-		this.pauseButton.addEventListener('click', () => this.toggleVideo());
+		this.pauseButton.addEventListener( 'click', () => this.toggleVideo() );
 	}
 
-	private updateToggleState(isPaused: boolean): void {
-		if (!this.pauseButton) {
+	private updateToggleState( isPaused: boolean ): void {
+		if ( ! this.pauseButton ) {
 			return;
 		}
 
-		this.pauseButton.setAttribute('aria-pressed', isPaused ? 'true' : 'false');
-		this.pauseButton.setAttribute('aria-label', isPaused ? 'Play background video' : 'Pause background video');
+		this.pauseButton.setAttribute(
+			'aria-pressed',
+			isPaused ? 'true' : 'false'
+		);
+		this.pauseButton.setAttribute(
+			'aria-label',
+			isPaused ? 'Play background video' : 'Pause background video'
+		);
 	}
 
 	private updateStyles(): void {
-		const minHeight = this.getAttribute('min-height');
-		const overlayOpacity = this.getAttribute('overlay-opacity');
+		const minHeight = this.getAttribute( 'min-height' );
+		const overlayOpacity = this.getAttribute( 'overlay-opacity' );
 
-		if (minHeight) {
-			this.style.setProperty('--hero-min-height', minHeight);
+		if ( minHeight ) {
+			this.style.setProperty( '--hero-min-height', minHeight );
 		}
-		if (overlayOpacity) {
-			this.style.setProperty('--hero-overlay-opacity', overlayOpacity);
+		if ( overlayOpacity ) {
+			this.style.setProperty( '--hero-overlay-opacity', overlayOpacity );
 		}
 	}
 }
 
 // Register the custom element
-if (!customElements.get(HeroSection.tagName)) {
-	customElements.define(HeroSection.tagName, HeroSection);
+if ( ! customElements.get( HeroSection.tagName ) ) {
+	customElements.define( HeroSection.tagName, HeroSection );
 }

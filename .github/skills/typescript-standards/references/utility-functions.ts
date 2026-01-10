@@ -23,21 +23,21 @@
  * debouncedSearch('abc'); // This one executes
  * ```
  */
-export function debounce<T extends (...args: unknown[]) => unknown>(
+export function debounce< T extends ( ...args: unknown[] ) => unknown >(
 	func: T,
 	wait: number
-): (...args: Parameters<T>) => void {
-	let timeoutId: ReturnType<typeof setTimeout> | null = null;
+): ( ...args: Parameters< T > ) => void {
+	let timeoutId: ReturnType< typeof setTimeout > | null = null;
 
-	return function (this: unknown, ...args: Parameters<T>): void {
-		if (timeoutId !== null) {
-			clearTimeout(timeoutId);
+	return function ( this: unknown, ...args: Parameters< T > ): void {
+		if ( timeoutId !== null ) {
+			clearTimeout( timeoutId );
 		}
 
-		timeoutId = setTimeout(() => {
-			func.apply(this, args);
+		timeoutId = setTimeout( () => {
+			func.apply( this, args );
 			timeoutId = null;
-		}, wait);
+		}, wait );
 	};
 }
 
@@ -50,18 +50,18 @@ export function debounce<T extends (...args: unknown[]) => unknown>(
  * @param wait - The throttle interval in milliseconds.
  * @returns A throttled version of the function.
  */
-export function throttle<T extends (...args: unknown[]) => unknown>(
+export function throttle< T extends ( ...args: unknown[] ) => unknown >(
 	func: T,
 	wait: number
-): (...args: Parameters<T>) => void {
+): ( ...args: Parameters< T > ) => void {
 	let lastCall = 0;
 
-	return function (this: unknown, ...args: Parameters<T>): void {
+	return function ( this: unknown, ...args: Parameters< T > ): void {
 		const now = Date.now();
 
-		if (now - lastCall >= wait) {
+		if ( now - lastCall >= wait ) {
 			lastCall = now;
-			func.apply(this, args);
+			func.apply( this, args );
 		}
 	};
 }

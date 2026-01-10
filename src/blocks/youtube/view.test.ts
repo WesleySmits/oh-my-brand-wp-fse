@@ -7,7 +7,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { OmbYouTubeFacade } from './view';
 
-describe('OmbYouTubeFacade', () => {
+describe( 'OmbYouTubeFacade', () => {
 	let element: OmbYouTubeFacade;
 
 	/**
@@ -19,14 +19,16 @@ describe('OmbYouTubeFacade', () => {
 		embedUrl: string = 'https://www.youtube.com/embed/dQw4w9WgXcQ',
 		videoTitle: string = 'Test Video'
 	): OmbYouTubeFacade {
-		const facade = document.createElement('omb-youtube-facade') as OmbYouTubeFacade;
+		const facade = document.createElement(
+			'omb-youtube-facade'
+		) as OmbYouTubeFacade;
 
-		if (embedUrl) {
-			facade.setAttribute('embed-url', embedUrl);
+		if ( embedUrl ) {
+			facade.setAttribute( 'embed-url', embedUrl );
 		}
 
-		if (videoTitle) {
-			facade.setAttribute('video-title', videoTitle);
+		if ( videoTitle ) {
+			facade.setAttribute( 'video-title', videoTitle );
 		}
 
 		// Add inner content (thumbnail and play button)
@@ -47,363 +49,423 @@ describe('OmbYouTubeFacade', () => {
 		embedUrl: string = 'https://www.youtube.com/embed/dQw4w9WgXcQ',
 		videoTitle: string = 'Test Video'
 	): { wrapper: HTMLDivElement; facade: OmbYouTubeFacade } {
-		const wrapper = document.createElement('div');
+		const wrapper = document.createElement( 'div' );
 		wrapper.className = 'wp-block-theme-oh-my-brand-youtube';
 
-		const facade = createFacadeElement(embedUrl, videoTitle);
-		wrapper.appendChild(facade);
+		const facade = createFacadeElement( embedUrl, videoTitle );
+		wrapper.appendChild( facade );
 
 		return { wrapper, facade };
 	}
 
-	beforeEach(() => {
+	beforeEach( () => {
 		document.body.innerHTML = '';
-	});
+	} );
 
-	afterEach(() => {
+	afterEach( () => {
 		vi.clearAllMocks();
 		vi.restoreAllMocks();
-	});
+	} );
 
-	describe('connectedCallback', () => {
-		it('should initialize with valid embed-url attribute', () => {
+	describe( 'connectedCallback', () => {
+		it( 'should initialize with valid embed-url attribute', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
-			expect(element.getAttribute('embed-url')).toBe('https://www.youtube.com/embed/dQw4w9WgXcQ');
-		});
+			expect( element.getAttribute( 'embed-url' ) ).toBe(
+				'https://www.youtube.com/embed/dQw4w9WgXcQ'
+			);
+		} );
 
-		it('should initialize with valid video-title attribute', () => {
+		it( 'should initialize with valid video-title attribute', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
-			expect(element.getAttribute('video-title')).toBe('Test Video');
-		});
+			expect( element.getAttribute( 'video-title' ) ).toBe(
+				'Test Video'
+			);
+		} );
 
-		it('should warn when embed-url is missing', () => {
-			const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+		it( 'should warn when embed-url is missing', () => {
+			const warnSpy = vi
+				.spyOn( console, 'warn' )
+				.mockImplementation( () => {} );
 
-			element = createFacadeElement('', 'Test Video');
-			element.removeAttribute('embed-url');
-			document.body.appendChild(element);
+			element = createFacadeElement( '', 'Test Video' );
+			element.removeAttribute( 'embed-url' );
+			document.body.appendChild( element );
 
-			expect(warnSpy).toHaveBeenCalledWith('omb-youtube-facade: Missing embed-url attribute');
-		});
+			expect( warnSpy ).toHaveBeenCalledWith(
+				'omb-youtube-facade: Missing embed-url attribute'
+			);
+		} );
 
-		it('should not warn when embed-url is present', () => {
-			const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+		it( 'should not warn when embed-url is present', () => {
+			const warnSpy = vi
+				.spyOn( console, 'warn' )
+				.mockImplementation( () => {} );
 
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
-			expect(warnSpy).not.toHaveBeenCalled();
-		});
+			expect( warnSpy ).not.toHaveBeenCalled();
+		} );
 
-		it('should use default video title when attribute is missing', () => {
-			element = createFacadeElement('https://www.youtube.com/embed/dQw4w9WgXcQ', '');
-			element.removeAttribute('video-title');
-			document.body.appendChild(element);
+		it( 'should use default video title when attribute is missing', () => {
+			element = createFacadeElement(
+				'https://www.youtube.com/embed/dQw4w9WgXcQ',
+				''
+			);
+			element.removeAttribute( 'video-title' );
+			document.body.appendChild( element );
 
 			// Activate to verify the default title is used
 			element.click();
 
-			const iframe = element.querySelector('iframe');
-			expect(iframe?.title).toBe('YouTube video');
-		});
-	});
+			const iframe = element.querySelector( 'iframe' );
+			expect( iframe?.title ).toBe( 'YouTube video' );
+		} );
+	} );
 
-	describe('attributeChangedCallback', () => {
-		it('should update embed-url when attribute changes', () => {
+	describe( 'attributeChangedCallback', () => {
+		it( 'should update embed-url when attribute changes', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
 			const newUrl = 'https://www.youtube.com/embed/newVideoId';
-			element.setAttribute('embed-url', newUrl);
+			element.setAttribute( 'embed-url', newUrl );
 
 			// Activate to verify the new URL is used
 			element.click();
 
-			const iframe = element.querySelector('iframe');
-			expect(iframe?.src).toBe(`${newUrl}?autoplay=1`);
-		});
+			const iframe = element.querySelector( 'iframe' );
+			expect( iframe?.src ).toBe( `${ newUrl }?autoplay=1` );
+		} );
 
-		it('should update video-title when attribute changes', () => {
+		it( 'should update video-title when attribute changes', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
-			element.setAttribute('video-title', 'New Title');
+			element.setAttribute( 'video-title', 'New Title' );
 
 			// Activate to verify the new title is used
 			element.click();
 
-			const iframe = element.querySelector('iframe');
-			expect(iframe?.title).toBe('New Title');
-		});
+			const iframe = element.querySelector( 'iframe' );
+			expect( iframe?.title ).toBe( 'New Title' );
+		} );
 
-		it('should not update when value is unchanged', () => {
+		it( 'should not update when value is unchanged', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
 			// Set the same value - should early return
-			const originalUrl = element.getAttribute('embed-url');
-			element.setAttribute('embed-url', originalUrl!);
+			const originalUrl = element.getAttribute( 'embed-url' );
+			element.setAttribute( 'embed-url', originalUrl! );
 
 			// This should not cause any issues
-			expect(element.getAttribute('embed-url')).toBe(originalUrl);
-		});
-	});
+			expect( element.getAttribute( 'embed-url' ) ).toBe( originalUrl );
+		} );
+	} );
 
-	describe('activation behavior', () => {
-		it('should create iframe on activation', () => {
+	describe( 'activation behavior', () => {
+		it( 'should create iframe on activation', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
 			element.click();
 
-			const iframe = element.querySelector('iframe');
-			expect(iframe).not.toBeNull();
-		});
+			const iframe = element.querySelector( 'iframe' );
+			expect( iframe ).not.toBeNull();
+		} );
 
-		it('should set correct iframe src with autoplay', () => {
+		it( 'should set correct iframe src with autoplay', () => {
 			const embedUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
-			element = createFacadeElement(embedUrl);
-			document.body.appendChild(element);
+			element = createFacadeElement( embedUrl );
+			document.body.appendChild( element );
 
 			element.click();
 
-			const iframe = element.querySelector('iframe');
-			expect(iframe?.src).toBe(`${embedUrl}?autoplay=1`);
-		});
+			const iframe = element.querySelector( 'iframe' );
+			expect( iframe?.src ).toBe( `${ embedUrl }?autoplay=1` );
+		} );
 
-		it('should set correct iframe title', () => {
-			element = createFacadeElement('https://www.youtube.com/embed/dQw4w9WgXcQ', 'My Video');
-			document.body.appendChild(element);
-
-			element.click();
-
-			const iframe = element.querySelector('iframe');
-			expect(iframe?.title).toBe('My Video');
-		});
-
-		it('should set aria-label on iframe', () => {
-			element = createFacadeElement('https://www.youtube.com/embed/dQw4w9WgXcQ', 'My Video');
-			document.body.appendChild(element);
+		it( 'should set correct iframe title', () => {
+			element = createFacadeElement(
+				'https://www.youtube.com/embed/dQw4w9WgXcQ',
+				'My Video'
+			);
+			document.body.appendChild( element );
 
 			element.click();
 
-			const iframe = element.querySelector('iframe');
-			expect(iframe?.getAttribute('aria-label')).toBe('Embedded YouTube video: My Video');
-		});
+			const iframe = element.querySelector( 'iframe' );
+			expect( iframe?.title ).toBe( 'My Video' );
+		} );
 
-		it('should set allow attribute on iframe', () => {
+		it( 'should set aria-label on iframe', () => {
+			element = createFacadeElement(
+				'https://www.youtube.com/embed/dQw4w9WgXcQ',
+				'My Video'
+			);
+			document.body.appendChild( element );
+
+			element.click();
+
+			const iframe = element.querySelector( 'iframe' );
+			expect( iframe?.getAttribute( 'aria-label' ) ).toBe(
+				'Embedded YouTube video: My Video'
+			);
+		} );
+
+		it( 'should set allow attribute on iframe', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
 			element.click();
 
-			const iframe = element.querySelector('iframe');
-			expect(iframe?.getAttribute('allow')).toBe(
+			const iframe = element.querySelector( 'iframe' );
+			expect( iframe?.getAttribute( 'allow' ) ).toBe(
 				'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
 			);
-		});
+		} );
 
-		it('should set allowfullscreen attribute on iframe', () => {
+		it( 'should set allowfullscreen attribute on iframe', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
 			element.click();
 
-			const iframe = element.querySelector('iframe');
-			expect(iframe?.hasAttribute('allowfullscreen')).toBe(true);
-		});
+			const iframe = element.querySelector( 'iframe' );
+			expect( iframe?.hasAttribute( 'allowfullscreen' ) ).toBe( true );
+		} );
 
-		it('should clear existing content on activation', () => {
+		it( 'should clear existing content on activation', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
 			const originalContent = element.innerHTML;
-			expect(originalContent).toContain('img');
+			expect( originalContent ).toContain( 'img' );
 
 			element.click();
 
 			// Original content should be gone
-			expect(element.querySelector('img')).toBeNull();
-			expect(element.querySelector('.play-button')).toBeNull();
-		});
+			expect( element.querySelector( 'img' ) ).toBeNull();
+			expect( element.querySelector( '.play-button' ) ).toBeNull();
+		} );
 
-		it('should add is-activated class to element', () => {
+		it( 'should add is-activated class to element', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
-			expect(element.classList.contains('is-activated')).toBe(false);
+			expect( element.classList.contains( 'is-activated' ) ).toBe(
+				false
+			);
 
 			element.click();
 
-			expect(element.classList.contains('is-activated')).toBe(true);
-		});
+			expect( element.classList.contains( 'is-activated' ) ).toBe( true );
+		} );
 
-		it('should only activate once', () => {
+		it( 'should only activate once', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
 			element.click();
 
-			const firstIframe = element.querySelector('iframe');
+			const firstIframe = element.querySelector( 'iframe' );
 			const firstSrc = firstIframe?.src;
 
 			// Change the embed URL
-			element.setAttribute('embed-url', 'https://www.youtube.com/embed/differentVideo');
+			element.setAttribute(
+				'embed-url',
+				'https://www.youtube.com/embed/differentVideo'
+			);
 
 			// Click again
 			element.click();
 
 			// Should still have the same iframe
-			const secondIframe = element.querySelector('iframe');
-			expect(secondIframe?.src).toBe(firstSrc);
-		});
+			const secondIframe = element.querySelector( 'iframe' );
+			expect( secondIframe?.src ).toBe( firstSrc );
+		} );
 
-		it('should contain only one iframe after activation', () => {
+		it( 'should contain only one iframe after activation', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
 			element.click();
 
-			const iframes = element.querySelectorAll('iframe');
-			expect(iframes.length).toBe(1);
-		});
-	});
+			const iframes = element.querySelectorAll( 'iframe' );
+			expect( iframes.length ).toBe( 1 );
+		} );
+	} );
 
-	describe('parent wrapper interaction', () => {
-		it('should add is-activated class to parent wrapper', () => {
+	describe( 'parent wrapper interaction', () => {
+		it( 'should add is-activated class to parent wrapper', () => {
 			const { wrapper, facade } = createFacadeWithWrapper();
-			document.body.appendChild(wrapper);
+			document.body.appendChild( wrapper );
 
-			expect(wrapper.classList.contains('is-activated')).toBe(false);
+			expect( wrapper.classList.contains( 'is-activated' ) ).toBe(
+				false
+			);
 
 			facade.click();
 
-			expect(wrapper.classList.contains('is-activated')).toBe(true);
-		});
+			expect( wrapper.classList.contains( 'is-activated' ) ).toBe( true );
+		} );
 
-		it('should handle activation without parent wrapper gracefully', () => {
+		it( 'should handle activation without parent wrapper gracefully', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
 			// Should not throw when no parent wrapper exists
-			expect(() => element.click()).not.toThrow();
-			expect(element.classList.contains('is-activated')).toBe(true);
-		});
+			expect( () => element.click() ).not.toThrow();
+			expect( element.classList.contains( 'is-activated' ) ).toBe( true );
+		} );
 
-		it('should not affect unrelated parent elements', () => {
-			const unrelatedWrapper = document.createElement('div');
+		it( 'should not affect unrelated parent elements', () => {
+			const unrelatedWrapper = document.createElement( 'div' );
 			unrelatedWrapper.className = 'some-other-class';
 
 			element = createFacadeElement();
-			unrelatedWrapper.appendChild(element);
-			document.body.appendChild(unrelatedWrapper);
+			unrelatedWrapper.appendChild( element );
+			document.body.appendChild( unrelatedWrapper );
 
 			element.click();
 
-			expect(unrelatedWrapper.classList.contains('is-activated')).toBe(false);
-		});
-	});
+			expect(
+				unrelatedWrapper.classList.contains( 'is-activated' )
+			).toBe( false );
+		} );
+	} );
 
-	describe('click interaction', () => {
-		it('should activate on click', () => {
+	describe( 'click interaction', () => {
+		it( 'should activate on click', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
 			element.click();
 
-			expect(element.classList.contains('is-activated')).toBe(true);
-			expect(element.querySelector('iframe')).not.toBeNull();
-		});
+			expect( element.classList.contains( 'is-activated' ) ).toBe( true );
+			expect( element.querySelector( 'iframe' ) ).not.toBeNull();
+		} );
 
-		it('should activate on programmatic click event', () => {
+		it( 'should activate on programmatic click event', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
-			element.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+			element.dispatchEvent(
+				new MouseEvent( 'click', { bubbles: true } )
+			);
 
-			expect(element.classList.contains('is-activated')).toBe(true);
-		});
-	});
+			expect( element.classList.contains( 'is-activated' ) ).toBe( true );
+		} );
+	} );
 
-	describe('keyboard interaction', () => {
-		it('should activate on Enter key', () => {
+	describe( 'keyboard interaction', () => {
+		it( 'should activate on Enter key', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
-			const event = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true });
-			const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
+			const event = new KeyboardEvent( 'keydown', {
+				key: 'Enter',
+				bubbles: true,
+			} );
+			const preventDefaultSpy = vi.spyOn( event, 'preventDefault' );
 
-			element.dispatchEvent(event);
+			element.dispatchEvent( event );
 
-			expect(preventDefaultSpy).toHaveBeenCalled();
-			expect(element.classList.contains('is-activated')).toBe(true);
-		});
+			expect( preventDefaultSpy ).toHaveBeenCalled();
+			expect( element.classList.contains( 'is-activated' ) ).toBe( true );
+		} );
 
-		it('should activate on Space key', () => {
+		it( 'should activate on Space key', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
-			const event = new KeyboardEvent('keydown', { key: ' ', bubbles: true });
-			const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
+			const event = new KeyboardEvent( 'keydown', {
+				key: ' ',
+				bubbles: true,
+			} );
+			const preventDefaultSpy = vi.spyOn( event, 'preventDefault' );
 
-			element.dispatchEvent(event);
+			element.dispatchEvent( event );
 
-			expect(preventDefaultSpy).toHaveBeenCalled();
-			expect(element.classList.contains('is-activated')).toBe(true);
-		});
+			expect( preventDefaultSpy ).toHaveBeenCalled();
+			expect( element.classList.contains( 'is-activated' ) ).toBe( true );
+		} );
 
-		it('should not activate on other keys', () => {
+		it( 'should not activate on other keys', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
-			const event = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true });
-			element.dispatchEvent(event);
+			const event = new KeyboardEvent( 'keydown', {
+				key: 'Escape',
+				bubbles: true,
+			} );
+			element.dispatchEvent( event );
 
-			expect(element.classList.contains('is-activated')).toBe(false);
-			expect(element.querySelector('iframe')).toBeNull();
-		});
+			expect( element.classList.contains( 'is-activated' ) ).toBe(
+				false
+			);
+			expect( element.querySelector( 'iframe' ) ).toBeNull();
+		} );
 
-		it('should not activate on Tab key', () => {
+		it( 'should not activate on Tab key', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
-			const event = new KeyboardEvent('keydown', { key: 'Tab', bubbles: true });
-			element.dispatchEvent(event);
+			const event = new KeyboardEvent( 'keydown', {
+				key: 'Tab',
+				bubbles: true,
+			} );
+			element.dispatchEvent( event );
 
-			expect(element.classList.contains('is-activated')).toBe(false);
-		});
-	});
+			expect( element.classList.contains( 'is-activated' ) ).toBe(
+				false
+			);
+		} );
+	} );
 
-	describe('disconnectedCallback', () => {
-		it('should remove click event listener on disconnect', () => {
+	describe( 'disconnectedCallback', () => {
+		it( 'should remove click event listener on disconnect', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
-			const removeEventListenerSpy = vi.spyOn(element, 'removeEventListener');
+			const removeEventListenerSpy = vi.spyOn(
+				element,
+				'removeEventListener'
+			);
 
 			element.remove();
 
-			expect(removeEventListenerSpy).toHaveBeenCalledWith('click', expect.any(Function));
-		});
+			expect( removeEventListenerSpy ).toHaveBeenCalledWith(
+				'click',
+				expect.any( Function )
+			);
+		} );
 
-		it('should remove keydown event listener on disconnect', () => {
+		it( 'should remove keydown event listener on disconnect', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
-			const removeEventListenerSpy = vi.spyOn(element, 'removeEventListener');
+			const removeEventListenerSpy = vi.spyOn(
+				element,
+				'removeEventListener'
+			);
 
 			element.remove();
 
-			expect(removeEventListenerSpy).toHaveBeenCalledWith('keydown', expect.any(Function));
-		});
+			expect( removeEventListenerSpy ).toHaveBeenCalledWith(
+				'keydown',
+				expect.any( Function )
+			);
+		} );
 
-		it('should not respond to events after disconnect', () => {
+		it( 'should not respond to events after disconnect', () => {
 			element = createFacadeElement();
-			document.body.appendChild(element);
+			document.body.appendChild( element );
 
 			// Remove from DOM
 			element.remove();
@@ -411,72 +473,91 @@ describe('OmbYouTubeFacade', () => {
 			// Re-add to DOM without going through connectedCallback again
 			// (simulating a detached element)
 			const detachedElement = createFacadeElement();
-			document.body.appendChild(detachedElement);
+			document.body.appendChild( detachedElement );
 			detachedElement.remove();
 
 			// Try to click - should not activate since disconnected
-			detachedElement.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+			detachedElement.dispatchEvent(
+				new MouseEvent( 'click', { bubbles: true } )
+			);
 
 			// Element should not be activated after being disconnected
-			expect(detachedElement.classList.contains('is-activated')).toBe(false);
-		});
-	});
+			expect( detachedElement.classList.contains( 'is-activated' ) ).toBe(
+				false
+			);
+		} );
+	} );
 
-	describe('custom element registration', () => {
-		it('should be registered as a custom element', () => {
-			const CustomElement = customElements.get('omb-youtube-facade');
-			expect(CustomElement).toBeDefined();
-		});
+	describe( 'custom element registration', () => {
+		it( 'should be registered as a custom element', () => {
+			const CustomElement = customElements.get( 'omb-youtube-facade' );
+			expect( CustomElement ).toBeDefined();
+		} );
 
-		it('should be instance of OmbYouTubeFacade', () => {
-			element = document.createElement('omb-youtube-facade') as OmbYouTubeFacade;
-			expect(element).toBeInstanceOf(OmbYouTubeFacade);
-		});
+		it( 'should be instance of OmbYouTubeFacade', () => {
+			element = document.createElement(
+				'omb-youtube-facade'
+			) as OmbYouTubeFacade;
+			expect( element ).toBeInstanceOf( OmbYouTubeFacade );
+		} );
 
-		it('should have observed attributes defined', () => {
-			expect(OmbYouTubeFacade.observedAttributes).toContain('embed-url');
-			expect(OmbYouTubeFacade.observedAttributes).toContain('video-title');
-		});
-	});
+		it( 'should have observed attributes defined', () => {
+			expect( OmbYouTubeFacade.observedAttributes ).toContain(
+				'embed-url'
+			);
+			expect( OmbYouTubeFacade.observedAttributes ).toContain(
+				'video-title'
+			);
+		} );
+	} );
 
-	describe('edge cases', () => {
-		it('should handle empty embed-url gracefully', () => {
-			const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+	describe( 'edge cases', () => {
+		it( 'should handle empty embed-url gracefully', () => {
+			const warnSpy = vi
+				.spyOn( console, 'warn' )
+				.mockImplementation( () => {} );
 
-			element = document.createElement('omb-youtube-facade') as OmbYouTubeFacade;
-			document.body.appendChild(element);
+			element = document.createElement(
+				'omb-youtube-facade'
+			) as OmbYouTubeFacade;
+			document.body.appendChild( element );
 
 			// Should warn but not throw
-			expect(warnSpy).toHaveBeenCalled();
+			expect( warnSpy ).toHaveBeenCalled();
 
 			// Click should not create iframe
 			element.click();
-			expect(element.querySelector('iframe')).toBeNull();
-		});
+			expect( element.querySelector( 'iframe' ) ).toBeNull();
+		} );
 
-		it('should handle special characters in video title', () => {
+		it( 'should handle special characters in video title', () => {
 			const specialTitle = 'Test <Video> "Title" & More';
-			element = createFacadeElement('https://www.youtube.com/embed/dQw4w9WgXcQ', specialTitle);
-			document.body.appendChild(element);
+			element = createFacadeElement(
+				'https://www.youtube.com/embed/dQw4w9WgXcQ',
+				specialTitle
+			);
+			document.body.appendChild( element );
 
 			element.click();
 
-			const iframe = element.querySelector('iframe');
-			expect(iframe?.title).toBe(specialTitle);
-			expect(iframe?.getAttribute('aria-label')).toBe(`Embedded YouTube video: ${specialTitle}`);
-		});
+			const iframe = element.querySelector( 'iframe' );
+			expect( iframe?.title ).toBe( specialTitle );
+			expect( iframe?.getAttribute( 'aria-label' ) ).toBe(
+				`Embedded YouTube video: ${ specialTitle }`
+			);
+		} );
 
-		it('should handle URL with existing query parameters', () => {
+		it( 'should handle URL with existing query parameters', () => {
 			const embedUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0';
-			element = createFacadeElement(embedUrl);
-			document.body.appendChild(element);
+			element = createFacadeElement( embedUrl );
+			document.body.appendChild( element );
 
 			element.click();
 
-			const iframe = element.querySelector('iframe');
+			const iframe = element.querySelector( 'iframe' );
 			// Note: This will append ?autoplay=1 to the URL even if it already has params
 			// This tests current behavior - might need adjustment if URL parsing is added
-			expect(iframe?.src).toBe(`${embedUrl}?autoplay=1`);
-		});
-	});
-});
+			expect( iframe?.src ).toBe( `${ embedUrl }?autoplay=1` );
+		} );
+	} );
+} );

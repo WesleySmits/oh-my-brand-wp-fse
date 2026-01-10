@@ -17,8 +17,8 @@ export default {
 				'build', // Build system or dependencies
 				'ci', // CI configuration
 				'chore', // Maintenance tasks
-				'revert' // Revert a previous commit
-			]
+				'revert', // Revert a previous commit
+			],
 		],
 
 		// Recommended scopes for this theme
@@ -38,8 +38,8 @@ export default {
 				'ci', // CI/CD
 				'vscode', // VSCode settings
 				'skills', // Agent skills documentation
-				'docs' // Documentation
-			]
+				'docs', // Documentation
+			],
 		],
 
 		// Subject formatting
@@ -55,19 +55,21 @@ export default {
 		'body-max-line-length': [ 2, 'always', 100 ],
 
 		// Footer formatting
-		'footer-leading-blank': [ 2, 'always' ]
+		'footer-leading-blank': [ 2, 'always' ],
 	},
 	prompt: {
 		questions: {
 			type: {
-				description: 'Select the type of change you are committing'
+				description: 'Select the type of change you are committing',
 			},
 			scope: {
-				description: 'What is the scope of this change (e.g., blocks, gallery, theme)?'
+				description:
+					'What is the scope of this change (e.g., blocks, gallery, theme)?',
 			},
 			subject: {
-				description: 'Write a short, imperative description of the change'
-			}
-		}
-	}
+				description:
+					'Write a short, imperative description of the change',
+			},
+		},
+	},
 };

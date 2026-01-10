@@ -31,7 +31,10 @@
 	-ms-overflow-style: none; /* IE/Edge */
 
 	--item-width: calc(100% / var(--visible-images));
-	--gap-offset: calc((var(--acf-gallery-gap) * (var(--visible-images) - 1)) / var(--visible-images));
+	--gap-offset: calc(
+		(var(--acf-gallery-gap) * (var(--visible-images) - 1)) /
+			var(--visible-images)
+	);
 	--gallery-item-width: calc(var(--item-width) - var(--gap-offset));
 }
 
@@ -184,7 +187,7 @@
 
 	/* Individual scroll markers (dots) */
 	.wp-block-theme-oh-my-brand-gallery .acf-gallery-item::scroll-marker {
-		content: '';
+		content: "";
 		display: inline-block;
 		width: 10px;
 		height: 10px;
@@ -198,7 +201,8 @@
 	}
 
 	/* Active scroll marker state */
-	.wp-block-theme-oh-my-brand-gallery .acf-gallery-item::scroll-marker:target-current {
+	.wp-block-theme-oh-my-brand-gallery
+		.acf-gallery-item::scroll-marker:target-current {
 		opacity: 100%;
 		transform: scale(1.2);
 	}
@@ -209,7 +213,8 @@
 	}
 
 	/* Focus-visible state for keyboard accessibility */
-	.wp-block-theme-oh-my-brand-gallery .acf-gallery-item::scroll-marker:focus-visible {
+	.wp-block-theme-oh-my-brand-gallery
+		.acf-gallery-item::scroll-marker:focus-visible {
 		outline: 2px solid var(--wp--preset--color--primary, #06c);
 		outline-offset: 2px;
 	}

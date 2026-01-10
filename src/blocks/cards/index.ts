@@ -60,8 +60,8 @@ interface CardsAttributes {
 	contentAlignment: string;
 }
 
-registerBlockType(metadata.name as 'theme-oh-my-brand/cards', {
-	...(metadata as unknown as BlockConfiguration<CardsAttributes>),
+registerBlockType( metadata.name as 'theme-oh-my-brand/cards', {
+	...( metadata as unknown as BlockConfiguration< CardsAttributes > ),
 	icon: gridIcon,
-	edit: Edit
-});
+	edit: Edit,
+} );
