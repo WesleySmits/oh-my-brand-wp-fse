@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.0/phpunit.xsd"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
     bootstrap="tests/php/bootstrap.php"
     colors="true"
-    cacheDirectory=".phpunit.cache"
     executionOrder="depends,defects"
     beStrictAboutOutputDuringTests="true"
     failOnRisky="true"
@@ -16,17 +15,17 @@
         </testsuite>
     </testsuites>
 
-    <source>
-        <include>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">blocks</directory>
             <directory suffix=".php">includes</directory>
-        </include>
-        <exclude>
-            <directory>vendor</directory>
-            <directory>node_modules</directory>
-            <directory>tests</directory>
-        </exclude>
-    </source>
+            <exclude>
+                <directory>vendor</directory>
+                <directory>node_modules</directory>
+                <directory>tests</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 
     <coverage>
         <report>
@@ -37,6 +36,5 @@
 
     <php>
         <const name="WP_TESTS_PHPUNIT_POLYFILLS_PATH" value="vendor/yoast/phpunit-polyfills"/>
-        <const name="OMB_TESTING" value="true"/>
     </php>
 </phpunit>

@@ -90,6 +90,9 @@ class BreadcrumbsTest extends WP_UnitTestCase {
 
 		$result = omb_breadcrumbs_get_trail( $attributes );
 
+		// Assert the result is an array (may be empty on front page)
+		$this->assertIsArray( $result );
+
 		if ( ! empty( $result ) ) {
 			$this->assertNotEquals( 'Home', $result[0]['label'] ?? '' );
 		}

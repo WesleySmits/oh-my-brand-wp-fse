@@ -7,8 +7,10 @@
 
 declare(strict_types=1);
 
-// Define test constant
-define('OMB_TESTING', true);
+// Define test constant (guard against multiple definitions)
+if ( ! defined( 'OMB_TESTING' ) ) {
+    define( 'OMB_TESTING', true );
+}
 
 // Load Composer autoloader
 $composer_autoload = dirname(__DIR__, 2) . '/vendor/autoload.php';
