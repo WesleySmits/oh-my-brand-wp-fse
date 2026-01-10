@@ -7,7 +7,19 @@
 
 declare(strict_types=1);
 
-add_action( 'wp_enqueue_scripts', 'omb_enqueue_styles' );
+// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
+namespace OhMyBrand\Includes;
+
+use function add_action;
+use function add_filter;
+use function wp_enqueue_style;
+use function get_stylesheet_directory_uri;
+use function get_stylesheet_uri;
+use function get_template_directory_uri;
+use function wp_get_theme;
+use function remove_action;
+
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_styles' );
 
 /**
  * Enqueue theme stylesheets.
@@ -16,7 +28,7 @@ add_action( 'wp_enqueue_scripts', 'omb_enqueue_styles' );
  *
  * @return void
  */
-function omb_enqueue_styles(): void {
+function enqueue_styles(): void {
 	wp_enqueue_style(
 		'omb-parent-style',
 		get_template_directory_uri() . '/style.css',
@@ -42,7 +54,7 @@ function omb_enqueue_styles(): void {
 	}
 }
 
-add_action( 'init', 'omb_disable_emojis' );
+add_action( 'init', __NAMESPACE__ . '\\disable_emojis' );
 
 /**
  * Disable WordPress emoji scripts and styles for performance.
@@ -51,14 +63,14 @@ add_action( 'init', 'omb_disable_emojis' );
  *
  * @return void
  */
-function omb_disable_emojis(): void {
+function disable_emojis(): void {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
 	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 	remove_action( 'admin_print_styles', 'print_emoji_styles' );
 
-	add_filter( 'tiny_mce_plugins', 'omb_disable_emojis_tinymce' );
-	add_filter( 'wp_resource_hints', 'omb_disable_emojis_dns_prefetch', 10, 2 );
+	add_filter( 'tiny_mce_plugins', __NAMESPACE__ . '\\disable_emojis_tinymce' );
+	add_filter( 'wp_resource_hints', __NAMESPACE__ . '\\disable_emojis_dns_prefetch', 10, 2 );
 }
 
 /**
@@ -69,7 +81,7 @@ function omb_disable_emojis(): void {
  * @param array<int, string> $plugins TinyMCE plugins.
  * @return array<int, string> Filtered plugins.
  */
-function omb_disable_emojis_tinymce( array $plugins ): array {
+function disable_emojis_tinymce( array $plugins ): array {
 	return array_diff( $plugins, [ 'wpemoji' ] );
 }
 
@@ -82,7 +94,7 @@ function omb_disable_emojis_tinymce( array $plugins ): array {
  * @param string             $relation_type Relation type.
  * @return array<int, string> Filtered URLs.
  */
-function omb_disable_emojis_dns_prefetch( array $urls, string $relation_type ): array {
+function disable_emojis_dns_prefetch( array $urls, string $relation_type ): array {
 	if ( 'dns-prefetch' !== $relation_type ) {
 		return $urls;
 	}

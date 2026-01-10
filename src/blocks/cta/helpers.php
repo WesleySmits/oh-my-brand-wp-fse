@@ -16,6 +16,6 @@ declare(strict_types=1);
  * @param string               $variant Button variant: 'primary' or 'secondary'.
  * @return string HTML output.
  */
-function omb_cta_render_button( array $button, string $variant = 'primary' ): string {
-	return omb_render_block_button( $button, 'cta', $variant );
+function omb_cta_render_button( array $button, string $variant ): string {
+	return \OhMyBrand\Includes\render_block_button( $button, 'cta', $variant );
 }

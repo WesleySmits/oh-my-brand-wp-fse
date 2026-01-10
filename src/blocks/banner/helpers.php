@@ -15,6 +15,6 @@ declare(strict_types=1);
  * @param array<string, mixed> $button Button data with 'text', 'url', 'openInNewTab'.
  * @return string HTML output.
  */
-function omb_banner_render_button( array $button ): string {
-	return omb_render_block_button( $button, 'banner', 'primary' );
+function omb_banner_render_button( array $button, string $variant ): string {
+	return \OhMyBrand\Includes\render_block_button( $button, 'banner', $variant );
 }

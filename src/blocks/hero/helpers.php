@@ -17,5 +17,5 @@ declare(strict_types=1);
  * @return string HTML output.
  */
 function omb_hero_render_button( array $button, string $variant ): string {
-	return omb_render_block_button( $button, 'hero', $variant );
+	return \OhMyBrand\Includes\render_block_button( $button, 'hero', $variant );
 }
