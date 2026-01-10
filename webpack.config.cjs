@@ -10,6 +10,14 @@ const path = require( 'path' );
 module.exports = {
 	...defaultConfig,
 	entry: {
+		'blocks/banner/index': path.resolve(
+			__dirname,
+			'src/blocks/banner/index.ts'
+		),
+		'blocks/banner/view': path.resolve(
+			__dirname,
+			'src/blocks/banner/view.ts'
+		),
 		'blocks/breadcrumbs/index': path.resolve(
 			__dirname,
 			'src/blocks/breadcrumbs/index.ts'
@@ -22,6 +30,10 @@ module.exports = {
 			__dirname,
 			'src/blocks/cards/index.ts'
 		),
+		'blocks/cta/index': path.resolve(
+			__dirname,
+			'src/blocks/cta/index.ts'
+		),
 		'blocks/faq/index': path.resolve(
 			__dirname,
 			'src/blocks/faq/index.js'
@@ -33,6 +45,14 @@ module.exports = {
 		'blocks/gallery/view': path.resolve(
 			__dirname,
 			'src/blocks/gallery/view.ts'
+		),
+		'blocks/hero/index': path.resolve(
+			__dirname,
+			'src/blocks/hero/index.js'
+		),
+		'blocks/hero/view': path.resolve(
+			__dirname,
+			'src/blocks/hero/view.ts'
 		),
 		'blocks/logo-grid/index': path.resolve(
 			__dirname,
