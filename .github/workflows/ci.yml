@@ -134,12 +134,12 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   # ============================================
-  # Unit Tests (PHP - PHPUnit)
+  # Integration Tests (PHP + E2E with wp-env)
   # ============================================
-  test-unit-php:
-    name: Unit Tests (PHP)
+  test-integration:
+    name: Integration Tests (PHP + E2E)
     runs-on: ubuntu-latest
-    needs: [lint-php]
+    needs: [lint-js, lint-php]
 
     steps:
       - uses: actions/checkout@v4
@@ -163,6 +163,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: composer install --prefer-dist --no-progress
 
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
       - name: Start wp-env
         run: |
           pnpm add -g @wordpress/env
@@ -170,35 +173,6 @@ jobs:
 
       - name: Run PHPUnit via wp-env
         run: wp-env run tests-cli --env-cwd=wp-content/themes/oh-my-brand vendor/bin/phpunit
-
-  # ============================================
-  # E2E Tests (Playwright)
-  # ============================================
-  test-e2e:
-    name: E2E Tests (Playwright)
-    runs-on: ubuntu-latest
-    needs: [lint-js, lint-php]
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'pnpm'
-
-      - run: pnpm install --frozen-lockfile
-
-      - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps chromium
-
-      - name: Setup WordPress with wp-env
-        run: |
-          pnpm add -g @wordpress/env
-          wp-env start
 
       - name: Run E2E tests
         run: pnpm exec playwright test --project=chromium

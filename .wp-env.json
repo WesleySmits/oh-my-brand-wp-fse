@@ -16,6 +16,9 @@
     "mappings": {
         "wp-content/themes/oh-my-brand": "."
     },
+    "lifecycleScripts": {
+        "afterStart": "wp-env run cli bash wp-content/themes/oh-my-brand/tests/e2e/bin/setup-fixtures.sh"
+    },
     "env": {
         "tests": {
             "phpVersion": "8.4",
